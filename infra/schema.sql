@@ -297,3 +297,45 @@ $$;
 insert into escenarios (nombre, es_por_defecto)
 select 'Por defecto', true
 where not exists (select 1 from escenarios where es_por_defecto);
+
+-- ------------------------------------------------------------
+-- 9. Privilegios
+-- ------------------------------------------------------------
+-- Los proyectos nuevos de Supabase ya no conceden privilegios automaticos
+-- sobre las tablas de `public`: sin esto, la ingesta recibe un 403 con
+-- "permission denied for table ingestas" aunque la clave secreta sea
+-- correcta. El esquema se los da el mismo, para no depender de como venga
+-- configurado el proyecto.
+
+grant usage on schema public to service_role;
+grant all on all tables    in schema public to service_role;
+grant all on all sequences in schema public to service_role;
+grant execute on all functions in schema public to service_role;
+
+-- Y para lo que se cree despues de este fichero.
+alter default privileges in schema public grant all on tables    to service_role;
+alter default privileges in schema public grant all on sequences to service_role;
+
+-- A `anon` y `authenticated` NO se les concede nada, y es deliberado.
+--
+-- La clave publicable viaja en el bundle de JavaScript: cualquiera que abra
+-- el inspector la tiene. Conceder lectura sobre `pois` haria que el censo de
+-- competencia y los puntos de demanda —que es exactamente el activo que se
+-- vende a 500 y 199 euros— se pudiera descargar entero con una peticion.
+--
+-- Cuando el frontend deje de usar el corte estatico y tenga que leer de aqui,
+-- la via es una vista con solo lo que el mapa necesita (celda, score, sin
+-- datos de contacto) y una politica RLS que la abra, nunca un grant sobre las
+-- tablas base.
+
+-- Defensa en profundidad: con RLS activada y sin politicas, cualquier rol que
+-- no sea service_role no ve nada aunque alguien le conceda un grant por error.
+do $$
+declare t record;
+begin
+  for t in
+    select tablename from pg_tables where schemaname = 'public'
+  loop
+    execute format('alter table public.%I enable row level security', t.tablename);
+  end loop;
+end $$;
