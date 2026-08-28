@@ -70,7 +70,10 @@ create table if not exists pois (
   direccion         text,
   cp                text,
   municipio         text,
-  cod_ine           text references municipios(cod_ine),
+  -- Sin clave ajena a municipios a proposito: ver la nota al final del
+  -- fichero. El codigo INE que publica el Banco de Espana es bueno, pero
+  -- `municipios` arranca vacia y la FK tiraria el lote entero.
+  cod_ine           text,
   provincia         text,
   telefono          text,
   email             text,
@@ -156,7 +159,7 @@ create table if not exists locales (
   fuente_id      text not null,
   titulo         text,
   direccion      text,
-  cod_ine        text references municipios(cod_ine),
+  cod_ine        text,                          -- sin FK, igual que pois
   precio_mes     numeric,
   superficie_m2  numeric,
   planta         text,
@@ -191,6 +194,66 @@ create table if not exists ingestas (
   bajas        integer,
   mensaje      text
 );
+
+-- ------------------------------------------------------------
+-- 6.bis. Geometria derivada de lat/lon
+-- ------------------------------------------------------------
+-- Los extractores escriben por PostgREST y solo mandan `lat` y `lon`: la API
+-- REST no puede construir un `geography`. Sin esto la columna `geom` se queda
+-- a NULL para siempre, y como los indices espaciales y `puntos_de_demanda()`
+-- cuelgan de ella, el resultado es que la tabla se llena, todo parece
+-- correcto y las consultas por distancia devuelven vacio. Es justo el tipo de
+-- fallo que no da la cara hasta que un cliente pregunta por que su informe
+-- sale sin puntos de demanda.
+
+create or replace function geom_desde_latlon() returns trigger
+language plpgsql as $$
+begin
+  new.geom := case
+    when new.lat is null or new.lon is null then null
+    -- Ojo al orden: st_makepoint es (x, y), o sea (lon, lat). Invertirlo
+    -- coloca Sabadell en algun punto de Somalia y no da ningun error.
+    else st_setsrid(st_makepoint(new.lon, new.lat), 4326)::geography
+  end;
+  return new;
+end $$;
+
+drop trigger if exists pois_geom on pois;
+create trigger pois_geom
+  before insert or update on pois
+  for each row execute function geom_desde_latlon();
+
+drop trigger if exists locales_geom on locales;
+create trigger locales_geom
+  before insert or update on locales
+  for each row execute function geom_desde_latlon();
+
+-- Relleno de lo que ya estuviera escrito sin geometria.
+update pois    set geom = st_setsrid(st_makepoint(lon, lat), 4326)::geography
+  where geom is null and lat is not null and lon is not null;
+update locales set geom = st_setsrid(st_makepoint(lon, lat), 4326)::geography
+  where geom is null and lat is not null and lon is not null;
+
+-- ------------------------------------------------------------
+-- 6.ter. Retirada de las claves ajenas a municipios
+-- ------------------------------------------------------------
+-- Idempotencia hacia atras: si se aplico una version anterior del esquema,
+-- estas FK ya existen y hay que quitarlas.
+--
+-- El motivo: `municipios` es una tabla de referencia que se carga del INE, y
+-- todavia no hay nada en el pipeline que la pueble. El Banco de Espana si
+-- publica el codigo INE de cada oficina, asi que `pois.cod_ine` viene relleno
+-- desde la primera ingesta y la FK rechazaria el lote completo de 500
+-- registros. Descartar el dato para que encaje seria peor: es un dato bueno.
+--
+-- Cuando `municipios` este cargada se puede recuperar la integridad sin
+-- bloquear nada:
+--   alter table pois add constraint pois_cod_ine_fkey
+--     foreign key (cod_ine) references municipios(cod_ine) not valid;
+--   alter table pois validate constraint pois_cod_ine_fkey;
+
+alter table pois    drop constraint if exists pois_cod_ine_fkey;
+alter table locales drop constraint if exists locales_cod_ine_fkey;
 
 -- ------------------------------------------------------------
 -- 7. Vista de servicio para el front

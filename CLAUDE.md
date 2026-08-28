@@ -65,6 +65,23 @@ mapa.
 **Las dos implementaciones tienen que dar el mismo número.** Falta un test que
 lo compruebe con datos reales; es una tarea pendiente que merece la pena.
 
+### 6. En Supabase, `geom` la rellena un trigger y `cod_ine` no tiene FK
+
+Los extractores escriben por PostgREST y solo pueden mandar `lat` y `lon`
+planos: la API REST no construye un `geography`. Sin el trigger
+`geom_desde_latlon`, la columna `geom` se queda a NULL, y como los índices
+espaciales y `puntos_de_demanda()` cuelgan de ella, **la tabla se llena, todo
+parece correcto y las consultas por distancia devuelven vacío**. El entregable
+de 199 € sale en blanco sin que nada dé error.
+
+`pois.cod_ine` y `locales.cod_ine` no tienen clave ajena a `municipios` a
+propósito. Esa tabla se carga del INE y todavía no hay nada que la puebla,
+mientras que el Banco de España sí publica el código INE de cada oficina: con
+la FK puesta, la primera ingesta real rechaza el lote entero de 500 registros.
+Descartar el `cod_ine` para que encajara sería tirar un dato bueno. Cuando
+`municipios` esté cargada se recupera la integridad con `not valid` y luego
+`validate constraint`, sin bloquear la tabla; está escrito en `schema.sql`.
+
 ---
 
 ## Estructura

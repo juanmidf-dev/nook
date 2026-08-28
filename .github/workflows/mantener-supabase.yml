@@ -1,0 +1,76 @@
+name: Mantener Supabase despierto
+
+# El plan gratuito de Supabase pausa el proyecto tras 7 días sin actividad, y
+# la ingesta es mensual: sin esto, cada vez que arranque el cron del día 3 se
+# encontrará la base de datos pausada y fallará. Una lectura trivial cuenta
+# como actividad y sale gratis.
+#
+# Dos veces por semana y no una: con siete días justos no hay ningún margen.
+# GitHub retrasa las ejecuciones programadas cuando va cargado, y una sola
+# ejecución perdida ya deja pasar la ventana.
+
+on:
+  schedule:
+    - cron: '23 5 * * 1,4'   # lunes y jueves; el minuto raro, para no coincidir con la hora en punto
+  workflow_dispatch:
+
+# Si una ejecución se solapa con otra no aporta nada: basta la más reciente.
+concurrency:
+  group: mantener-supabase
+  cancel-in-progress: true
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Tocar la API REST
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${SUPABASE_URL}" ] || [ -z "${SUPABASE_SERVICE_KEY}" ]; then
+            echo "::notice::Faltan SUPABASE_URL o SUPABASE_SERVICE_KEY. Nada que mantener despierto todavía."
+            exit 0
+          fi
+
+          # Las claves nuevas (sb_secret_...) no son JWT y no pueden ir en
+          # Authorization: la petición llega a la base de datos y se rechaza al
+          # leerlas como token. Las legadas sí lo son y lo necesitan. Se
+          # distingue por la forma, igual que en pipelines/nook/salida.py.
+          AUTORIZACION=()
+          case "${SUPABASE_SERVICE_KEY}" in
+            eyJ*) AUTORIZACION=(-H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}") ;;
+          esac
+
+          # Se consulta una tabla real, no la raíz de la API: el objetivo es
+          # que la petición llegue a Postgres, y la raíz responde sin tocarlo.
+          CODIGO=$(curl -s -o /tmp/respuesta.txt -w '%{http_code}' \
+            --max-time 60 --retry 2 --retry-delay 10 \
+            -H "apikey: ${SUPABASE_SERVICE_KEY}" \
+            "${AUTORIZACION[@]}" \
+            "${SUPABASE_URL%/}/rest/v1/ingestas?select=id&limit=1")
+
+          echo "HTTP ${CODIGO}"
+          case "${CODIGO}" in
+            2*)
+              echo "::notice::Proyecto despierto y respondiendo."
+              ;;
+            404)
+              # PostgREST ha contestado, así que la base de datos está viva;
+              # lo que falta es el esquema. Cumple su función igualmente.
+              echo "::warning::La tabla 'ingestas' no existe: ¿falta aplicar infra/schema.sql? El proyecto sí responde."
+              ;;
+            401|403)
+              echo "::error::Credenciales rechazadas (${CODIGO}). Revisa SUPABASE_SERVICE_KEY: debe ser la clave secreta, no la publishable."
+              cat /tmp/respuesta.txt
+              exit 1
+              ;;
+            *)
+              echo "::error::Respuesta inesperada (${CODIGO}). El proyecto puede estar pausado."
+              cat /tmp/respuesta.txt
+              exit 1
+              ;;
+          esac
