@@ -330,12 +330,17 @@ alter default privileges in schema public grant all on sequences to service_role
 
 -- Defensa en profundidad: con RLS activada y sin politicas, cualquier rol que
 -- no sea service_role no ve nada aunque alguien le conceda un grant por error.
+-- Lista explicita y no un recorrido de pg_tables: `public` tambien contiene
+-- `spatial_ref_sys`, que la trae PostGIS, no es nuestra y no se puede alterar
+-- ("must be owner of table spatial_ref_sys"). Enumerar tambien evita activar
+-- RLS sin querer sobre lo que instale una extension futura.
 do $$
-declare t record;
+declare t text;
 begin
-  for t in
-    select tablename from pg_tables where schemaname = 'public'
-  loop
-    execute format('alter table public.%I enable row level security', t.tablename);
+  foreach t in array array[
+    'municipios', 'secciones_censales', 'pois', 'poi_duplicados',
+    'celdas', 'escenarios', 'celda_scores', 'locales', 'ingestas'
+  ] loop
+    execute format('alter table public.%I enable row level security', t);
   end loop;
 end $$;
