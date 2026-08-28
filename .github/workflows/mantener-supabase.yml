@@ -90,9 +90,11 @@ jobs:
               # PostgREST publica en su raiz las tablas que expone. Si esto
               # responde, el problema es la tabla; si tambien da 404, es la URL.
               echo "--- raiz de la API ---"
-              RAIZ=$(curl -s -o /tmp/raiz.txt -w '%{http_code}' --max-time 30 \n                -H "apikey: ${SUPABASE_SERVICE_KEY}" "${AUTORIZACION[@]}" \n                "${SUPABASE_URL%/}/rest/v1/")
+              : > /tmp/raiz.txt
+              RAIZ=$(curl -s -o /tmp/raiz.txt -w '%{http_code}' --max-time 30 -H "apikey: ${SUPABASE_SERVICE_KEY}" "${AUTORIZACION[@]}" "${SUPABASE_URL%/}/rest/v1/" || echo "sin-respuesta")
               echo "raiz -> HTTP ${RAIZ}"
-              head -c 400 /tmp/raiz.txt; echo
+              head -c 400 /tmp/raiz.txt || true
+              echo
               ;;
             401|403)
               echo "::error::Credenciales rechazadas (${CODIGO}). Revisa SUPABASE_SERVICE_KEY: debe ser la clave secreta, no la publishable."
