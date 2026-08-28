@@ -14,6 +14,8 @@ Ninguna prueba toca la red.
 import pathlib
 import sys
 
+import pytest
+
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from nook.fuentes.notarias import (
@@ -164,3 +166,56 @@ class TestInterpretaRespuesta:
         # decisión de no escribir un censo vacío.
         assert interpreta_respuesta(None) == []
         assert interpreta_respuesta({"error": "algo"}) == []
+
+
+class TestEndpoint:
+    """
+    El workflow pasa NOOK_ENDPOINT_NOTARIAS siempre. Cuando el secreto no
+    existe la variable llega definida pero vacia, y environ.get devuelve ""
+    en vez del defecto: la ingesta se quedaba pidiendo "/buscar/notarios" sin
+    dominio y devolvia cero notarias.
+    """
+
+    @pytest.fixture(autouse=True)
+    def _restaura_el_modulo(self):
+        """
+        `importlib.reload` deja el modulo cargado con el ultimo valor probado.
+        Sin esto, cualquier test posterior que usara ENDPOINT lo heredaria
+        apuntando a otro.test, y el fallo aparecería lejos de su causa.
+        """
+        import importlib
+
+        from nook.fuentes import notarias as modulo
+
+        yield
+        import os
+
+        os.environ.pop("NOOK_ENDPOINT_NOTARIAS", None)
+        importlib.reload(modulo)
+
+    def _base(self, valor, monkeypatch):
+        import importlib
+
+        from nook.fuentes import notarias as modulo
+
+        if valor is None:
+            monkeypatch.delenv("NOOK_ENDPOINT_NOTARIAS", raising=False)
+        else:
+            monkeypatch.setenv("NOOK_ENDPOINT_NOTARIAS", valor)
+        return importlib.reload(modulo).ENDPOINT
+
+    def test_sin_la_variable(self, monkeypatch):
+        assert self._base(None, monkeypatch).startswith("https://guianotarial.notariado.org")
+
+    def test_variable_vacia_cae_al_defecto(self, monkeypatch):
+        assert self._base("", monkeypatch).startswith("https://guianotarial.notariado.org")
+
+    def test_variable_puesta_manda(self, monkeypatch):
+        assert self._base("https://otro.test/rest", monkeypatch) == "https://otro.test/rest/buscar/notarios"
+
+    def test_barra_final_no_duplica_el_separador(self, monkeypatch):
+        assert self._base("https://otro.test/rest/", monkeypatch) == "https://otro.test/rest/buscar/notarios"
+
+    def test_el_endpoint_siempre_es_absoluto(self, monkeypatch):
+        for v in (None, "", "https://otro.test/rest"):
+            assert self._base(v, monkeypatch).startswith("https://")

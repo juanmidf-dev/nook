@@ -40,9 +40,16 @@ from ..modelo import Poi, extrae_cp, id_estable, limpia_direccion
 
 log = logging.getLogger("nook.notarias")
 
-BASE = os.environ.get(
-    "NOOK_ENDPOINT_NOTARIAS", "https://guianotarial.notariado.org/guianotarial/rest"
-)
+BASE_POR_DEFECTO = "https://guianotarial.notariado.org/guianotarial/rest"
+
+# `or` y no el segundo argumento de environ.get: el workflow pasa
+# NOOK_ENDPOINT_NOTARIAS siempre, y cuando el secreto no existe la variable
+# llega definida pero vacia. environ.get devuelve "" en ese caso, no el
+# defecto, y la URL acababa siendo "/buscar/notarios" a secas.
+#
+# El rstrip es por lo mismo que ya paso con SUPABASE_URL: una barra de mas al
+# final del valor duplica el separador y la ruta deja de existir.
+BASE = (os.environ.get("NOOK_ENDPOINT_NOTARIAS") or BASE_POR_DEFECTO).rstrip("/")
 ENDPOINT = f"{BASE}/buscar/notarios"
 
 # El buscador rechaza el cuerpo si le faltan campos: hay que mandarlos todos,
