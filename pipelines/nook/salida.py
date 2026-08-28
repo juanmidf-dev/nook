@@ -1,0 +1,110 @@
+"""
+Escritura del resultado: a fichero (modo prueba) o a Supabase (modo real).
+
+El modo prueba existe porque estos extractores no se pueden ensayar en local
+—ni el entorno de desarrollo ni el equipo tienen salida hacia notariado.org,
+el Banco de España o el INE—, así que la primera vez que un extractor toca
+datos de verdad es dentro de un runner de GitHub. Escribir directamente en la
+base de datos en esa primera ejecución sería temerario: en modo prueba el
+resultado queda como artefacto descargable y se revisa antes de tocar nada.
+"""
+
+from __future__ import annotations
+
+import json
+import logging
+import pathlib
+from dataclasses import asdict
+
+import requests
+
+from .modelo import Poi
+
+log = logging.getLogger("nook.salida")
+
+
+def a_ndjson(pois: list[Poi], destino: pathlib.Path) -> pathlib.Path:
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    with destino.open("w", encoding="utf-8") as f:
+        for p in pois:
+            f.write(json.dumps(asdict(p), ensure_ascii=False) + "\n")
+    log.info("escritos %d registros en %s", len(pois), destino)
+    return destino
+
+
+def resumen(pois: list[Poi]) -> dict:
+    """Cifras que se imprimen al final de cada ejecución y van al log de Actions."""
+    from collections import Counter
+
+    por_tipo = Counter(p.tipo for p in pois)
+    sin_coord = sum(1 for p in pois if not p.geolocalizado)
+    por_calidad = Counter(p.geocode_calidad for p in pois if p.geolocalizado)
+    return {
+        "total": len(pois),
+        "por_tipo": dict(por_tipo),
+        "sin_coordenadas": sin_coord,
+        "por_calidad": dict(por_calidad),
+        # Una tasa alta de "municipio" significa que el geocodificador está
+        # devolviendo el centro del pueblo en vez del portal: los puntos
+        # existen pero no sirven para medir distancias a 600 m.
+        "solo_municipio": por_calidad.get("municipio", 0),
+    }
+
+
+class Supabase:
+    """
+    Escritura por PostgREST con upsert.
+
+    Se usa la API REST y no una conexión directa de PostgreSQL para no tener
+    que abrir la base de datos a los rangos de IP de GitHub: el runner solo
+    necesita la URL del proyecto y la service key, ambas como secretos del
+    repositorio.
+    """
+
+    def __init__(self, url: str, service_key: str, lote: int = 500) -> None:
+        self.base = url.rstrip("/") + "/rest/v1"
+        self.lote = lote
+        self.cabeceras = {
+            "apikey": service_key,
+            "Authorization": f"Bearer {service_key}",
+            "Content-Type": "application/json",
+            # merge-duplicates convierte el insert en upsert: la ejecución
+            # mensual actualiza los registros existentes en vez de duplicarlos.
+            "Prefer": "resolution=merge-duplicates,return=minimal",
+        }
+
+    def upsert_pois(self, pois: list[Poi]) -> int:
+        escritos = 0
+        for i in range(0, len(pois), self.lote):
+            trozo = [p.para_supabase() for p in pois[i : i + self.lote]]
+            r = requests.post(
+                f"{self.base}/pois",
+                params={"on_conflict": "fuente,fuente_id"},
+                headers=self.cabeceras,
+                data=json.dumps(trozo, ensure_ascii=False).encode("utf-8"),
+                timeout=120,
+            )
+            if r.status_code >= 300:
+                log.error("Supabase devolvió %d: %s", r.status_code, r.text[:500])
+                raise RuntimeError(f"fallo escribiendo en Supabase: {r.status_code}")
+            escritos += len(trozo)
+            log.info("escritos %d/%d", escritos, len(pois))
+        return escritos
+
+    def registra_ingesta(self, fuente: str, ambito: str, res: dict, estado: str,
+                         mensaje: str | None = None) -> None:
+        requests.post(
+            f"{self.base}/ingestas",
+            headers={**self.cabeceras, "Prefer": "return=minimal"},
+            data=json.dumps(
+                {
+                    "fuente": fuente,
+                    "ambito": ambito,
+                    "estado": estado,
+                    "registros": res.get("total"),
+                    "mensaje": mensaje,
+                },
+                ensure_ascii=False,
+            ).encode("utf-8"),
+            timeout=30,
+        )

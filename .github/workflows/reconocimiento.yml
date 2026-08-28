@@ -1,0 +1,40 @@
+name: Reconocimiento de fuentes
+
+# Se ejecuta a mano. Su único trabajo es traerse muestras de las fuentes que
+# no se pueden inspeccionar desde ningún otro sitio: ni el entorno de
+# desarrollo ni el equipo local tienen salida hacia notariado.org o el Banco
+# de España. Con el artefacto que deja aquí se escribe el parser exacto de la
+# Guía Notarial, en vez de adivinar el endpoint y esperar a que suene.
+on:
+  workflow_dispatch:
+
+jobs:
+  explorar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar dependencias
+        working-directory: pipelines
+        run: pip install -r requirements.txt
+
+      - name: Explorar las fuentes
+        working-directory: pipelines
+        run: python cli.py reconocimiento
+
+      - name: Publicar el resultado
+        # `always()` a propósito: si una fuente tumba el paso, lo que ya se
+        # haya descargado de las demás sigue siendo justo lo que hace falta
+        # para escribir el parser.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reconocimiento
+          path: pipelines/datos/recon/
+          retention-days: 30

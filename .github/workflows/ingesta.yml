@@ -1,0 +1,101 @@
+name: Ingesta de datos
+
+on:
+  workflow_dispatch:
+    inputs:
+      fuente:
+        description: Qué fuente ingerir
+        required: true
+        default: overture
+        type: choice
+        options: [bancos, overture, notarias]
+      modo:
+        description: 'prueba deja el resultado como artefacto; real escribe en Supabase'
+        required: true
+        default: prueba
+        type: choice
+        options: [prueba, real]
+      bbox:
+        description: 'Opcional, solo overture: min_lat,min_lon,max_lat,max_lon'
+        required: false
+        type: string
+
+  schedule:
+    # Día 3 de cada mes a las 04:17 UTC. Mensual porque estos censos se mueven
+    # despacio —una notaría no abre cada semana— y la hora es deliberadamente
+    # rara: a las 04:00 en punto arranca medio GitHub a la vez.
+    - cron: '17 4 3 * *'
+
+concurrency:
+  # Dos ingestas simultáneas de la misma fuente escribirían sobre los mismos
+  # registros. Se encola en vez de cancelar: la que ya está corriendo puede
+  # llevar veinte minutos de geocodificación hecha.
+  group: ingesta-${{ github.event.inputs.fuente || 'programada' }}
+  cancel-in-progress: false
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - working-directory: pipelines
+        run: |
+          pip install -r requirements.txt
+          python -m pytest tests -q
+
+  ingerir:
+    # Nunca se escribe en la base de datos con los tests en rojo: un parser
+    # roto no devuelve un error, devuelve datos malos.
+    needs: pruebas
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        fuente: ${{ github.event_name == 'schedule' && fromJSON('["bancos","overture","notarias"]') || fromJSON(format('["{0}"]', github.event.inputs.fuente)) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar dependencias
+        working-directory: pipelines
+        run: pip install -r requirements.txt
+
+      - name: Ejecutar la ingesta
+        working-directory: pipelines
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          NOOK_ENDPOINT_NOTARIAS: ${{ secrets.NOOK_ENDPOINT_NOTARIAS }}
+          NOOK_AMBITO: ES
+        run: |
+          # Las ejecuciones programadas escriben en Supabase; las lanzadas a
+          # mano, solo si se pide explícitamente. Así el botón "Run workflow"
+          # nunca toca la base de datos por descuido.
+          MODO="--prueba"
+          if [ "${{ github.event.inputs.modo }}" = "real" ] || [ "${{ github.event_name }}" = "schedule" ]; then
+            MODO=""
+          fi
+          BBOX=""
+          if [ -n "${{ github.event.inputs.bbox }}" ]; then
+            BBOX="--bbox ${{ github.event.inputs.bbox }}"
+          fi
+          python cli.py ${{ matrix.fuente }} $MODO $BBOX
+
+      - name: Publicar el resultado
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ingesta-${{ matrix.fuente }}
+          path: pipelines/datos/salida/
+          retention-days: 30
+          if-no-files-found: warn

@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit -p tsconfig.app.json
+      - name: Compilar
+        env:
+          # Token de relleno: la compilación no llama a Mapbox, solo necesita
+          # que la variable exista para no entrar en la pantalla de error.
+          VITE_MAPBOX_TOKEN: pk.ci
+        run: npm run build
+
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - working-directory: pipelines
+        run: |
+          pip install -r requirements.txt
+          python -m pytest tests -q

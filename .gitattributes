@@ -1,0 +1,12 @@
+# Normaliza a LF en el repositorio. Sin esto, trabajar desde Windows marca los
+# 110 ficheros como modificados en cuanto git los toca, y cualquier diff real
+# queda enterrado bajo el ruido de los finales de linea.
+* text=auto eol=lf
+
+# Binarios: que git no intente convertir nada.
+*.png   binary
+*.jpg   binary
+*.ico   binary
+*.lockb binary
+*.xlsx  binary
+*.parquet binary

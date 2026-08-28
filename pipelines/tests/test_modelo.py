@@ -1,0 +1,112 @@
+"""Pruebas del modelo común. Sin red: todo son casos tomados de ficheros reales."""
+
+import pathlib
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+
+from nook.modelo import Poi, deduplica, extrae_cp, id_estable, limpia_direccion, normaliza
+
+
+class TestLimpiaDireccion:
+    """
+    Los casos vienen del fichero real del Banco de España. El más importante
+    es el del número de portal: la primera versión borraba el número final
+    rellenado con ceros creyendo que era un código de oficina repetido, y
+    dejaba media provincia con direcciones sin portal.
+    """
+
+    def test_expande_el_codigo_de_via(self):
+        assert limpia_direccion("CL LES TRES CREUS 00087") == "Calle Les Tres Creus 87"
+
+    def test_conserva_el_numero_de_portal(self):
+        assert limpia_direccion("CR DE TERRASSA 0335") == "Carretera De Terrassa 335"
+        assert limpia_direccion("AV MATADEPERA 0079") == "Avenida Matadepera 79"
+
+    def test_quita_el_numero_repetido(self):
+        assert limpia_direccion("CL RAMBLA, 95 0095") == "Rambla, 95"
+        assert limpia_direccion("PS PO. PLACA MAJOR, 32 0032") == "Placa Major, 32"
+
+    def test_expande_la_abreviatura_cuando_no_hay_codigo_de_via(self):
+        # "ZZ" es "sin clasificar": la abreviatura interna es la única pista
+        # del tipo de vía y borrarla dejaba "De Matadepera, 46".
+        assert limpia_direccion("ZZ AV. DE MATADEPERA, 46. 0") == "Avenida De Matadepera, 46"
+        assert limpia_direccion("ZZ RDA. EUROPA 00524") == "Ronda Europa 524"
+
+    def test_no_duplica_el_tipo_de_via(self):
+        assert limpia_direccion("RB RAMBLA 0184") == "Rambla 184"
+        assert limpia_direccion("CL VIA MASSAGUE 6 - 8") == "Via Massague 6 - 8"
+
+    def test_respeta_lo_que_ya_viene_bien(self):
+        assert limpia_direccion("CL Pi i Margall 10-12") == "Calle Pi i Margall 10-12"
+
+    def test_vacios(self):
+        assert limpia_direccion(None) is None
+        assert limpia_direccion("   ") is None
+
+
+class TestCodigoPostal:
+    def test_extrae(self):
+        assert extrae_cp("Calle Mayor 3, 08202 Sabadell") == "08202"
+
+    def test_descarta_lo_que_no_es_provincia(self):
+        # 99 no es un código de provincia español: es basura de otro campo.
+        assert extrae_cp("ref 99123 interna") is None
+
+    def test_sin_numero(self):
+        assert extrae_cp("Calle Mayor") is None
+
+
+class TestIdEstable:
+    def test_es_determinista(self):
+        assert id_estable("Banco X", "Calle Mayor 3") == id_estable("Banco X", "Calle Mayor 3")
+
+    def test_ignora_forma_societaria_y_acentos(self):
+        # El mismo banco escrito de dos formas tiene que dar el mismo id, o la
+        # ejecución mensual duplica en vez de actualizar.
+        assert id_estable("BANCO SANTANDER, S.A.") == id_estable("Banco Santander SA")
+
+    def test_distingue_direcciones_distintas(self):
+        assert id_estable("Banco X", "Calle Mayor 3") != id_estable("Banco X", "Calle Mayor 4")
+
+
+class TestNormaliza:
+    def test_quita_acentos_y_puntuacion(self):
+        assert normaliza("Plaça Sant Roc, 20.") == "placa sant roc 20"
+
+
+def _poi(nombre, lat, lon, tipo="inmobiliaria", fuente="overture", **kw):
+    return Poi(tipo=tipo, fuente=fuente, fuente_id=nombre, nombre=nombre, lat=lat, lon=lon, **kw)
+
+
+class TestDeduplica:
+    def test_funde_el_mismo_sitio_de_dos_fuentes(self):
+        a = _poi("Fincamps", 41.5474, 2.1099)
+        b = _poi("Fincamps", 41.5474, 2.1099, fuente="osm", telefono="937000000")
+        salida, fusionados = deduplica([a, b])
+        assert fusionados == 1
+        assert len(salida) == 1
+        # Los huecos del que se conserva se rellenan con lo que traía el otro.
+        assert salida[0].telefono == "937000000"
+
+    def test_no_funde_sitios_lejanos_con_el_mismo_nombre(self):
+        # Una cadena con dos oficinas en la misma ciudad son dos puntos de
+        # demanda, no uno.
+        a = _poi("Tecnocasa", 41.5474, 2.1099)
+        b = _poi("Tecnocasa", 41.5600, 2.1200)
+        salida, fusionados = deduplica([a, b])
+        assert fusionados == 0
+        assert len(salida) == 2
+
+    def test_no_funde_tipos_distintos(self):
+        a = _poi("Central", 41.5474, 2.1099, tipo="banco")
+        b = _poi("Central", 41.5474, 2.1099, tipo="inmobiliaria")
+        _, fusionados = deduplica([a, b])
+        assert fusionados == 0
+
+    def test_conserva_los_que_no_tienen_coordenadas(self):
+        # Se quedan fuera de la comparación, pero no se pierden: se declaran
+        # después como incidencia.
+        a = Poi(tipo="notaria", fuente="notariado", fuente_id="x", nombre="Sin geo")
+        salida, _ = deduplica([a])
+        assert len(salida) == 1

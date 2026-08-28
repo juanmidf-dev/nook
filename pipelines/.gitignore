@@ -1,0 +1,5 @@
+datos/salida/
+datos/recon/
+datos/entrada/
+__pycache__/
+.pytest_cache/

@@ -1,0 +1,1065 @@
+{
+ "municipio": {
+  "codIne": "08187",
+  "nombre": "Sabadell",
+  "provincia": "Barcelona",
+  "centro": [
+   2.1097,
+   41.5431
+  ],
+  "zoom": 13
+ },
+ "pois": [
+  {
+   "id": "not-1",
+   "categoria": "notaria",
+   "nombre": "Alejandro Sáez Ripoll",
+   "direccion": "Avenida Francesc Macià, número 60 Planta 6 , 08208 - Sabadell (Barcelona)",
+   "lat": 41.555318,
+   "lon": 2.098193
+  },
+  {
+   "id": "not-2",
+   "categoria": "notaria",
+   "nombre": "Juan Gómez Martínez",
+   "direccion": "Avenida Francesc Macià, número 60 Planta 6 (Torre Millenium), 08208 - Sabadell (Barcelona)",
+   "lat": 41.555318,
+   "lon": 2.098193
+  },
+  {
+   "id": "not-3",
+   "categoria": "notaria",
+   "nombre": "Aurora Cristina Díaz-Fraile del Monte",
+   "direccion": "Plaza Del Farell, número 3 Local 4, 08207 - Sabadell (Barcelona)",
+   "lat": 41.568624,
+   "lon": 2.08797
+  },
+  {
+   "id": "not-4",
+   "categoria": "notaria",
+   "nombre": "María Mercedes Lázaro Velo",
+   "direccion": "Calle Filadors, número 35 Pl 5 1, 08204 - Sabadell (Barcelona)",
+   "lat": 41.553321,
+   "lon": 2.098682
+  },
+  {
+   "id": "not-5",
+   "categoria": "notaria",
+   "nombre": "Marta Navarro Redondo",
+   "direccion": "Calle República, número 36 Bajo , 08202 - Sabadell (Barcelona)",
+   "lat": 41.546057,
+   "lon": 2.110994
+  },
+  {
+   "id": "not-6",
+   "categoria": "notaria",
+   "nombre": "Ignacio Corbí González",
+   "direccion": "Calle De la República, número 3 Bajo , 08202 - Sabadell (Barcelona)",
+   "lat": 41.545949,
+   "lon": 2.110078
+  },
+  {
+   "id": "not-7",
+   "categoria": "notaria",
+   "nombre": "Joan Bosch Boada",
+   "direccion": "Calle Lacy, número 23 , 08202 - Sabadell (Barcelona)",
+   "lat": 41.544454,
+   "lon": 2.111108
+  },
+  {
+   "id": "not-8",
+   "categoria": "notaria",
+   "nombre": "María Lara Domínguez Martínez",
+   "direccion": "Calle Sant Pau, número 2 Pl 1 1, 08201 - Sabadell (Barcelona)",
+   "lat": 41.545893,
+   "lon": 2.108191
+  },
+  {
+   "id": "not-9",
+   "categoria": "notaria",
+   "nombre": "Jesús Cembrano Zaldivar",
+   "direccion": "Calle Del Sol, número 1 Pl 2 , 08201 - Sabadell (Barcelona)",
+   "lat": 41.546052,
+   "lon": 2.108921
+  },
+  {
+   "id": "not-10",
+   "categoria": "notaria",
+   "nombre": "Montserrat Prieto Santos",
+   "direccion": "Calle República, número 18 Planta 3 , 08202 - Sabadell (Barcelona)",
+   "lat": 41.545843,
+   "lon": 2.110675
+  },
+  {
+   "id": "not-12",
+   "categoria": "notaria",
+   "nombre": "Javier Micó Giner",
+   "direccion": "Calle Narcis Giralt, número 57 Bajo , 08202 - Sabadell (Barcelona)",
+   "lat": 41.545219,
+   "lon": 2.111315
+  },
+  {
+   "id": "not-13",
+   "categoria": "notaria",
+   "nombre": "José Antonio Simón Hernández",
+   "direccion": "Calle Republica, número 36 Bajo , 08202 - Sabadell (Barcelona)",
+   "lat": 41.546033,
+   "lon": 2.110972
+  },
+  {
+   "id": "ban-1",
+   "categoria": "banco",
+   "nombre": "Deutsche Bank S.A.E.",
+   "direccion": "Passeig Plaça Major 62-64",
+   "lat": 41.54805,
+   "lon": 2.109,
+   "entidad": "0019"
+  },
+  {
+   "id": "ban-2",
+   "categoria": "banco",
+   "nombre": "Banco Santander S.A.",
+   "direccion": "Po. Plaça Major 32",
+   "lat": 41.547392,
+   "lon": 2.10909,
+   "entidad": "0049"
+  },
+  {
+   "id": "ban-3",
+   "categoria": "banco",
+   "nombre": "Banco Santander S.A.",
+   "direccion": "Rambla De Sabadell 118",
+   "lat": 41.543238,
+   "lon": 2.11054,
+   "entidad": "0049"
+  },
+  {
+   "id": "ban-4",
+   "categoria": "banco",
+   "nombre": "Banco Santander S.A.",
+   "direccion": "Rambla 95",
+   "lat": 41.543634,
+   "lon": 2.110744,
+   "entidad": "0049"
+  },
+  {
+   "id": "ban-5",
+   "categoria": "banco",
+   "nombre": "Banco Santander S.A.",
+   "direccion": "Via Massague 6 - 8",
+   "lat": 41.549472,
+   "lon": 2.10801,
+   "entidad": "0049"
+  },
+  {
+   "id": "ban-6",
+   "categoria": "banco",
+   "nombre": "Banco Santander S.A.",
+   "direccion": "Av. Matadepera 63",
+   "lat": 41.565152,
+   "lon": 2.089622,
+   "entidad": "0049"
+  },
+  {
+   "id": "ban-7",
+   "categoria": "banco",
+   "nombre": "Banco De Sabadell S.A.",
+   "direccion": "Avinguda De Matadepera 46. 0",
+   "lat": 41.565231,
+   "lon": 2.090039,
+   "entidad": "0081"
+  },
+  {
+   "id": "ban-8",
+   "categoria": "banco",
+   "nombre": "Banco De Sabadell S.A.",
+   "direccion": "Avinguda De Barbera 385. 0",
+   "lat": 41.529391,
+   "lon": 2.117517,
+   "entidad": "0081"
+  },
+  {
+   "id": "ban-9",
+   "categoria": "banco",
+   "nombre": "Banco De Sabadell S.A.",
+   "direccion": "Plaça Sant Roc 20 0",
+   "lat": 41.545956,
+   "lon": 2.108275,
+   "entidad": "0081"
+  },
+  {
+   "id": "ban-10",
+   "categoria": "banco",
+   "nombre": "Banco De Sabadell S.A.",
+   "direccion": "Coromines 7. 0",
+   "lat": 41.54689,
+   "lon": 2.104597,
+   "entidad": "0081"
+  },
+  {
+   "id": "ban-11",
+   "categoria": "banco",
+   "nombre": "Banco De Sabadell S.A.",
+   "direccion": "Via Massague 105. 0",
+   "lat": 41.551846,
+   "lon": 2.106297,
+   "entidad": "0081"
+  },
+  {
+   "id": "ban-12",
+   "categoria": "banco",
+   "nombre": "Banco De Sabadell S.A.",
+   "direccion": "Gustavo Adolfo Becquer 117",
+   "lat": 41.551872,
+   "lon": 2.082229,
+   "entidad": "0081"
+  },
+  {
+   "id": "ban-13",
+   "categoria": "banco",
+   "nombre": "Banco De Sabadell S.A.",
+   "direccion": "Barberà 25",
+   "lat": 41.538769,
+   "lon": 2.112987,
+   "entidad": "0081"
+  },
+  {
+   "id": "ban-14",
+   "categoria": "banco",
+   "nombre": "Banco De Sabadell S.A.",
+   "direccion": "Plaça De Catalunya 1. 0",
+   "lat": 41.549776,
+   "lon": 2.098839,
+   "entidad": "0081"
+  },
+  {
+   "id": "ban-15",
+   "categoria": "banco",
+   "nombre": "Banco De Sabadell S.A.",
+   "direccion": "Plaça Sant Roc 20. 0",
+   "lat": 41.545956,
+   "lon": 2.108275,
+   "entidad": "0081"
+  },
+  {
+   "id": "ban-16",
+   "categoria": "banco",
+   "nombre": "Banco De Sabadell S.A.",
+   "direccion": "Passeig Bernat Metge 73. 0",
+   "lat": 41.529914,
+   "lon": 2.101539,
+   "entidad": "0081"
+  },
+  {
+   "id": "ban-17",
+   "categoria": "banco",
+   "nombre": "Renta 4 Banco S.A.",
+   "direccion": "Tres Creus 87",
+   "lat": 41.546255,
+   "lon": 2.112742,
+   "entidad": "0083"
+  },
+  {
+   "id": "ban-18",
+   "categoria": "banco",
+   "nombre": "Bankinter S.A.",
+   "direccion": "De Manresa 2. 0",
+   "lat": 41.546764,
+   "lon": 2.108925,
+   "entidad": "0128"
+  },
+  {
+   "id": "ban-19",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
+   "direccion": "Va Alexandra",
+   "lat": 41.546764,
+   "lon": 2.108925,
+   "entidad": "0182"
+  },
+  {
+   "id": "ban-20",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
+   "direccion": "De Europa",
+   "lat": 41.546764,
+   "lon": 2.108925,
+   "entidad": "0182"
+  },
+  {
+   "id": "ban-21",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
+   "direccion": "Banyoles",
+   "lat": 41.546764,
+   "lon": 2.108925,
+   "entidad": "0182"
+  },
+  {
+   "id": "ban-22",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
+   "direccion": "Concordia 61",
+   "lat": 41.560846,
+   "lon": 2.093182,
+   "entidad": "0182"
+  },
+  {
+   "id": "ban-23",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
+   "direccion": "Sol I Padrs",
+   "lat": 41.546764,
+   "lon": 2.108925,
+   "entidad": "0182"
+  },
+  {
+   "id": "ban-24",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
+   "direccion": "De Terrassa",
+   "lat": 41.546764,
+   "lon": 2.108925,
+   "entidad": "0182"
+  },
+  {
+   "id": "ban-25",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
+   "direccion": "Matadepera",
+   "lat": 41.565552,
+   "lon": 2.089507,
+   "entidad": "0182"
+  },
+  {
+   "id": "ban-26",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
+   "direccion": "De Prats",
+   "lat": 41.546764,
+   "lon": 2.108925,
+   "entidad": "0182"
+  },
+  {
+   "id": "ban-27",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
+   "direccion": "Espronceda",
+   "lat": 41.546764,
+   "lon": 2.108925,
+   "entidad": "0182"
+  },
+  {
+   "id": "ban-28",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
+   "direccion": "Sant Quirze 4",
+   "lat": 41.546749,
+   "lon": 2.107425,
+   "entidad": "0182"
+  },
+  {
+   "id": "ban-29",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
+   "direccion": "Rb De Sabadell 164",
+   "lat": 41.546764,
+   "lon": 2.108925,
+   "entidad": "0182"
+  },
+  {
+   "id": "ban-30",
+   "categoria": "banco",
+   "nombre": "Ibercaja Banco S.A.",
+   "direccion": "De La Republica 18",
+   "lat": 41.545667,
+   "lon": 2.110643,
+   "entidad": "2085"
+  },
+  {
+   "id": "ban-31",
+   "categoria": "banco",
+   "nombre": "Kutxabank S.A",
+   "direccion": "Alfonso Xiii 36 S/N",
+   "lat": 41.546764,
+   "lon": 2.108925,
+   "entidad": "2095"
+  },
+  {
+   "id": "ban-32",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "Granados 16",
+   "lat": 41.551208,
+   "lon": 2.103484,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-33",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "De Matadepera 00143",
+   "lat": 41.568945,
+   "lon": 2.08612,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-34",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "Rda. Europa 00524",
+   "lat": 41.557949,
+   "lon": 2.082985,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-35",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "Rambla 1",
+   "lat": 41.546076,
+   "lon": 2.109392,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-36",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "San Isidoro 21",
+   "lat": 41.546764,
+   "lon": 2.108925,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-37",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "Josep Tarradellas 4",
+   "lat": 41.559127,
+   "lon": 2.097292,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-38",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "De Terrassa 346",
+   "lat": 41.547574,
+   "lon": 2.088793,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-39",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "C. Pedregar 00006",
+   "lat": 41.546817,
+   "lon": 2.109339,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-40",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "De Barberà 397",
+   "lat": 41.529423,
+   "lon": 2.117564,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-41",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "Doctor Robert 4",
+   "lat": 41.54674,
+   "lon": 2.109055,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-42",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "RB Rambla 184",
+   "lat": 41.540054,
+   "lon": 2.111995,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-43",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "C. Baells 00002",
+   "lat": 41.546997,
+   "lon": 2.129148,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-44",
+   "categoria": "banco",
+   "nombre": "Caixabank S.A.",
+   "direccion": "De Cataluña 8",
+   "lat": 41.550608,
+   "lon": 2.098628,
+   "entidad": "2100"
+  },
+  {
+   "id": "ban-45",
+   "categoria": "banco",
+   "nombre": "Caixa C. Dels Enginyers S.C.C.",
+   "direccion": "Indústria 18",
+   "lat": 41.547012,
+   "lon": 2.111274,
+   "entidad": "3025"
+  },
+  {
+   "id": "ban-47",
+   "categoria": "banco",
+   "nombre": "Cajamar Caja Rural S.C.C.",
+   "direccion": "Matadepera 00054",
+   "lat": 41.568945,
+   "lon": 2.08612,
+   "entidad": "3058"
+  },
+  {
+   "id": "ban-48",
+   "categoria": "banco",
+   "nombre": "Ing Bank N.V. S.E.",
+   "direccion": "Pi i Margall 10-12",
+   "lat": 41.554212,
+   "lon": 2.099548,
+   "entidad": "1465"
+  },
+  {
+   "id": "inm-1",
+   "categoria": "inmobiliaria",
+   "nombre": "Global Llar",
+   "direccion": "Av. de la Concòrdia 7, 08206",
+   "lat": 41.559104,
+   "lon": 2.096147
+  },
+  {
+   "id": "inm-2",
+   "categoria": "inmobiliaria",
+   "nombre": "Fincamps",
+   "direccion": "C. Sant Joan, 39, 08202",
+   "lat": 41.547391,
+   "lon": 2.109857
+  },
+  {
+   "id": "inm-3",
+   "categoria": "inmobiliaria",
+   "nombre": "Exes Sabadell Centre",
+   "direccion": "C. del Doctor Puig, nº ?, 08202",
+   "lat": 41.549116,
+   "lon": 2.109045
+  },
+  {
+   "id": "inm-4",
+   "categoria": "inmobiliaria",
+   "nombre": "FS Finques",
+   "direccion": "C. Alguersuari i Pascual 47, 08203",
+   "lat": 41.541178,
+   "lon": 2.11659
+  },
+  {
+   "id": "inm-5",
+   "categoria": "inmobiliaria",
+   "nombre": "Finques Nostra Llar",
+   "direccion": "Plaça Madrid 5, 08206",
+   "lat": 41.559205,
+   "lon": 2.082841
+  },
+  {
+   "id": "inm-6",
+   "categoria": "inmobiliaria",
+   "nombre": "CANVI DE CASA",
+   "direccion": "Passeig d’Espronceda 42, 08204",
+   "lat": 41.528799,
+   "lon": 2.115897
+  },
+  {
+   "id": "inm-7",
+   "categoria": "inmobiliaria",
+   "nombre": "Cameva Serveis Immobiliaris",
+   "direccion": "08206 Sabadell*",
+   "lat": 41.557454,
+   "lon": 2.081229
+  },
+  {
+   "id": "inm-9",
+   "categoria": "inmobiliaria",
+   "nombre": "Novafinques Centre",
+   "direccion": "Centre, Sabadell*",
+   "lat": 41.546764,
+   "lon": 2.108925
+  },
+  {
+   "id": "inm-10",
+   "categoria": "inmobiliaria",
+   "nombre": "Expofinques",
+   "direccion": "Sabadell Sud, Sabadell*",
+   "lat": 41.528705,
+   "lon": 2.105405
+  },
+  {
+   "id": "inm-11",
+   "categoria": "inmobiliaria",
+   "nombre": "Falgueras Immobiliària",
+   "direccion": "C. Doctor Puig, 44-A, 08202",
+   "lat": 41.549661,
+   "lon": 2.10909
+  },
+  {
+   "id": "inm-12",
+   "categoria": "inmobiliaria",
+   "nombre": "Habitaclia listados",
+   "direccion": "C. Prats de Lluçanès, 104, 08208",
+   "lat": 41.557541,
+   "lon": 2.101958
+  },
+  {
+   "id": "inm-13",
+   "categoria": "inmobiliaria",
+   "nombre": "IGLOO exes Centre",
+   "direccion": "Zona centro, Sabadell*",
+   "lat": 41.54855,
+   "lon": 2.107348
+  },
+  {
+   "id": "inm-14",
+   "categoria": "inmobiliaria",
+   "nombre": "Inmobity",
+   "direccion": "Sabadell (sin dirección exacta)",
+   "lat": 41.546764,
+   "lon": 2.108925
+  },
+  {
+   "id": "inm-15",
+   "categoria": "inmobiliaria",
+   "nombre": "FS Finques (segunda oficina)",
+   "direccion": "Sabadell*",
+   "lat": 41.546764,
+   "lon": 2.108925
+  },
+  {
+   "id": "inm-16",
+   "categoria": "inmobiliaria",
+   "nombre": "A‑HOUSE REAL ESTATE",
+   "direccion": "Sabadell (Idealista)",
+   "lat": 41.546764,
+   "lon": 2.108925
+  },
+  {
+   "id": "inm-17",
+   "categoria": "inmobiliaria",
+   "nombre": "Doncasa",
+   "direccion": "Sabadell (Idealista)",
+   "lat": 41.546764,
+   "lon": 2.108925
+  },
+  {
+   "id": "inm-18",
+   "categoria": "inmobiliaria",
+   "nombre": "Habitalia (?)",
+   "direccion": "Sabadell (Fotocasa indica 606 inmob. activas)",
+   "lat": 41.546764,
+   "lon": 2.108925
+  },
+  {
+   "id": "inm-24",
+   "categoria": "inmobiliaria",
+   "nombre": "Best House Sabadell Creu Alta",
+   "direccion": "Creu Alta",
+   "lat": 41.555278,
+   "lon": 2.102489
+  },
+  {
+   "id": "inm-25",
+   "categoria": "inmobiliaria",
+   "nombre": "Bona Llar Real Estate",
+   "direccion": "Creu de Barberà",
+   "lat": 41.523295,
+   "lon": 2.113396
+  },
+  {
+   "id": "inm-26",
+   "categoria": "inmobiliaria",
+   "nombre": "Finques Ferran",
+   "direccion": "Eixample",
+   "lat": 41.538236,
+   "lon": 2.111573
+  },
+  {
+   "id": "inm-27",
+   "categoria": "inmobiliaria",
+   "nombre": "SBD Immobles",
+   "direccion": "La Creu Alta",
+   "lat": 41.555278,
+   "lon": 2.102489
+  },
+  {
+   "id": "inm-38",
+   "categoria": "inmobiliaria",
+   "nombre": "Monapart",
+   "direccion": "Sabadell/Barcelona",
+   "lat": 41.546764,
+   "lon": 2.108925
+  }
+ ],
+ "locales": [
+  {
+   "id": "loc-1",
+   "nombre": "Local en alquiler",
+   "direccion": "ronda de Jean Monnet, 248",
+   "fuente": "Idealista",
+   "lat": 41.53997,
+   "lon": 2.089259
+  },
+  {
+   "id": "loc-2",
+   "nombre": "Local en alquiler",
+   "direccion": "Francesc Macià, 60",
+   "fuente": "Idealista",
+   "lat": 41.555158,
+   "lon": 2.098204
+  },
+  {
+   "id": "loc-3",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Renall, 6",
+   "fuente": "Idealista",
+   "lat": 41.534457,
+   "lon": 2.10376
+  },
+  {
+   "id": "loc-4",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Narcís Giralt",
+   "fuente": "Idealista",
+   "lat": 41.545826,
+   "lon": 2.110622
+  },
+  {
+   "id": "loc-5",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Duran i Sors",
+   "fuente": "Idealista",
+   "lat": 41.539683,
+   "lon": 2.109438
+  },
+  {
+   "id": "loc-6",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Vergós",
+   "fuente": "Idealista",
+   "lat": 41.53132,
+   "lon": 2.111654
+  },
+  {
+   "id": "loc-7",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Sol i Padrís",
+   "fuente": "Idealista",
+   "lat": 41.53755,
+   "lon": 2.11862
+  },
+  {
+   "id": "loc-8",
+   "nombre": "Local en alquiler",
+   "direccion": "Francesc Macia, 60",
+   "fuente": "Idealista",
+   "lat": 41.555158,
+   "lon": 2.098204
+  },
+  {
+   "id": "loc-9",
+   "nombre": "Local en alquiler",
+   "direccion": "Francesc Macià s/n",
+   "fuente": "Idealista",
+   "lat": 41.554202,
+   "lon": 2.09761
+  },
+  {
+   "id": "loc-10",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Narcís Giralt, 13",
+   "fuente": "Idealista",
+   "lat": 41.546296,
+   "lon": 2.110455
+  },
+  {
+   "id": "loc-11",
+   "nombre": "Local en alquiler",
+   "direccion": "Rambla, 27",
+   "fuente": "Idealista",
+   "lat": 41.545346,
+   "lon": 2.109804
+  },
+  {
+   "id": "loc-12",
+   "nombre": "Local en alquiler",
+   "direccion": "via de Massagué",
+   "fuente": "Idealista",
+   "lat": 41.550477,
+   "lon": 2.107413
+  },
+  {
+   "id": "loc-13",
+   "nombre": "Local en alquiler",
+   "direccion": "avenida Onze de Setembre",
+   "fuente": "Idealista",
+   "lat": 41.553268,
+   "lon": 2.104651
+  },
+  {
+   "id": "loc-14",
+   "nombre": "Local en alquiler",
+   "direccion": "Barberà del Vallès, Barberà del Vallès",
+   "fuente": "Idealista",
+   "lat": 41.513621,
+   "lon": 2.125555
+  },
+  {
+   "id": "loc-15",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Turull",
+   "fuente": "Idealista",
+   "lat": 41.543529,
+   "lon": 2.11445
+  },
+  {
+   "id": "loc-16",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Turull",
+   "fuente": "Idealista",
+   "lat": 41.543529,
+   "lon": 2.11445
+  },
+  {
+   "id": "loc-17",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Viladomat, 2",
+   "fuente": "Idealista",
+   "lat": 41.540273,
+   "lon": 2.105407
+  },
+  {
+   "id": "loc-18",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Sant Antoni",
+   "fuente": "Idealista",
+   "lat": 41.548177,
+   "lon": 2.107702
+  },
+  {
+   "id": "loc-19",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Sant Antoni",
+   "fuente": "Idealista",
+   "lat": 41.548177,
+   "lon": 2.107702
+  },
+  {
+   "id": "loc-20",
+   "nombre": "Local en alquiler",
+   "direccion": "Rambla",
+   "fuente": "Idealista",
+   "lat": 41.542623,
+   "lon": 2.110952
+  },
+  {
+   "id": "loc-21",
+   "nombre": "Local en alquiler",
+   "direccion": "paseo de Manresa",
+   "fuente": "Idealista",
+   "lat": 41.548652,
+   "lon": 2.108374
+  },
+  {
+   "id": "loc-22",
+   "nombre": "Local en alquiler",
+   "direccion": "Barrio El Centre",
+   "fuente": "Idealista",
+   "lat": 41.54855,
+   "lon": 2.107348
+  },
+  {
+   "id": "loc-23",
+   "nombre": "Local en alquiler",
+   "direccion": "camino Can Quadres",
+   "fuente": "Idealista",
+   "lat": 41.539745,
+   "lon": 2.124229
+  },
+  {
+   "id": "loc-24",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de la Indústria",
+   "fuente": "Idealista",
+   "lat": 41.547259,
+   "lon": 2.111945
+  },
+  {
+   "id": "loc-25",
+   "nombre": "Local en alquiler",
+   "direccion": "Poblenou",
+   "fuente": "Idealista",
+   "lat": 41.546764,
+   "lon": 2.108925
+  },
+  {
+   "id": "loc-26",
+   "nombre": "Local en alquiler",
+   "direccion": "La Creu Alta",
+   "fuente": "Idealista",
+   "lat": 41.555278,
+   "lon": 2.102489
+  },
+  {
+   "id": "loc-27",
+   "nombre": "Local en alquiler",
+   "direccion": "La Creu Alta",
+   "fuente": "Idealista",
+   "lat": 41.555278,
+   "lon": 2.102489
+  },
+  {
+   "id": "loc-28",
+   "nombre": "Local en alquiler",
+   "direccion": "calle de Duran i Sors",
+   "fuente": "Idealista",
+   "lat": 41.539683,
+   "lon": 2.109438
+  },
+  {
+   "id": "loc-29",
+   "nombre": "Local en alquiler",
+   "direccion": "Gràcia",
+   "fuente": "Idealista",
+   "lat": 41.538104,
+   "lon": 2.100683
+  }
+ ],
+ "incidencias": [
+  {
+   "categoria": "notaria",
+   "nombre": "Enrique Ruiz de Bustillo Pont",
+   "direccion": "Calle Sant Antoni Mª. Claret, número 1 Pl 2 , 08202 - Sabadell (Barcelona)",
+   "motivo": "sin coordenadas"
+  },
+  {
+   "categoria": "banco",
+   "nombre": "Cajamar Caja Rural S.C.C.",
+   "direccion": "Les Tres Creus 00087",
+   "motivo": "fuera del municipio (12 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Tecnocasa (varias oficinas en Sabadell)",
+   "direccion": "Zonas: Avinguda‑Eixample, La Creu de Barberà",
+   "motivo": "fuera del municipio (17 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "RealAdvisor – Fincas AGN",
+   "direccion": "C. Mallorca 615, 08026 Barcelona (cercano)",
+   "motivo": "fuera del municipio (16 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "RealAdvisor – IMNOVA AGENCY",
+   "direccion": "L’Hospitalet (cerca)",
+   "motivo": "fuera del municipio (20 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Mes que Finques",
+   "direccion": "Passeig 22 Juliol 512, Terrassa (cerca)",
+   "motivo": "fuera del municipio (8 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "BCN Homes 4You",
+   "direccion": "Barcelona (cerca)",
+   "motivo": "fuera del municipio (18 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "BC Inmo",
+   "direccion": "Barcelona (cerca)",
+   "motivo": "fuera del municipio (18 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Houzz – Monapart Barcelona",
+   "direccion": "Pl. Gal•la Placídia, Barcelona (cerca)",
+   "motivo": "fuera del municipio (16 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Larsson Estate",
+   "direccion": "Plaça Francesc Macià 4, Barcelona (cerca)",
+   "motivo": "fuera del municipio (17 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "The Home Hunter",
+   "direccion": "Barcelona (cerca)",
+   "motivo": "fuera del municipio (18 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Cospedo S.A.",
+   "direccion": "08024 Barcelona (cerca)",
+   "motivo": "fuera del municipio (15 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Alma Rehabitat",
+   "direccion": "08036 Barcelona (cerca)",
+   "motivo": "fuera del municipio (17 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Norvet",
+   "direccion": "Av. Diagonal 418, Barcelona (cerca)",
+   "motivo": "fuera del municipio (17 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Bonavista Developments",
+   "direccion": "Gran Via Corts Catalanes 643, BCN (cerca)",
+   "motivo": "fuera del municipio (18 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Personal Housing",
+   "direccion": "08250 Sant Joan de Vilatorrada (cerca)",
+   "motivo": "fuera del municipio (34 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Figue Galí (?)",
+   "direccion": "08243 Manresa (cerca)",
+   "motivo": "fuera del municipio (29 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Vendopor",
+   "direccion": "C. Agudes 24, 08033 Barcelona (cerca)",
+   "motivo": "fuera del municipio (11 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Fincas AGN",
+   "direccion": "Registro via RealAdvisor (Barcelona)",
+   "motivo": "fuera del municipio (18 km del centro)"
+  },
+  {
+   "categoria": "inmobiliaria",
+   "nombre": "Hello Homes Sitges",
+   "direccion": "Sitges (no relevante local)",
+   "motivo": "fuera del municipio (42 km del centro)"
+  }
+ ]
+}
