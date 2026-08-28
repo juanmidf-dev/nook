@@ -36,6 +36,30 @@ jobs:
             exit 0
           fi
 
+          # Diagnostico de la configuracion. Se imprimen hechos derivados y
+          # nunca los valores: GitHub enmascara los secretos en el log, asi que
+          # imprimirlos tal cual solo mostraria ***, que no ayuda a nadie.
+          echo "--- configuracion ---"
+          case "${SUPABASE_URL}" in
+            https://*) echo "url: empieza por https" ;;
+            *)         echo "::error::La URL no empieza por https. Debe ser https://<ref>.supabase.co" ;;
+          esac
+          case "${SUPABASE_URL}" in
+            */rest/v1|*/rest/v1/)
+              echo "::error::SUPABASE_URL ya incluye /rest/v1. El codigo lo anade solo, asi que la ruta queda duplicada y todo responde 404. Deja solo https://<ref>.supabase.co" ;;
+            *supabase.co|*supabase.co/)
+              echo "url: termina en supabase.co, sin ruta extra (correcto)" ;;
+            *)
+              echo "::warning::La URL no termina en supabase.co ni en /rest/v1. Revisa que no lleve ninguna ruta detras." ;;
+          esac
+          case "${SUPABASE_SERVICE_KEY}" in
+            sb_secret_*)      echo "clave: formato nuevo secreto (correcto)" ;;
+            sb_publishable_*) echo "::error::La clave es la PUBLICABLE, no la secreta. Es la que va en el frontend y no puede escribir." ;;
+            eyJ*)             echo "clave: JWT legado (service_role o anon)" ;;
+            *)                echo "::warning::Formato de clave no reconocido." ;;
+          esac
+          echo "---------------------"
+
           # Las claves nuevas (sb_secret_...) no son JWT y no pueden ir en
           # Authorization: la petición llega a la base de datos y se rechaza al
           # leerlas como token. Las legadas sí lo son y lo necesitan. Se
@@ -61,7 +85,14 @@ jobs:
             404)
               # PostgREST ha contestado, así que la base de datos está viva;
               # lo que falta es el esquema. Cumple su función igualmente.
-              echo "::warning::La tabla 'ingestas' no existe: ¿falta aplicar infra/schema.sql? El proyecto sí responde."
+              echo "::warning::404 sobre 'ingestas'. O falta aplicar infra/schema.sql, o la ruta no es la que crees."
+              cat /tmp/respuesta.txt; echo
+              # PostgREST publica en su raiz las tablas que expone. Si esto
+              # responde, el problema es la tabla; si tambien da 404, es la URL.
+              echo "--- raiz de la API ---"
+              RAIZ=$(curl -s -o /tmp/raiz.txt -w '%{http_code}' --max-time 30 \n                -H "apikey: ${SUPABASE_SERVICE_KEY}" "${AUTORIZACION[@]}" \n                "${SUPABASE_URL%/}/rest/v1/")
+              echo "raiz -> HTTP ${RAIZ}"
+              head -c 400 /tmp/raiz.txt; echo
               ;;
             401|403)
               echo "::error::Credenciales rechazadas (${CODIGO}). Revisa SUPABASE_SERVICE_KEY: debe ser la clave secreta, no la publishable."
