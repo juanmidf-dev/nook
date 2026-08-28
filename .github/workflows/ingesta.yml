@@ -77,19 +77,24 @@ jobs:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           NOOK_ENDPOINT_NOTARIAS: ${{ secrets.NOOK_ENDPOINT_NOTARIAS }}
           NOOK_AMBITO: ES
+          # bbox es texto libre: si se interpola en el shell, cualquiera con
+          # permiso de escritura ejecuta lo que quiera en el runner. Por env
+          # llega como dato y no como codigo.
+          ENTRADA_BBOX: ${{ github.event.inputs.bbox }}
+          ENTRADA_MODO: ${{ github.event.inputs.modo }}
         run: |
           # Las ejecuciones programadas escriben en Supabase; las lanzadas a
           # mano, solo si se pide explícitamente. Así el botón "Run workflow"
           # nunca toca la base de datos por descuido.
           MODO="--prueba"
-          if [ "${{ github.event.inputs.modo }}" = "real" ] || [ "${{ github.event_name }}" = "schedule" ]; then
+          if [ "$ENTRADA_MODO" = "real" ] || [ "${{ github.event_name }}" = "schedule" ]; then
             MODO=""
           fi
-          BBOX=""
-          if [ -n "${{ github.event.inputs.bbox }}" ]; then
-            BBOX="--bbox ${{ github.event.inputs.bbox }}"
+          if [ -n "$ENTRADA_BBOX" ]; then
+            python cli.py "${{ matrix.fuente }}" $MODO --bbox "$ENTRADA_BBOX"
+          else
+            python cli.py "${{ matrix.fuente }}" $MODO
           fi
-          python cli.py ${{ matrix.fuente }} $MODO $BBOX
 
       - name: Publicar el resultado
         if: always()
