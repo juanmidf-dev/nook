@@ -26,3 +26,7 @@ dist-ssr
 # Variables de entorno locales
 .env
 .env.local
+
+# Configuracion local de Claude Code. launch.json lleva la ruta absoluta de
+# node en esta maquina, asi que no vale para nadie mas.
+.claude/
