@@ -66,12 +66,24 @@ class Supabase:
         self.lote = lote
         self.cabeceras = {
             "apikey": service_key,
-            "Authorization": f"Bearer {service_key}",
             "Content-Type": "application/json",
             # merge-duplicates convierte el insert en upsert: la ejecución
             # mensual actualiza los registros existentes en vez de duplicarlos.
             "Prefer": "resolution=merge-duplicates,return=minimal",
         }
+        # Las dos generaciones de clave de Supabase quieren cosas distintas.
+        #
+        # La antigua `service_role` es un JWT y va también en Authorization,
+        # que es de donde PostgREST saca el rol. La nueva `sb_secret_...` no
+        # es un JWT: mandarla en Authorization hace que la petición llegue a
+        # la base de datos y se rechace al intentar interpretarla como token,
+        # aunque coincida con el valor de `apikey`. Con la nueva basta con
+        # `apikey`, que es donde la pasarela resuelve el rol.
+        #
+        # Se distingue por la forma y no por configuración: un JWT siempre
+        # empieza por la cabecera '{"alg"' en base64, o sea "eyJ".
+        if service_key.startswith("eyJ"):
+            self.cabeceras["Authorization"] = f"Bearer {service_key}"
 
     def upsert_pois(self, pois: list[Poi]) -> int:
         escritos = 0

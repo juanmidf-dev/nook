@@ -110,3 +110,37 @@ class TestDeduplica:
         a = Poi(tipo="notaria", fuente="notariado", fuente_id="x", nombre="Sin geo")
         salida, _ = deduplica([a])
         assert len(salida) == 1
+
+
+class TestCabecerasSupabase:
+    """
+    Supabase tiene dos generaciones de clave y no aceptan las mismas
+    cabeceras. Enviar la nueva `sb_secret_...` en Authorization hace que la
+    peticion llegue a la base de datos y se rechace al leerla como JWT, asi
+    que la ingesta entera fallaria con un 401 dificil de interpretar.
+    """
+
+    def _cabeceras(self, clave):
+        from nook.salida import Supabase
+
+        return Supabase("https://abc.supabase.co", clave).cabeceras
+
+    def test_clave_nueva_no_lleva_authorization(self):
+        h = self._cabeceras("sb_secret_MBqnmG4cx10MUV6051qbpA")
+        assert h["apikey"] == "sb_secret_MBqnmG4cx10MUV6051qbpA"
+        assert "Authorization" not in h
+
+    def test_clave_legada_si_lleva_authorization(self):
+        jwt = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIn0.firma"
+        h = self._cabeceras(jwt)
+        assert h["Authorization"] == f"Bearer {jwt}"
+        assert h["apikey"] == jwt
+
+    def test_la_url_no_duplica_la_barra(self):
+        from nook.salida import Supabase
+
+        assert Supabase("https://abc.supabase.co/", "k").base == "https://abc.supabase.co/rest/v1"
+
+    def test_el_upsert_sigue_siendo_upsert(self):
+        # Sin merge-duplicates el insert mensual duplicaria el censo entero.
+        assert "merge-duplicates" in self._cabeceras("k")["Prefer"]
