@@ -206,13 +206,23 @@ lo que el descubrimiento automático volvía vacío. Ya está corregido a `https
 
 ## Restricciones del entorno que condicionan el diseño
 
-- **Desde Claude Code en el equipo local sí hay salida** a notariado.org (y a
-  api.github.com). Comprobado el 28/08/2026: por eso el reconocimiento y el
-  cierre del extractor de notarías se hicieron aquí, sin esperar a un runner.
-  No alcanzan `app.bde.es` (400) ni la sede del Catastro (403), así que esos
-  siguen dependiendo de Actions. La ejecución de producción sigue siendo
-  Actions en cualquier caso: cron, histórico, y no depende de la máquina de
-  nadie.
+- **El Banco de España responde al equipo local y bloquea al runner.** Es al
+  revés de lo que se supuso al principio, y condiciona toda la estrategia de
+  esa fuente. Comprobado el 28/08/2026 con `reconocimiento.yml`:
+  `app.bde.es/exbwciu/exbwciuias/xml/Arranque.html` sale `inalcanzable` desde
+  Actions y **HTTP 200 desde el equipo**. Es lo normal en sedes de la
+  administración española, que filtran rangos de IP de nube. Conclusión:
+  **automatizar la descarga del registro de oficinas en Actions no es una
+  opción**, por bien que esté hecho el formulario. O fichero descargado a mano
+  y versionado, o un extractor que se ejecute en la máquina de alguien.
+  La sede del Catastro (403) tampoco la alcanza el runner.
+- **Desde Claude Code en el equipo local sí hay salida** a notariado.org, a
+  api.github.com, a cartociudad.es y a app.bde.es. Por eso el reconocimiento y
+  el cierre del extractor de notarías se hicieron aquí, sin esperar a un
+  runner, y por eso se pudo depurar la geocodificación contra el servicio real
+  (ver punto 7). Para todo lo que sí alcanza el runner, la ejecución de
+  producción sigue siendo Actions: cron, histórico, y no depende de la máquina
+  de nadie.
 - **Google Places está descartado** para construir la base de datos: sus
   términos prohíben almacenar los resultados más de 30 días salvo el
   `place_id`, así que con Google no se puede construir el activo que se vende.

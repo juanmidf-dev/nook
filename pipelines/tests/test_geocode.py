@@ -158,3 +158,53 @@ class TestInterpretaCartociudad:
         # una que coloca la notaria en otro continente.
         fuera = [dict(self.REAL[0], lat=2.1088, lng=41.5459)]
         assert interpreta_cartociudad(fuera) is None
+
+
+class TestMotivoDelFallo:
+    """
+    `get` devuelve None tanto por excepcion de red como por un codigo que no
+    se reintenta. Sin distinguirlos, el reconocimiento marcaba "inalcanzable"
+    sin decir por que, y "no hay salida a este dominio" y "el dominio
+    responde 403" llevan a decisiones opuestas.
+    """
+
+    def test_arranca_a_none(self):
+        assert Cliente(pausa_s=0).ultimo_fallo is None
+
+    def test_anota_el_codigo_que_no_se_reintenta(self, monkeypatch):
+        c = Cliente(pausa_s=0)
+        monkeypatch.setattr(c.sesion, "get", lambda *a, **k: _Respuesta403())
+        assert c.get("http://x") is None
+        assert c.ultimo_fallo == "HTTP 403"
+
+    def test_anota_la_excepcion_de_red(self, monkeypatch):
+        import requests
+
+        c = Cliente(pausa_s=0, intentos=1)
+
+        def revienta(*a, **k):
+            raise requests.ConnectionError("no route to host")
+
+        monkeypatch.setattr(c.sesion, "get", revienta)
+        assert c.get("http://x") is None
+        assert "ConnectionError" in c.ultimo_fallo
+
+    def test_una_peticion_buena_lo_limpia(self, monkeypatch):
+        c = Cliente(pausa_s=0)
+        monkeypatch.setattr(c.sesion, "get", lambda *a, **k: _Respuesta403())
+        c.get("http://x")
+        monkeypatch.setattr(c.sesion, "get", lambda *a, **k: _Respuesta200())
+        c.get("http://y")
+        assert c.ultimo_fallo is None
+
+
+class _Respuesta403:
+    status_code = 403
+    headers: dict = {}
+    text = ""
+
+
+class _Respuesta200:
+    status_code = 200
+    headers: dict = {}
+    text = "{}"

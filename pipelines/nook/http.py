@@ -46,6 +46,12 @@ class Cliente:
             {"User-Agent": self.agente, "Accept-Language": "es-ES,es;q=0.9"}
         )
         self._ultima = 0.0
+        # Por qué falló la última petición. `get` devuelve None tanto si hubo
+        # excepción de red como si el servidor contestó algo que no se
+        # reintenta, y sin esto quien llama no puede distinguir "no hay
+        # salida a este dominio" de "el dominio contesta 403". Son
+        # diagnósticos opuestos y llevan a decisiones opuestas.
+        self.ultimo_fallo: str | None = None
 
     def _espera_ritmo(self) -> None:
         delta = time.monotonic() - self._ultima
@@ -60,15 +66,22 @@ class Cliente:
             try:
                 r = self.sesion.get(url, timeout=self.timeout_s, **kw)
             except requests.RequestException as e:
+                self.ultimo_fallo = f"{type(e).__name__}: {e}"
                 log.warning("intento %d/%d fallo de red en %s: %s", intento, self.intentos, url, e)
             else:
                 if r.status_code == 200:
+                    self.ultimo_fallo = None
                     return r
                 # 429 y 5xx son transitorios; 404 y 403 no se reintentan
                 # porque repetirlos solo gasta tiempo y llama la atención.
                 if r.status_code in (429, 500, 502, 503, 504):
+                    # También se anota: si se agotan los intentos, el motivo
+                    # que quede registrado debe ser este y no el de una
+                    # excepción anterior de otra petición.
+                    self.ultimo_fallo = f"HTTP {r.status_code}"
                     log.warning("intento %d/%d %s devolvió %d", intento, self.intentos, url, r.status_code)
                 else:
+                    self.ultimo_fallo = f"HTTP {r.status_code}"
                     log.error("%s devolvió %d, no se reintenta", url, r.status_code)
                     return None
             if intento < self.intentos:

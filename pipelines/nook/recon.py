@@ -73,7 +73,9 @@ def explora(destino: pathlib.Path, cliente: Cliente | None = None) -> list[Halla
     for nombre, url in OBJETIVOS.items():
         r = cliente.get(url)
         if r is None:
-            hallazgos.append(Hallazgo(nombre, url, "inalcanzable"))
+            hallazgos.append(
+                Hallazgo(nombre, url, "inalcanzable", nota=cliente.ultimo_fallo)
+            )
             continue
 
         cuerpo = r.content
