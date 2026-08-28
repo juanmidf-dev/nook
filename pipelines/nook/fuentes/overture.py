@@ -39,11 +39,23 @@ CATEGORIAS: dict[Tipo, set[str]] = {
         "real_estate_service", "property_management",
     },
     "abogados": {
-        "lawyer", "law_firm", "legal_services", "attorney", "notary_public",
+        "lawyer", "law_firm", "legal_services", "attorney",
         "solicitor", "legal",
     },
     "banco": {"bank", "banking_and_finance", "credit_union"},
 }
+
+# `notary_public` NO va en abogados, aunque sea lo primero que apetece.
+#
+# Una notaría española catalogada en Overture entraría entonces como demanda,
+# sumando peso justo encima de donde ya hay una notaría instalada: el error
+# que el modelo entero existe para evitar. Y ademas duplicaria un punto que ya
+# tenemos de la Guia Notarial, que es censo oficial y completo.
+#
+# Se descarta en vez de mapearse a `notaria` precisamente por eso: la
+# competencia ya la tenemos bien, y meterla por una segunda via solo añade
+# duplicados que habria que deduplicar.
+CATEGORIAS_EXCLUIDAS = {"notary_public", "notary"}
 
 # Overture arrastra registros de baja confianza procedentes de fuentes
 # automáticas. Por debajo de este umbral hay bastante ruido —negocios
@@ -137,6 +149,11 @@ def consulta_sql(b: BBox, geometria: str = GEOM_WKB) -> str:
 def clasifica(categoria: str | None, alternativas: Iterable[str] | None) -> Tipo | None:
     """Traduce la taxonomía de Overture a los tipos de Nook."""
     candidatas = {c for c in [categoria, *(alternativas or [])] if c}
+    # La exclusión va antes que nada: una notaría catalogada en Overture suele
+    # llevar también `lawyer` entre sus categorías, así que sacarla del
+    # conjunto de abogados no basta para que deje de contar como demanda.
+    if candidatas & CATEGORIAS_EXCLUIDAS:
+        return None
     for tipo, validas in CATEGORIAS.items():
         if candidatas & validas:
             return tipo

@@ -23,7 +23,19 @@ from nook.fuentes.overture import (
     fila_a_poi,
 )
 
-duckdb = pytest.importorskip("duckdb")
+# duckdb solo hace falta para las pruebas que ejecutan SQL. La clasificacion
+# de categorias y el mapeo de filas son logica pura, y saltarselos por no
+# tener duckdb instalado dejaba sin cubrir justo lo que mas se toca. Windows
+# con Python 3.14, por ejemplo, no tiene rueda de duckdb 1.1.3.
+try:
+    import duckdb
+except ImportError:  # pragma: no cover
+    duckdb = None
+
+
+def _exige_duckdb():
+    if duckdb is None:
+        pytest.skip("duckdb no está instalado en este entorno")
 
 
 class TestClasifica:
@@ -98,6 +110,7 @@ class TestConsultaSQL:
         estructuras anidadas y filtros— están en `test_filtros_sin_spatial`,
         que sí corre en cualquier sitio.
         """
+        _exige_duckdb()
         con = duckdb.connect()
         try:
             con.execute("INSTALL spatial; LOAD spatial;")
@@ -159,6 +172,7 @@ class TestConsultaSQL:
         con.execute(sql.replace("{origen}", str(parquet))).fetchall()
 
     def test_origen_ilegible_asume_wkb(self):
+        _exige_duckdb()
         # Una ruta que no existe no debe propagar la excepción desde aquí: el
         # error se entiende mucho mejor cuando lo da la consulta de verdad.
         assert (
@@ -209,6 +223,7 @@ class TestFiltrosSinSpatial:
 
     @pytest.fixture
     def parquet(self, tmp_path):
+        _exige_duckdb()
         con = duckdb.connect()
         destino = tmp_path / "places_planas.parquet"
         con.execute(
@@ -253,6 +268,7 @@ class TestFiltrosSinSpatial:
             .replace("ST_Y(ST_GeomFromWKB(geometry))", "lat_p")
             .replace("ST_X(ST_GeomFromWKB(geometry))", "lon_p")
         )
+        _exige_duckdb()
         con = duckdb.connect()
         filas = con.execute(sql).fetchall()
         columnas = [d[0] for d in con.description]
@@ -267,3 +283,30 @@ class TestFiltrosSinSpatial:
         assert p.web == "https://ejemplo.test"
         assert p.telefono == "937000000"
         assert p.extra["confianza"] == pytest.approx(0.91)
+
+
+class TestNoCuentaNotariasComoDemanda:
+    """
+    `notary_public` estuvo en el conjunto de abogados. Con eso, una notaria
+    catalogada en Overture entraba como DEMANDA: sumaba peso justo encima de
+    donde ya hay competencia instalada, que es el error que el modelo entero
+    existe para evitar, y ademas duplicaba un punto que la Guia Notarial ya
+    da como censo oficial.
+    """
+
+    def test_notaria_pura_se_descarta(self):
+        assert clasifica("notary_public", None) is None
+
+    def test_notaria_etiquetada_tambien_como_abogado(self):
+        # El caso real: en Overture una notaria suele llevar las dos. Si la
+        # exclusion no fuera lo primero, `lawyer` la colaria como demanda.
+        assert clasifica("lawyer", ["notary_public"]) is None
+        assert clasifica("notary_public", ["lawyer", "legal_services"]) is None
+
+    def test_un_abogado_de_verdad_sigue_siendo_demanda(self):
+        assert clasifica("lawyer", None) == "abogados"
+        assert clasifica("professional_services", ["lawyer"]) == "abogados"
+
+    def test_no_arrastra_a_las_demas_categorias(self):
+        assert clasifica("real_estate_agency", None) == "inmobiliaria"
+        assert clasifica("bank", None) == "banco"
