@@ -15,7 +15,13 @@ import pytest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
-from nook.fuentes.overture import BBox, clasifica, consulta_sql, fila_a_poi
+from nook.fuentes.overture import (
+    BBox,
+    clasifica,
+    consulta_sql,
+    expresion_geometria,
+    fila_a_poi,
+)
 
 duckdb = pytest.importorskip("duckdb")
 
@@ -141,10 +147,34 @@ class TestConsultaSQL:
         )
         return destino
 
+    def test_detecta_el_tipo_de_la_geometria(self, parquet):
+        con = self._conexion_espacial()
+        # No se fija cuál de las dos sale: depende de la versión de la
+        # extensión spatial, que se descarga en ejecución y no está fijada
+        # como sí lo está la de duckdb. Lo que importa es que la consulta
+        # armada con lo que devuelva se ejecute.
+        expr = expresion_geometria(con, str(parquet))
+        assert expr in ("geometry", "ST_GeomFromWKB(geometry)")
+        sql = consulta_sql(BBox.de_centro(41.5431, 2.1097, 6000), expr)
+        con.execute(sql.replace("{origen}", str(parquet))).fetchall()
+
+    def test_origen_ilegible_asume_wkb(self):
+        # Una ruta que no existe no debe propagar la excepción desde aquí: el
+        # error se entiende mucho mejor cuando lo da la consulta de verdad.
+        assert (
+            expresion_geometria(duckdb.connect(), "/no/existe/*.parquet")
+            == "ST_GeomFromWKB(geometry)"
+        )
+
     def test_filtra_y_transforma(self, parquet):
         con = self._conexion_espacial()
         caja = BBox.de_centro(41.5431, 2.1097, 6000)
-        sql = consulta_sql(caja).replace("{origen}", str(parquet))
+        # Se pregunta el tipo en vez de fijarlo: escrito el parquet con
+        # ST_AsWKB, DuckDB lo relee como GEOMETRY si su extensión spatial
+        # entiende los metadatos GeoParquet, y entonces envolverlo otra vez
+        # en ST_GeomFromWKB no encaja con ninguna sobrecarga.
+        geometria = expresion_geometria(con, str(parquet))
+        sql = consulta_sql(caja, geometria).replace("{origen}", str(parquet))
         filas = con.execute(sql).fetchall()
         columnas = [d[0] for d in con.description]
         pois = [p for f in filas if (p := fila_a_poi(dict(zip(columnas, f)))) is not None]

@@ -76,7 +76,36 @@ ESPANA = [
 ]
 
 
-def consulta_sql(b: BBox) -> str:
+# Cómo leer la columna `geometry`. Overture la publica como WKB, pero DuckDB
+# con la extensión spatial cargada reconoce los metadatos GeoParquet del
+# fichero y puede devolverla ya convertida a GEOMETRY. En ese caso
+# `ST_GeomFromWKB(geometry)` no encaja con ninguna sobrecarga y la consulta
+# revienta entera. Cuál de las dos toca no se puede decidir a priori: depende
+# de la versión de la extensión, que se descarga en tiempo de ejecución y no
+# está fijada como sí lo está la de duckdb.
+GEOM_WKB = "ST_GeomFromWKB(geometry)"
+GEOM_NATIVA = "geometry"
+
+
+def expresion_geometria(con, origen: str) -> str:
+    """
+    Pregunta al propio DuckDB de qué tipo le llega la columna, en vez de
+    suponerlo. `DESCRIBE` solo lee metadatos del parquet: no descarga datos,
+    así que sale gratis incluso contra S3.
+    """
+    try:
+        filas = con.execute(
+            f"DESCRIBE SELECT geometry FROM read_parquet('{origen}') LIMIT 0"
+        ).fetchall()
+    except Exception as e:  # noqa: BLE001
+        log.warning("no se pudo describir la geometría de %s (%s); se asume WKB", origen, e)
+        return GEOM_WKB
+    tipo = filas[0][1].upper() if filas else ""
+    log.info("columna geometry de tipo %s", tipo or "desconocido")
+    return GEOM_NATIVA if "GEOMETRY" in tipo else GEOM_WKB
+
+
+def consulta_sql(b: BBox, geometria: str = GEOM_WKB) -> str:
     """
     SQL de extracción. Separado de la ejecución para poder probarlo contra un
     parquet local, que es la única forma de validar la transformación sin
@@ -95,8 +124,8 @@ def consulta_sql(b: BBox) -> str:
         addresses[1].region                             AS region,
         websites[1]                                     AS web,
         phones[1]                                       AS telefono,
-        ST_Y(ST_GeomFromWKB(geometry))                  AS lat,
-        ST_X(ST_GeomFromWKB(geometry))                  AS lon
+        ST_Y({geometria})                               AS lat,
+        ST_X({geometria})                               AS lon
     FROM read_parquet('{{origen}}', filename=true, hive_partitioning=1)
     WHERE bbox.ymin BETWEEN {b.min_lat} AND {b.max_lat}
       AND bbox.xmin BETWEEN {b.min_lon} AND {b.max_lon}
@@ -164,9 +193,11 @@ def extrae(cajas: list[BBox] | None = None, origen: str = BASE) -> list[Poi]:
     con.execute("INSTALL spatial; LOAD spatial; INSTALL httpfs; LOAD httpfs;")
     con.execute("SET s3_region='us-west-2'; SET s3_access_key_id=''; SET s3_secret_access_key='';")
 
+    geometria = expresion_geometria(con, origen)
+
     pois: list[Poi] = []
     for b in cajas or ESPANA:
-        sql = consulta_sql(b).replace("{origen}", origen)
+        sql = consulta_sql(b, geometria).replace("{origen}", origen)
         log.info("consultando Overture en %s", b)
         filas = con.execute(sql).fetchall()
         columnas = [d[0] for d in con.description]
