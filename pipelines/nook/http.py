@@ -70,8 +70,44 @@ class Cliente:
         log.error("agotados los intentos con %s", url)
         return None
 
+    def post(self, url: str, **kw) -> requests.Response | None:
+        """
+        Como `get`, con la misma política de ritmo y reintentos.
+
+        Existe porque la Guía Notarial expone su buscador como POST con el
+        filtro en el cuerpo: no hay forma de pedirle el censo con un GET.
+        """
+        for intento in range(1, self.intentos + 1):
+            self._espera_ritmo()
+            try:
+                r = self.sesion.post(url, timeout=self.timeout_s, **kw)
+            except requests.RequestException as e:
+                log.warning("intento %d/%d fallo de red en %s: %s", intento, self.intentos, url, e)
+            else:
+                if r.status_code == 200:
+                    return r
+                if r.status_code in (429, 500, 502, 503, 504):
+                    log.warning("intento %d/%d %s devolvió %d", intento, self.intentos, url, r.status_code)
+                else:
+                    log.error("%s devolvió %d, no se reintenta", url, r.status_code)
+                    return None
+            if intento < self.intentos:
+                time.sleep(min(2**intento, 30))
+        log.error("agotados los intentos con %s", url)
+        return None
+
     def json(self, url: str, **kw) -> object | None:
         r = self.get(url, **kw)
+        if r is None:
+            return None
+        try:
+            return r.json()
+        except ValueError:
+            log.error("%s no devolvió JSON válido (content-type=%s)", url, r.headers.get("content-type"))
+            return None
+
+    def json_post(self, url: str, **kw) -> object | None:
+        r = self.post(url, **kw)
         if r is None:
             return None
         try:

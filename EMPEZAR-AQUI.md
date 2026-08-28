@@ -1,112 +1,59 @@
-# Cómo pasar esto a GitHub y seguir en Claude Code
+# Estado y pendientes
 
-Esta carpeta no es un repositorio git todavía: es el ZIP descomprimido. Estos
-son los pasos, en orden.
+Este fichero era la guía para pasar el ZIP a GitHub. Eso ya está hecho, así que
+queda solo lo que sigue pendiente. El contexto del proyecto —el modelo, las
+decisiones y por qué— está en `CLAUDE.md`.
 
-## 1. Antes de nada, comprueba que arranca
+## Arrancar el frontend
 
 ```powershell
-cd C:\Users\Usuario\Documents\Claude\Projects\sabadell-eats-heatmap-main
 npm install
 npm run dev
 ```
 
-Debería abrirse Sabadell con el mapa oscuro y los hexágonos. Si sale la pantalla
-de "Falta el token de Mapbox", es que `.env` no está donde debe; se creó
-automáticamente, pero compruébalo.
+**Node no está instalado en este equipo.** Hay que instalarlo (`winget install
+OpenJS.NodeJS.LTS`) para poder levantar el frontend en local; mientras tanto,
+el workflow de CI sí compila y comprueba tipos en cada push.
 
-## 2. Borra lo que ya no sirve
-
-La carpeta `_obsoleto/` tiene los ficheros del MVP de Lovable que ya no se usan
-y el ZIP de la entrega. No los borré yo porque el puente con tu ordenador no
-tiene permiso de borrado. Bórrala tú antes de subir nada:
+El pipeline de Python sí corre en local, salvo los tests de Overture: `duckdb
+1.1.3` no publica rueda para Python 3.14 e intenta compilarse. CI usa 3.12 y
+pasa entero.
 
 ```powershell
-Remove-Item -Recurse -Force _obsoleto
+cd pipelines
+python -m pytest tests -q
 ```
 
-## 3. Sube el repositorio
-
-**Si quieres reutilizar el repo que ya tienes** (`sabadell-eats-heatmap`):
-
-```powershell
-git init
-git add .
-git commit -m "Nook v2: motor de calor, datos reales de Sabadell y pipeline de ingesta"
-git branch -M main
-git remote add origin https://github.com/juanmidf-dev/sabadell-eats-heatmap.git
-git push -u origin main --force
-```
-
-El `--force` es necesario porque estás reemplazando el contenido del MVP. Si
-prefieres conservar el historial anterior, clona el repo en otra carpeta, copia
-estos ficheros encima y haz un commit normal.
-
-**Nota sobre el nombre:** `sabadell-eats-heatmap` viene de la plantilla de
-Lovable con la que arrancó el MVP y ya no describe el proyecto. Merece la pena
-renombrarlo a `nook` en Settings → General → Repository name. Si lo haces,
-actualiza el `remote` con `git remote set-url origin ...`.
-
-**Ojo con Lovable:** si el proyecto sigue sincronizado con Lovable, este push
-cambiará también lo que ves allí. Es lo esperado, pero que no te pille por
-sorpresa.
-
-## 4. Comprueba que `.env` NO se ha subido
-
-```powershell
-git ls-files | Select-String "\.env$"
-```
-
-No debe devolver nada. `.gitignore` ya lo excluye, pero merece la pena mirarlo:
-ese fichero lleva tu token de Mapbox.
-
-## 5. Abre Claude Code en la carpeta
-
-```powershell
-cd C:\Users\Usuario\Documents\Claude\Projects\sabadell-eats-heatmap-main
-claude
-```
-
-Claude Code lee `CLAUDE.md` automáticamente al arrancar, así que llega con todo
-el contexto: el modelo, las decisiones tomadas y por qué, el estado de cada
-extractor y lo que queda pendiente. No hace falta que le expliques nada.
-
-**Por qué en Code sí funciona GitHub:** Claude Code se ejecuta en tu ordenador y
-usa tus propias credenciales de git, las mismas que el `git push` del paso 3.
-No hay que darle acceso a nada ni pasarle ningún token — el problema que
-tuvimos en la sesión anterior desaparece solo. Si además instalas el CLI de
-GitHub (`winget install GitHub.cli` y luego `gh auth login`), podrá crear ramas
-y abrir pull requests directamente.
-
-Aparte de eso, `/install-github-app` dentro de Claude Code instala la app de
-GitHub para que Claude revise pull requests y responda en el repositorio. Es
-opcional y no hace falta para trabajar.
-
-## 6. Lo primero que le puedes pedir
-
-> Ejecuta el workflow de reconocimiento y, con el artefacto, cierra el extractor
-> de la Guía Notarial.
-
-Ese es el bloqueante real: sin el endpoint de las notarías no hay capa de
-competencia, y sin capa de competencia el mapa no vale para lo que se vende.
-
-Después, por orden:
+## Pendiente de código
 
 1. Crear el proyecto de Supabase y aplicar `infra/schema.sql`.
 2. Añadir los secretos `SUPABASE_URL` y `SUPABASE_SERVICE_KEY` al repositorio.
 3. Ingesta en **modo prueba**, revisar el artefacto NDJSON, y solo entonces
-   ejecutar en modo real.
+   ejecutarla en modo real.
 4. Sustituir `src/data/sabadell.ts` por la consulta a Supabase.
+5. El test que falta: comprobar que `src/lib/heat.ts` y `pipelines/nook/heat.py`
+   dan el mismo número con datos reales. Están duplicados a propósito y ahora
+   mismo nada garantiza que no se separen.
 
-## Cosas que siguen pendientes y no dependen del código
+## Pendiente que no depende del código
 
 - **Restringir el token de Mapbox por dominio** en
   `account.mapbox.com/access-tokens`. Un token público sin restricción lo usa
-  cualquiera que abra el inspector, y la factura la pagas tú.
+  cualquiera que abra el inspector, y la factura la pagas tú. Con el
+  repositorio ya publicado, esto sube de prioridad.
 - **Solicitar acceso a la API de Idealista** en
   `developers.idealista.com/access-request`. Tarda, así que cuanto antes mejor.
-- **Geocodificar la notaría que falta**: Enrique Ruiz de Bustillo Pont, calle
-  Sant Antoni Mª Claret 1, Sabadell. Es la incidencia grave de los datos.
 - **Conseguir un volcado de despachos de abogados**, que no existe. Mientras
   tanto la capa aparece como "sin datos" en la interfaz.
 - **Revisar las condiciones del Consejo General del Notariado** antes de vender.
+  Ahora que el extractor de notarías funciona y baja el censo nacional, esto
+  deja de ser teórico.
+
+### Resuelto: la notaría "que faltaba"
+
+Estaba anotado geocodificar a Enrique Ruiz de Bustillo Pont, en Sant Antoni Mª
+Claret 1 de Sabadell, como la incidencia grave del volcado estático. **No es un
+hueco de geocodificación: es un registro caducado.** En el censo en vivo esa
+notaría no existe y en esa misma dirección está Lluis Colomé Serra. El volcado
+de Sabadell arrastra el dato viejo; se corrige solo en cuanto la capa de
+competencia venga de la Guía Notarial en lugar del corte estático.

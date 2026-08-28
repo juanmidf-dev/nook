@@ -31,7 +31,10 @@ from .http import Cliente
 log = logging.getLogger("nook.recon")
 
 OBJETIVOS = {
-    "guia_notarial": "http://guianotarial.notariado.org/",
+    # https, no http: por http el HTML sí responde, pero los bundles que
+    # cuelgan de él devuelven 404 y el reconocimiento acaba sin encontrar
+    # nada. Fue exactamente lo que pasó la primera vez que se ejecutó.
+    "guia_notarial": "https://guianotarial.notariado.org/",
     "notariado": "https://www.notariado.org/portal/elige-a-tu-notario",
     "catastro_notarios": "https://www1.sedecatastro.gob.es/administracionElectronica/SECBuscaNotarios.aspx",
     "bde_oficinas": "https://app.bde.es/exbwciu/exbwciuias/xml/Arranque.html",

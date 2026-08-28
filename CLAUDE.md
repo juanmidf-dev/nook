@@ -112,42 +112,59 @@ restricción lo usa cualquiera que abra el inspector.
 | Esquema PostGIS | Escrito, sin desplegar |
 | Extractor Banco de España | **Listo y probado** contra un fichero real |
 | Extractor Overture Maps | Listo; consulta y transformación probadas contra parquet local, sin ejecutar aún contra S3 |
-| Extractor Guía Notarial | **Pendiente del endpoint** — ver abajo |
+| Extractor Guía Notarial | **Listo y probado** contra el endpoint real |
 | Supabase | No existe todavía |
 | Idealista | Sin solicitar la API |
 
-### Lo primero que hay que hacer en Claude Code
+### Lo primero que hay que hacer
 
-1. **Subir el repositorio a GitHub.** Era el bloqueante en la sesión anterior.
-2. Ejecutar `Actions → Reconocimiento de fuentes → Run workflow`.
-3. Con su artefacto, cerrar el extractor de notarías (ver siguiente sección).
-4. Crear el proyecto de Supabase, aplicar `infra/schema.sql`, y añadir los
+1. ~~Subir el repositorio a GitHub.~~ Hecho.
+2. ~~Reconocimiento y cierre del extractor de notarías.~~ Hecho, en local:
+   desde el equipo sí hay salida a notariado.org (ver más abajo).
+3. Crear el proyecto de Supabase, aplicar `infra/schema.sql`, y añadir los
    secretos `SUPABASE_URL` y `SUPABASE_SERVICE_KEY`.
-5. Ingesta en modo prueba, revisar el artefacto, y solo entonces en modo real.
+4. Ingesta en modo prueba, revisar el artefacto, y solo entonces en modo real.
+5. Sustituir `src/data/sabadell.ts` por la consulta a Supabase.
 
-### El endpoint de la Guía Notarial
+### El endpoint de la Guía Notarial (confirmado el 28/08/2026)
 
-`guianotarial.notariado.org` es una aplicación React: la lista de notarías no
-está en el HTML, se la pide su JavaScript a un endpoint no documentado. En la
-sesión anterior no se pudo inspeccionar porque ni el entorno de Claude ni el
-equipo local tienen salida hacia ese dominio.
+    POST https://guianotarial.notariado.org/guianotarial/rest/buscar/notarios
 
-`reconocimiento.yml` existe para eso: baja los bundles, busca en ellos las rutas
-de API, las prueba y deja todo como artefacto. Con eso se rellena `ENDPOINT` en
-`pipelines/nook/fuentes/notarias.py` o el secreto `NOOK_ENDPOINT_NOTARIAS`.
+Cuerpo: el formulario completo con todos los campos presentes aunque vayan
+vacíos, y `codigoSituacionNotario: "AC"` para quedarse con los notarios en
+activo. Sin autenticación —la aplicación tiene un `/tokenjwt`, pero este
+buscador no lo pide—. Devuelve **el censo nacional en una sola petición y sin
+paginar**: 2.641 notarios en la comprobación.
 
-**No se dejó un endpoint inventado que pareciera plausible**, y conviene no
-dejarlo: un extractor que falla en silencio es peor que uno que no existe.
+**Una petición, no 52.** El portal corta con 429 tras unas veinte peticiones
+seguidas, incluso espaciadas dos segundos: enumerar provincias se queda a
+medias y marca la IP del runner. Si hace falta filtrar por provincia, se
+filtra sobre el resultado.
+
+**La fuente sí publica clave propia**, al contrario de lo que se supuso antes
+de verla: `codigoNotaria`. Se usa como `fuente_id` en vez del hash de nombre y
+dirección, porque sobrevive a que un despacho cambie de domicilio —con el hash,
+una notaría que se muda aparecía como un cierre más un alta nueva—.
+
+El nombre viene invertido en un único campo `apellidos_nombre` ("Apellidos,
+Nombre") y la dirección trae el código postal pegado al final sin separador.
+Ambas cosas están cubiertas por `tests/test_notarias.py`, con registros reales.
+
+`reconocimiento.yml` sigue siendo útil para las demás fuentes. Ojo: pedía la
+Guía por `http://`, y así el HTML responde pero sus bundles dan 404, que es por
+lo que el descubrimiento automático volvía vacío. Ya está corregido a `https`.
 
 ---
 
 ## Restricciones del entorno que condicionan el diseño
 
-- **Ni el entorno de desarrollo ni el equipo local alcanzan** notariado.org,
-  app.bde.es, Overpass ni el INE. Por eso los extractores corren en GitHub
-  Actions: no es una preferencia de arquitectura, es la única vía. Si en Claude
-  Code sí hay salida, se puede probar en local, pero la ejecución de producción
-  sigue siendo Actions (cron, histórico, y no depende de la máquina de nadie).
+- **Desde Claude Code en el equipo local sí hay salida** a notariado.org (y a
+  api.github.com). Comprobado el 28/08/2026: por eso el reconocimiento y el
+  cierre del extractor de notarías se hicieron aquí, sin esperar a un runner.
+  No alcanzan `app.bde.es` (400) ni la sede del Catastro (403), así que esos
+  siguen dependiendo de Actions. La ejecución de producción sigue siendo
+  Actions en cualquier caso: cron, histórico, y no depende de la máquina de
+  nadie.
 - **Google Places está descartado** para construir la base de datos: sus
   términos prohíben almacenar los resultados más de 30 días salvo el
   `place_id`, así que con Google no se puede construir el activo que se vende.
