@@ -16,6 +16,7 @@ volver a geocodificar España entera.
 from __future__ import annotations
 
 import logging
+import re
 from dataclasses import dataclass
 
 from .http import Cliente
@@ -40,6 +41,32 @@ CALIDAD_POR_TIPO: dict[str, Calidad] = {
     "poblacion": "municipio",
     "toponimo": "municipio",
 }
+
+
+# CartoCiudad quiere "vía, portal" y nada más. Medido sobre 30 direcciones
+# reales del censo notarial: con la planta, el local, el edificio o la palabra
+# "número" dentro, acierta 0 de 30; sin ellos, 28 de 30 y todas a nivel de
+# portal. No devuelve un resultado peor, devuelve lista vacía, que es lo que
+# hace el fallo tan fácil de confundir con "esta dirección no existe".
+#
+# La provincia y "España" estorban igual: son correctos como dirección postal,
+# pero el buscador del IGN los interpreta como parte del literal de la vía.
+_CON_NUMERO = re.compile(r"^(?P<via>.+?)[,\s]+n[úu]m(?:ero)?\.?\s*(?P<portal>\d+)", re.I)
+_COMA_NUMERO = re.compile(r"^(?P<via>.+?),\s*(?P<portal>\d+)\b")
+_SIN_NUMERO = re.compile(r"^(?P<via>.+?)[,\s]+s/?\s*n\b", re.I)
+
+
+def para_cartociudad(direccion: str) -> str:
+    """Reduce la dirección de la Guía Notarial a lo que el IGN sabe buscar."""
+    d = " ".join(direccion.split())
+    for patron in (_CON_NUMERO, _COMA_NUMERO):
+        m = patron.match(d)
+        if m:
+            return f"{m.group('via').strip(' ,')}, {m.group('portal')}"
+    m = _SIN_NUMERO.match(d)
+    if m:
+        return m.group("via").strip(" ,")
+    return d
 
 
 @dataclass
@@ -125,8 +152,13 @@ class Geocodificador:
         if consulta in self.cache:
             return self.cache[consulta]
 
+        # Cada geocodificador quiere la dirección de una forma distinta: el
+        # IGN, escueta y sin provincia; Nominatim agradece todo el contexto.
+        consulta_ign = ", ".join(
+            x for x in (para_cartociudad(direccion), municipio) if x
+        )
         r = interpreta_cartociudad(
-            self.cliente.json(CARTOCIUDAD, params={"q": consulta, "no_process": "false"})
+            self.cliente.jsonp(CARTOCIUDAD, params={"q": consulta_ign, "no_process": "false"})
         )
         if r is None and self.usar_nominatim:
             r = interpreta_nominatim(

@@ -11,13 +11,19 @@ IP de los runners de GitHub bloqueada.
 
 from __future__ import annotations
 
+import json
 import logging
+import re
 import time
 from dataclasses import dataclass
 
 import requests
 
 log = logging.getLogger("nook.http")
+
+# `callback([...]);` -> `[...]`. El nombre de la funcion varia, y puede no
+# haberlo, asi que se acepta cualquiera y tambien el parentesis pelado.
+_ENVOLTORIO_JSONP = re.compile(r"^\s*[\w$.]*\(\s*(.*?)\s*\)\s*;?\s*$", re.S)
 
 AGENTE = (
     "NookBot/1.0 (+https://github.com/juanmidf-dev; herramienta de análisis "
@@ -104,6 +110,31 @@ class Cliente:
             return r.json()
         except ValueError:
             log.error("%s no devolvió JSON válido (content-type=%s)", url, r.headers.get("content-type"))
+            return None
+
+    def jsonp(self, url: str, **kw) -> object | None:
+        """
+        Como `json`, pero desenvolviendo la llamada JSONP.
+
+        CartoCiudad solo publica `findJsonp`, que responde
+        `callback([...])` con content-type application/x-javascript.
+        `r.json()` no puede con eso, asi que el geocodificador oficial
+        fallaba en todas y cada una de las peticiones y todo caia al
+        respaldo de Nominatim sin que nada lo anunciara mas alla de un
+        ERROR por linea en el log.
+        """
+        r = self.get(url, **kw)
+        if r is None:
+            return None
+        m = _ENVOLTORIO_JSONP.match(r.text)
+        cuerpo = m.group(1) if m else r.text
+        try:
+            return json.loads(cuerpo)
+        except ValueError:
+            log.error(
+                "%s no devolvió JSONP interpretable (content-type=%s): %s",
+                url, r.headers.get("content-type"), r.text[:120],
+            )
             return None
 
     def json_post(self, url: str, **kw) -> object | None:

@@ -82,6 +82,23 @@ Descartar el `cod_ine` para que encajara sería tirar un dato bueno. Cuando
 `municipios` esté cargada se recupera la integridad con `not valid` y luego
 `validate constraint`, sin bloquear la tabla; está escrito en `schema.sql`.
 
+### 7. CartoCiudad habla JSONP y quiere la dirección corta
+
+Dos detalles que costaron el 97 % de la capa de competencia en la primera
+ingesta real, y ninguno de los dos daba error.
+
+El único endpoint de geocodificación del IGN es `findJsonp`, y responde
+`callback([...])` con `content-type: application/x-javascript`. `r.json()` no
+puede con eso: por eso existe `Cliente.jsonp`.
+
+Y la consulta tiene que ser **`vía, portal, municipio`** y nada más. Con la
+planta, el local, el edificio, la palabra "número" o la provincia dentro,
+CartoCiudad devuelve **lista vacía**, que es indistinguible de "esta dirección
+no existe". Medido sobre 30 direcciones reales del censo: 0 de 30 con el texto
+completo, 28 de 30 —todas a nivel de portal— reducido. De ahí
+`geocode.para_cartociudad`. Nominatim, en cambio, sí agradece el contexto
+completo, así que cada uno recibe su propia consulta.
+
 ---
 
 ## Estructura
