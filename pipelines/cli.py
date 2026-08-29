@@ -2,7 +2,7 @@
 Punto de entrada del pipeline de ingesta.
 
     python cli.py reconocimiento
-    python cli.py bancos     --entrada datos/entrada/bde --prueba
+    python cli.py bancos     --prueba          # lee datos/bde/*.csv
     python cli.py overture   --provincia 08 --prueba
     python cli.py notarias   --prueba
 
@@ -117,7 +117,11 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.comando == "bancos":
-        entrada = args.entrada or (RAIZ / "datos" / "entrada" / "bde")
+        # Carpeta versionada, no `datos/entrada/` (que está en .gitignore): el
+        # CSV del Banco de España se descarga a mano y viaja en el
+        # repositorio, porque ni Actions alcanza app.bde.es ni existe un
+        # endpoint de descarga. Ver datos/bde/README.md.
+        entrada = args.entrada or (RAIZ / "datos" / "bde")
         pois = bancos.desde_carpeta(entrada)
 
     elif args.comando == "overture":

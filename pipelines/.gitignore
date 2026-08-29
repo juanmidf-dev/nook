@@ -1,5 +1,9 @@
 datos/salida/
 datos/recon/
 datos/entrada/
+
+# datos/bde/ SI se versiona: es el CSV del Banco de Espana, que se
+# descarga a mano porque no hay forma de automatizarlo. Ver su README.
+!datos/bde/
 __pycache__/
 .pytest_cache/

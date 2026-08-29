@@ -188,7 +188,14 @@ def desde_carpeta(carpeta: pathlib.Path) -> list[Poi]:
     pois: list[Poi] = []
     ficheros = sorted(carpeta.glob("*.csv"))
     if not ficheros:
-        log.warning("no hay CSV del Banco de España en %s", carpeta)
+        # Es el estado normal de un clon recién hecho, no una anomalía: el CSV
+        # se descarga a mano. Sin decir dónde, el siguiente que se lo encuentre
+        # tiene que reconstruir por qué esta fuente es distinta a las demás.
+        log.warning(
+            "no hay ningún CSV en %s. Este fichero se descarga a mano del Banco "
+            "de España; las instrucciones están en %s",
+            carpeta, carpeta / "README.md",
+        )
     for f in ficheros:
         log.info("leyendo %s", f.name)
         pois += desde_fichero(f)
