@@ -22,8 +22,12 @@ permissions:
   contents: write
 
 concurrency:
-  group: exportar-${{ github.event.inputs.municipio }}
-  cancel-in-progress: true
+  # Un unico grupo para todo el workflow, no uno por municipio: dos
+  # exportaciones simultaneas comitean sobre la misma rama y la segunda pierde
+  # el push. Paso al lanzar Barcelona y Madrid a la vez. Y no se cancela la que
+  # esta corriendo, porque ya ha hecho el trabajo.
+  group: exportar
+  cancel-in-progress: false
 
 jobs:
   exportar:
@@ -77,4 +81,11 @@ jobs:
             exit 0
           fi
           git commit -m "Actualizar el corte de $MUNICIPIO desde Supabase"
-          git push
+          # Cinturon y tirantes: aunque la concurrencia serializa, entre el
+          # checkout y el push puede haber entrado otro commit.
+          for intento in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rechazado, reintento $intento tras rebase"
+            git pull --rebase origin main
+          done
+          exit 1

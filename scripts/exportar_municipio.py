@@ -70,11 +70,32 @@ def caja(centro: list[float], radio_m: float) -> tuple[float, float, float, floa
     return lat - d_lat, lat + d_lat, lon - d_lon, lon + d_lon
 
 
+# PostgREST corta las respuestas por su cuenta —en Supabase, a 1.000 filas— y
+# **no avisa**: devuelve 200 con la primera página y ya. Pedir `limit=20000` no
+# lo evita, porque el tope del servidor manda sobre el del cliente. La primera
+# exportación de Barcelona y Madrid dio exactamente 1.000 puntos las dos, que
+# es la clase de número redondo que delata un truncamiento.
+PAGINA = 1000
+
+
 def pide(base: str, cabeceras: dict, ruta: str, params: dict) -> list[dict]:
-    r = requests.get(f"{base}/rest/v1/{ruta}", headers=cabeceras, params=params, timeout=90)
-    if r.status_code >= 300:
-        raise SystemExit(f"Supabase devolvió {r.status_code}: {r.text[:300]}")
-    return r.json()
+    """Trae **todas** las filas, paginando hasta que el servidor se queda corto."""
+    filas: list[dict] = []
+    desplazamiento = 0
+    while True:
+        p = dict(params, limit=str(PAGINA), offset=str(desplazamiento))
+        r = requests.get(f"{base}/rest/v1/{ruta}", headers=cabeceras, params=p, timeout=90)
+        if r.status_code >= 300:
+            raise SystemExit(f"Supabase devolvió {r.status_code}: {r.text[:300]}")
+        pagina = r.json()
+        filas.extend(pagina)
+        if len(pagina) < PAGINA:
+            return filas
+        desplazamiento += PAGINA
+        # Un tope de seguridad: si algún día una consulta se descontrola, mejor
+        # fallar que llenar la memoria del runner en silencio.
+        if desplazamiento > 200_000:
+            raise SystemExit(f"{ruta}: más de 200.000 filas, algo no encaja")
 
 
 def exporta(clave: str) -> pathlib.Path:
@@ -99,7 +120,6 @@ def exporta(clave: str) -> pathlib.Path:
         "lon": f"gte.{lon_min}",
         "and": f"(lat.lte.{lat_max},lon.lte.{lon_max})",
         "activo": "is.true",
-        "limit": "20000",
     })
 
     pois = [
@@ -123,7 +143,6 @@ def exporta(clave: str) -> pathlib.Path:
         "select": "tipo,nombre,direccion,geocode_fuente,geocode_calidad",
         "municipio": f"eq.{muni['nombre']}",
         "lat": "is.null",
-        "limit": "2000",
     })
     incidencias = [
         {
@@ -146,7 +165,6 @@ def exporta(clave: str) -> pathlib.Path:
         "lat": f"gte.{lat_min}",
         "lon": f"gte.{lon_min}",
         "and": f"(lat.lte.{lat_max},lon.lte.{lon_max})",
-        "limit": "5000",
     })
 
     salida = DESTINO / f"{clave}.json"
