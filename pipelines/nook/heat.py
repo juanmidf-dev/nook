@@ -47,6 +47,7 @@ PESOS_POR_DEFECTO: dict[str, float] = {
     "banco": 1.0,
     "inmobiliaria": 1.0,
     "abogados": 1.0,
+    "gestoria": 1.0,
 }
 
 

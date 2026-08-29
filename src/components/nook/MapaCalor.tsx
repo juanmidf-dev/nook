@@ -66,6 +66,8 @@ function crearIcono(forma: Forma, px = 30): ImageData | null {
     ctx.lineTo(c, c + r * 1.1);
     ctx.lineTo(c - r * 1.1, c);
     ctx.closePath();
+  } else if (forma === 'circulo') {
+    ctx.arc(c, c, r * 0.92, 0, Math.PI * 2);
   } else if (forma === 'cruz') {
     const g = r * 0.36;
     ctx.moveTo(c - g, c - r);
@@ -190,7 +192,7 @@ export default function MapaCalor({
     m.addControl(new mapboxgl.ScaleControl({ unit: 'metric' }), 'bottom-right');
 
     m.on('load', () => {
-      for (const forma of ['cuadrado', 'triangulo', 'rombo', 'cruz'] as Forma[]) {
+      for (const forma of ['cuadrado', 'triangulo', 'rombo', 'cruz', 'circulo'] as Forma[]) {
         const img = crearIcono(forma);
         if (img && !m.hasImage(forma)) {
           m.addImage(forma, { width: img.width, height: img.height, data: img.data }, { pixelRatio: 2 });

@@ -14,7 +14,7 @@ import unicodedata
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal
 
-Tipo = Literal["notaria", "banco", "inmobiliaria", "abogados"]
+Tipo = Literal["notaria", "banco", "inmobiliaria", "abogados", "gestoria"]
 Fuente = Literal["notariado", "colegio_notarial", "bde", "overture", "osm", "icab_ica", "manual"]
 
 # Calidad de la posición. Se guarda siempre, porque una notaría situada solo a

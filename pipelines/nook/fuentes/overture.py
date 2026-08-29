@@ -73,6 +73,18 @@ CATEGORIAS: dict[Tipo, set[str]] = {
     # buena para esta capa —es registro oficial y trae el código INE—; Overture
     # solo la completa donde el volcado del BdE no llegue.
     "banco": {"bank_credit_union", "banks", "credit_union"},
+    # Gestorías administrativas y asesorías fiscales y contables. En España
+    # canalizan constitución y modificación de sociedades, poderes,
+    # compraventa de vehículos y tramitación de herencias: un polígono con
+    # seis gestorías genera más actos notariales que seis inmobiliarias.
+    #
+    # `tax_office` queda fuera aunque el nombre invite: su rama en la
+    # taxonomía es `public_service_and_government`, o sea, la Agencia
+    # Tributaria. Eso no es un despacho que derive trabajo a una notaría.
+    "gestoria": {
+        "accountant", "bookkeeper", "tax_services",
+        "payroll_services", "business_consulting",
+    },
 }
 
 # `notary_public` NO va en abogados, aunque sea lo primero que apetece.

@@ -152,13 +152,11 @@ restricción lo usa cualquiera que abra el inspector.
 
 ### Pendientes anotados con su razón
 
-- **Gestorías y asesorías como capa de demanda.** Es el hueco más grande de
-  la capa de demanda: en España canalizan constitución de sociedades, poderes,
-  compraventa de vehículos y tramitación de herencias, y un polígono con seis
-  gestorías genera más actos notariales que seis inmobiliarias. Categorías de
-  Overture: `accounting`, `tax_preparation`, `business_management_consultant`.
-  Hacerlo **cuando se toque `fuentes/overture.py`**, no antes, para no volver
-  a lanzar la consulta contra S3 dos veces.
+- ~~Gestorías y asesorías como capa de demanda.~~ Hecho el 29/08/2026. Quinto
+  tipo de POI, con forma de círculo relleno en el mapa. Categorías reales de
+  la taxonomía: `accountant`, `bookkeeper`, `tax_services`, `payroll_services`
+  y `business_consulting`. `tax_office` queda fuera a propósito: cuelga de
+  `public_service_and_government`, es la Agencia Tributaria.
 - **Registros de la Propiedad y Mercantiles.** El enum `poi_tipo` ya incluye
   `registro` y nada lo puebla.
 - **Población por sección censal.** Ver más abajo por qué la municipal no

@@ -363,3 +363,28 @@ class TestCategoriasExistenDeVerdad:
     def test_ningun_tipo_se_queda_sin_categorias(self):
         for tipo, cs in CATEGORIAS.items():
             assert cs, f"{tipo} no tiene ninguna categoria"
+
+
+class TestGestorias:
+    """
+    La capa de demanda mas grande que faltaba. En Espana las gestorias
+    canalizan constitucion de sociedades, poderes, compraventa de vehiculos y
+    tramitacion de herencias.
+    """
+
+    def test_se_clasifican_las_cinco(self):
+        for c in ("accountant", "bookkeeper", "tax_services",
+                  "payroll_services", "business_consulting"):
+            assert clasifica(c, None) == "gestoria", c
+
+    def test_por_categoria_alternativa(self):
+        assert clasifica("professional_services", ["accountant"]) == "gestoria"
+
+    def test_la_agencia_tributaria_no_es_una_gestoria(self):
+        # `tax_office` cuelga de public_service_and_government: es Hacienda,
+        # no un despacho que derive trabajo a una notaria.
+        assert clasifica("tax_office", None) is None
+
+    def test_no_pisa_a_los_abogados(self):
+        # `tax_law` es un despacho de abogados fiscalista, no una gestoria.
+        assert clasifica("tax_law", None) == "abogados"

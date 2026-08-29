@@ -27,6 +27,7 @@ export default function Index() {
     banco: true,
     inmobiliaria: true,
     abogados: true,
+    gestoria: true,
   });
   const [mostrarCalor, setMostrarCalor] = useState(true);
   const [mostrarLocales, setMostrarLocales] = useState(true);

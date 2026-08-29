@@ -15,12 +15,12 @@
 
 import { cellToBoundary, cellToLatLng, polygonToCells } from 'h3-js';
 
-export type Categoria = 'notaria' | 'banco' | 'inmobiliaria' | 'abogados';
+export type Categoria = 'notaria' | 'banco' | 'inmobiliaria' | 'abogados' | 'gestoria';
 
 export type CategoriaDemanda = Exclude<Categoria, 'notaria'>;
 
-export const CATEGORIAS: Categoria[] = ['notaria', 'banco', 'inmobiliaria', 'abogados'];
-export const CATEGORIAS_DEMANDA: CategoriaDemanda[] = ['banco', 'inmobiliaria', 'abogados'];
+export const CATEGORIAS: Categoria[] = ['notaria', 'banco', 'inmobiliaria', 'abogados', 'gestoria'];
+export const CATEGORIAS_DEMANDA: CategoriaDemanda[] = ['banco', 'inmobiliaria', 'abogados', 'gestoria'];
 
 /** Etiquetas cortas para columnas estrechas, donde la larga se trunca. */
 export const ETIQUETAS_CORTAS: Record<Categoria, string> = {
@@ -28,6 +28,7 @@ export const ETIQUETAS_CORTAS: Record<Categoria, string> = {
   banco: 'Bancos',
   inmobiliaria: 'Inmobiliarias',
   abogados: 'Abogados',
+  gestoria: 'Gestorías',
 };
 
 export const ETIQUETAS: Record<Categoria, string> = {
@@ -35,6 +36,11 @@ export const ETIQUETAS: Record<Categoria, string> = {
   banco: 'Oficinas bancarias',
   inmobiliaria: 'Inmobiliarias',
   abogados: 'Despachos de abogados',
+  // Gestorías administrativas y asesorías fiscales y contables. Canalizan
+  // constitución de sociedades, poderes, compraventa de vehículos y
+  // tramitación de herencias: un polígono con seis gestorías genera más
+  // actos notariales que seis inmobiliarias.
+  gestoria: 'Gestorías y asesorías',
 };
 
 export interface Poi {
@@ -91,7 +97,7 @@ export interface Config {
 export const CONFIG_POR_DEFECTO: Config = {
   resolucion: 9,
   bandwidthM: 600,
-  pesos: { banco: 1, inmobiliaria: 1, abogados: 1 },
+  pesos: { banco: 1, inmobiliaria: 1, abogados: 1, gestoria: 1 },
   pesoCompetencia: 0.7,
 };
 

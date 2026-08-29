@@ -13,7 +13,7 @@ create extension if not exists unaccent;     -- normalización de nombres en esp
 -- ------------------------------------------------------------
 
 do $$ begin
-  create type poi_tipo as enum ('notaria', 'banco', 'inmobiliaria', 'abogados', 'registro');
+  create type poi_tipo as enum ('notaria', 'banco', 'inmobiliaria', 'abogados', 'gestoria', 'registro');
 exception when duplicate_object then null; end $$;
 
 do $$ begin
@@ -28,6 +28,11 @@ do $$ begin
     'manual'
   );
 exception when duplicate_object then null; end $$;
+
+-- Para las bases de datos ya creadas antes de que existiera este valor: el
+-- bloque de arriba no se vuelve a ejecutar porque el tipo ya existe, asi que
+-- el valor nuevo hay que anadirlo aparte. `if not exists` lo hace idempotente.
+alter type poi_tipo add value if not exists 'gestoria';
 
 -- ------------------------------------------------------------
 -- 2. Referencia geográfica

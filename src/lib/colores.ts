@@ -26,7 +26,7 @@ export const COLOR_COMPETENCIA = '#f08a8a';
 export const TINTA_MARCADOR = '#eef3fb';
 export const HALO_MARCADOR = '#0a0e17';
 
-export type Forma = 'cuadrado' | 'triangulo' | 'rombo' | 'anillo' | 'cruz';
+export type Forma = 'cuadrado' | 'triangulo' | 'rombo' | 'anillo' | 'cruz' | 'circulo';
 
 /**
  * Los locales en alquiler llevan una cruz: es la forma más distinta de las
@@ -39,6 +39,11 @@ export const FORMA_POR_CATEGORIA: Record<Categoria, Forma> = {
   inmobiliaria: 'triangulo',
   abogados: 'rombo',
   notaria: 'anillo',
+  // Círculo relleno para las gestorías. Es la quinta forma geométrica que
+  // sigue leyéndose a 13 px, y no se confunde con el anillo de la notaría:
+  // aquélla es hueca y roja, ésta es maciza y de la tinta de demanda. Dos
+  // canales de diferencia, no uno.
+  gestoria: 'circulo',
 };
 
 /** Paradas de la rampa en score 0-100, para la expresión de Mapbox y la leyenda. */
