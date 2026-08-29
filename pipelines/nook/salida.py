@@ -121,6 +121,65 @@ class Supabase:
         if service_key.startswith("eyJ"):
             self.cabeceras["Authorization"] = f"Bearer {service_key}"
 
+    def tipos_admitidos(self) -> set[str] | None:
+        """
+        Los valores que el enum `poi_tipo` acepta hoy en la base de datos.
+
+        PostgREST publica en su raíz un OpenAPI con la definición de cada
+        tabla, y las columnas de tipo enumerado traen ahí sus valores. Es una
+        lectura, no toca nada.
+
+        Devuelve None si no se puede averiguar, y eso **no** debe bloquear la
+        ingesta: un chequeo previo que da falsos negativos es peor que no
+        tenerlo, porque acabaría impidiendo escrituras perfectamente válidas.
+        """
+        try:
+            r = requests.get(self.base + "/", headers=self.cabeceras, timeout=30)
+            if r.status_code >= 300:
+                return None
+            definiciones = r.json().get("definitions", {})
+            tipo = definiciones.get("pois", {}).get("properties", {}).get("tipo", {})
+        except Exception as e:  # noqa: BLE001
+            log.warning("no se pudo leer el esquema de Supabase (%s)", e)
+            return None
+
+        valores = tipo.get("enum")
+        if valores:
+            return set(valores)
+        # PostgREST viejo describe el enum dentro de `format`, no en `enum`.
+        formato = tipo.get("format", "")
+        if "'" in formato:
+            import re as _re
+
+            return set(_re.findall(r"'([^']+)'", formato)) or None
+        return None
+
+    def comprueba_tipos(self, pois: list[Poi]) -> None:
+        """
+        Aborta antes de trabajar si la base de datos no acepta algún tipo.
+
+        Existe porque tres fallos distintos del 29/08/2026 se manifestaron
+        solo **al escribir**, después de hacer todo el trabajo: las claves no
+        uniformes, las claves repetidas y un valor de enum que faltaba. Con
+        Overture eso cuesta ocho minutos; con notarías o bancos, setenta,
+        porque la geocodificación va por delante.
+        """
+        admitidos = self.tipos_admitidos()
+        if admitidos is None:
+            log.warning("no se pudo comprobar el enum poi_tipo; se sigue igualmente")
+            return
+        usados = {p.tipo for p in pois}
+        faltan = sorted(usados - admitidos)
+        if faltan:
+            raise SystemExit(
+                "la base de datos no admite el tipo/s " + ", ".join(faltan)
+                + ". Admite: " + ", ".join(sorted(admitidos))
+                + ". Aplica el bloque correspondiente de infra/schema.sql, "
+                + "por ejemplo: alter type poi_tipo add value if not exists '"
+                + faltan[0] + "';"
+            )
+        log.info("la base de datos admite los %d tipos que se van a escribir", len(usados))
+
     def upsert_pois(self, pois: list[Poi]) -> int:
         escritos = 0
         for i in range(0, len(pois), self.lote):

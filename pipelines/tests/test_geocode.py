@@ -283,3 +283,65 @@ class TestResumenDistingueLosHuecos:
         assert r["sin_coordenadas"] == 0
         assert r["descartadas_por_calidad"] == {}
         assert r["no_encontradas"] == 0
+
+
+class TestComprobacionPreviaDeTipos:
+    """
+    Tres fallos distintos del 29/08/2026 se manifestaron solo al escribir,
+    despues de hacer todo el trabajo: claves no uniformes, claves repetidas y
+    un valor de enum que faltaba. Con Overture cuesta ocho minutos; con
+    notarias o bancos, setenta, porque la geocodificacion va por delante.
+    """
+
+    def _sb(self, monkeypatch, respuesta):
+        from nook.salida import Supabase
+
+        sb = Supabase("https://x.supabase.co", "sb_secret_x")
+        monkeypatch.setattr("nook.salida.requests.get", lambda *a, **k: respuesta)
+        return sb
+
+    def _poi(self, tipo):
+        from nook.modelo import Poi
+
+        return Poi(tipo=tipo, fuente="overture", fuente_id=tipo, nombre="N")
+
+    def test_lee_el_enum_del_esquema(self, monkeypatch):
+        sb = self._sb(monkeypatch, _Spec({"enum": ["notaria", "banco", "gestoria"]}))
+        assert sb.tipos_admitidos() == {"notaria", "banco", "gestoria"}
+
+    def test_formato_antiguo_de_postgrest(self, monkeypatch):
+        sb = self._sb(monkeypatch, _Spec({"format": "public.poi_tipo: 'notaria', 'banco'"}))
+        assert sb.tipos_admitidos() == {"notaria", "banco"}
+
+    def test_aborta_si_falta_un_tipo(self, monkeypatch):
+        sb = self._sb(monkeypatch, _Spec({"enum": ["notaria", "banco"]}))
+        with pytest.raises(SystemExit) as e:
+            sb.comprueba_tipos([self._poi("gestoria")])
+        # El mensaje tiene que traer la orden que lo arregla, no solo el fallo.
+        assert "gestoria" in str(e.value)
+        assert "alter type poi_tipo" in str(e.value)
+
+    def test_no_aborta_si_todo_encaja(self, monkeypatch):
+        sb = self._sb(monkeypatch, _Spec({"enum": ["notaria", "banco", "gestoria"]}))
+        sb.comprueba_tipos([self._poi("gestoria"), self._poi("banco")])
+
+    def test_si_no_puede_averiguarlo_no_bloquea(self, monkeypatch):
+        # Un chequeo previo con falsos negativos es peor que no tenerlo:
+        # acabaria impidiendo escrituras perfectamente validas.
+        sb = self._sb(monkeypatch, _Spec(None))
+        assert sb.tipos_admitidos() is None
+        sb.comprueba_tipos([self._poi("gestoria")])
+
+
+class _Spec:
+    """Respuesta minima del OpenAPI que publica PostgREST en su raiz."""
+
+    status_code = 200
+
+    def __init__(self, tipo):
+        self._tipo = tipo
+
+    def json(self):
+        if self._tipo is None:
+            return {"definitions": {}}
+        return {"definitions": {"pois": {"properties": {"tipo": self._tipo}}}}

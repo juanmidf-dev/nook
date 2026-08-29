@@ -61,6 +61,13 @@ def geocodifica_pendientes(pois: list[Poi], limite: int | None = None) -> None:
             log.info("  %d/%d", i + 1, len(pendientes))
 
 
+def cliente_supabase() -> Supabase:
+    url, key = os.environ.get("SUPABASE_URL"), os.environ.get("SUPABASE_SERVICE_KEY")
+    if not url or not key:
+        raise SystemExit("faltan SUPABASE_URL o SUPABASE_SERVICE_KEY")
+    return Supabase(url, key)
+
+
 def escribe(pois: list[Poi], fuente: str, prueba: bool) -> None:
     res = resumen(pois)
     log.info("resumen: %s", json.dumps(res, ensure_ascii=False))
@@ -82,10 +89,7 @@ def escribe(pois: list[Poi], fuente: str, prueba: bool) -> None:
         log.info("modo prueba: no se escribe en Supabase. Revisa %s", destino)
         return
 
-    url, key = os.environ.get("SUPABASE_URL"), os.environ.get("SUPABASE_SERVICE_KEY")
-    if not url or not key:
-        raise SystemExit("faltan SUPABASE_URL o SUPABASE_SERVICE_KEY")
-    sb = Supabase(url, key)
+    sb = cliente_supabase()
     try:
         n = sb.upsert_pois(pois)
         sb.registra_ingesta(fuente, os.environ.get("NOOK_AMBITO", "ES"), res, "ok")
@@ -142,6 +146,12 @@ def main(argv: list[str] | None = None) -> int:
 
     else:
         pois = notarias.extrae()
+
+    # Antes de geocodificar, no después. La geocodificación es lo que hace
+    # que una ingesta dure setenta minutos, y no tiene ningún sentido pagarlos
+    # para descubrir al final que la base de datos no admite lo que traemos.
+    if not args.prueba and pois:
+        cliente_supabase().comprueba_tipos(pois)
 
     if not args.sin_geocodificar:
         geocodifica_pendientes(pois)
