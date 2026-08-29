@@ -24,7 +24,7 @@ import sys
 
 from nook import geocode
 from nook.fuentes import bancos, notarias, overture
-from nook.modelo import Poi, deduplica
+from nook.modelo import Poi, colapsa_por_id, deduplica
 from nook.salida import Supabase, a_ndjson, resumen
 
 RAIZ = pathlib.Path(__file__).resolve().parent
@@ -140,6 +140,13 @@ def main(argv: list[str] | None = None) -> int:
     pois, fusionados = deduplica(pois)
     if fusionados:
         log.info("deduplicación: %d registros fundidos", fusionados)
+
+    # Después de deduplicar, no antes: deduplica puede dejar dos registros con
+    # la misma clave si no llegó a fundirlos, y lo que no puede salir de aquí
+    # es un lote con claves repetidas.
+    pois, repetidos = colapsa_por_id(pois)
+    if repetidos:
+        log.info("claves repetidas en origen: %d registros colapsados", repetidos)
 
     escribe(pois, args.comando, prueba=args.prueba)
     return 0

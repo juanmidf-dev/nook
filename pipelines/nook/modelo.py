@@ -209,6 +209,56 @@ def extrae_cp(texto: str | None) -> str | None:
     return cp if 1 <= int(cp[:2]) <= 52 else None
 
 
+def colapsa_por_id(pois: list[Poi]) -> tuple[list[Poi], int]:
+    """
+    Deja un solo registro por `(fuente, fuente_id)`.
+
+    Hace falta porque el upsert de PostgREST se traduce en un `ON CONFLICT`, y
+    Postgres rechaza la **sentencia entera** si dos filas del mismo lote
+    apuntan a la misma fila destino:
+
+        21000: ON CONFLICT DO UPDATE command cannot affect row a second time
+
+    No es teórico: el volcado del Banco de España trae filas repetidas. El
+    Banco Sabadell aparece dos veces en Plaça Sant Roc 20, y Eurodivisas seis
+    veces en la T4 de Barajas —seis mostradores en el mismo punto, que para un
+    modelo de densidad no son seis focos de demanda—. La ingesta real murió
+    ahí después de escribir 3.500 de 4.024 filas.
+
+    Es distinto de `deduplica`, y los dos hacen falta: aquélla une lo que **dos
+    fuentes** ven como el mismo sitio, comparando nombre y distancia, y solo
+    actúa sobre registros ya geolocalizados. Ésta resuelve que **una misma
+    fuente** repita la misma clave, pase lo que pase con las coordenadas.
+    """
+    vistos: dict[tuple[str, str], Poi] = {}
+    salida: list[Poi] = []
+    fusionados = 0
+
+    for p in pois:
+        clave = (p.fuente, p.fuente_id)
+        q = vistos.get(clave)
+        if q is None:
+            vistos[clave] = p
+            salida.append(p)
+            continue
+
+        fusionados += 1
+        for campo in ("telefono", "email", "web", "direccion", "cp",
+                      "cod_ine", "municipio", "provincia"):
+            if getattr(q, campo) is None and getattr(p, campo) is not None:
+                setattr(q, campo, getattr(p, campo))
+        # Las coordenadas se copian juntas o no se copian: media coordenada
+        # no es un dato incompleto, es un punto en el meridiano de Greenwich.
+        if not q.geolocalizado and p.geolocalizado:
+            q.lat, q.lon = p.lat, p.lon
+            q.geocode_fuente, q.geocode_calidad = p.geocode_fuente, p.geocode_calidad
+        # Se deja constancia: que la fuente repita una clave es información
+        # sobre la fuente, no ruido que convenga esconder.
+        q.extra["repetidos_en_origen"] = q.extra.get("repetidos_en_origen", 1) + 1
+
+    return salida, fusionados
+
+
 def deduplica(pois: list[Poi], umbral_m: float = 60.0) -> tuple[list[Poi], int]:
     """
     Une registros que son el mismo sitio visto por dos fuentes.

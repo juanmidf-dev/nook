@@ -167,7 +167,7 @@ def interpreta(texto: str) -> list[Poi]:
     # los existentes. Pero se avisa, porque si el número crece hay que mirarlo.
     colisiones = len(pois) - len({p.fuente_id for p in pois})
     if colisiones:
-        log.warning("BdE: %d registros comparten id y se fundirán al escribir", colisiones)
+        log.warning("BdE: %d registros comparten id; se colapsan antes de escribir", colisiones)
 
     log.info("BdE: %d oficinas operativas, %d filas descartadas", len(pois), descartadas)
     return pois

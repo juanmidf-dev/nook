@@ -202,3 +202,80 @@ class TestDefensaDeLote:
         from nook.salida import _comprueba_claves_uniformes
 
         _comprueba_claves_uniformes([], 0)
+
+
+class TestColapsaPorId:
+    """
+    Postgres rechaza la sentencia entera si dos filas del mismo lote apuntan a
+    la misma fila destino: `21000: ON CONFLICT DO UPDATE command cannot affect
+    row a second time`. La ingesta real de bancos murio ahi despues de escribir
+    3.500 de 4.024 filas, porque el volcado del BdE trae filas repetidas.
+    """
+
+    def _poi(self, fid="1", **kw):
+        from nook.modelo import Poi
+
+        base = dict(tipo="banco", fuente="bde", fuente_id=fid, nombre="Oficina")
+        base.update(kw)
+        return Poi(**base)
+
+    def test_no_deja_claves_repetidas(self):
+        from nook.modelo import colapsa_por_id
+
+        pois, n = colapsa_por_id([self._poi("a"), self._poi("a"), self._poi("b")])
+        assert len(pois) == 2
+        assert n == 1
+        assert len({(p.fuente, p.fuente_id) for p in pois}) == 2
+
+    def test_la_misma_clave_en_fuentes_distintas_no_choca(self):
+        from nook.modelo import colapsa_por_id
+
+        a = self._poi("x")
+        b = self._poi("x", fuente="overture")
+        pois, n = colapsa_por_id([a, b])
+        assert len(pois) == 2 and n == 0
+
+    def test_rellena_los_huecos_del_primero(self):
+        from nook.modelo import colapsa_por_id
+
+        pois, _ = colapsa_por_id([
+            self._poi("a", telefono=None, web="https://x.es"),
+            self._poi("a", telefono="900", web=None),
+        ])
+        assert pois[0].telefono == "900"
+        assert pois[0].web == "https://x.es"
+
+    def test_las_coordenadas_van_en_pareja(self):
+        # Media coordenada no es un dato incompleto: es un punto en Greenwich.
+        from nook.modelo import colapsa_por_id
+
+        pois, _ = colapsa_por_id([
+            self._poi("a"),
+            self._poi("a", lat=41.5, lon=2.1, geocode_calidad="portal"),
+        ])
+        assert pois[0].lat == 41.5 and pois[0].lon == 2.1
+        assert pois[0].geocode_calidad == "portal"
+
+    def test_no_pisa_una_coordenada_buena(self):
+        from nook.modelo import colapsa_por_id
+
+        pois, _ = colapsa_por_id([
+            self._poi("a", lat=41.5, lon=2.1),
+            self._poi("a", lat=40.0, lon=-3.7),
+        ])
+        assert pois[0].lat == 41.5
+
+    def test_deja_constancia_de_la_repeticion(self):
+        from nook.modelo import colapsa_por_id
+
+        pois, _ = colapsa_por_id([self._poi("a")] * 1 + [self._poi("a"), self._poi("a")])
+        assert pois[0].extra["repetidos_en_origen"] == 3
+
+    def test_el_caso_real_de_eurodivisas(self):
+        # Seis mostradores con la misma clave en la T4 de Barajas.
+        from nook.modelo import colapsa_por_id
+
+        seis = [self._poi("euro", nombre="Eurodivisas, S.A.") for _ in range(6)]
+        pois, n = colapsa_por_id(seis)
+        assert len(pois) == 1 and n == 5
+        assert pois[0].extra["repetidos_en_origen"] == 6
