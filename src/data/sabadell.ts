@@ -2,13 +2,20 @@ import datos from './sabadell.json';
 import type { Local, Poi } from '@/lib/heat';
 
 /**
- * Datos reales de Sabadell.
+ * Datos reales de Sabadell, exportados desde Supabase.
  *
- * Origen: los volcados que ya tenía el proyecto (notarías del Consejo General
- * del Notariado, oficinas bancarias del Banco de España, agencias
- * inmobiliarias, y locales en alquiler de Idealista), convertidos desde los
- * Excel de `Raw data/xlsx`. Es un corte estático: hasta que el pipeline de
- * ingesta escriba en Supabase, estos datos no se refrescan solos.
+ * Los genera `scripts/exportar_municipio.py` desde la base de datos, y los
+ * refresca el workflow «Exportar corte para el mapa».
+ *
+ * Es un fichero y no una consulta desde el navegador a propósito: la clave
+ * publicable de Supabase viaja en el bundle de JavaScript, así que conceder
+ * lectura sobre `pois` al rol anónimo permitiría descargarse el censo de
+ * competencia y los puntos de demanda —el activo que se vende— con una sola
+ * petición. Ver la sección de privilegios de `infra/schema.sql`.
+ *
+ * Los sliders siguen recalculando en vivo en el navegador, que es lo que hace
+ * la herramienta usable; lo único que se pierde es que los datos son tan
+ * frescos como la última exportación, y la ingesta es mensual.
  */
 
 export interface Municipio {
@@ -40,4 +47,5 @@ export interface Incidencia {
 export const INCIDENCIAS: Incidencia[] = (datos.incidencias ?? []) as Incidencia[];
 
 export const PROCEDENCIA =
-  'Datos de Sabadell: Consejo General del Notariado, Banco de España e Idealista. Corte estático.';
+  'Notarías: Consejo General del Notariado. Oficinas bancarias: Banco de España. ' +
+  'Inmobiliarias, despachos y gestorías: Overture Maps. Locales: Idealista.';
