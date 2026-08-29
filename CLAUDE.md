@@ -159,6 +159,42 @@ restricción lo usa cualquiera que abra el inspector.
 | Locales en alquiler | Sin fuente. Idealista sin solicitar |
 | Abogados y gestorías | Dependen de Overture, que no se ha estrenado |
 
+### La capa de gestorías está a medias, y se sabe cuánto
+
+Medido el 29/08/2026 y anotado para no repetir el recorrido.
+
+El registro oficial declara **7.664 despachos colegiados** en España, o sea 1
+por cada 6.340 habitantes. La caja de prueba de Sabadell cubre unos 310.000
+habitantes, así que tocarían unas 49; **Overture encontró 26**. Y la cobertura
+real es peor que ese 53 %, porque nuestra categoría de Overture es más ancha
+que la colegiación: incluye contables, asesores fiscales y consultores, o sea
+el CNAE 6920 completo. Encuentra menos con una definición más amplia.
+
+La causa es que la taxonomía de Overture es de origen anglosajón y la figura
+del gestor administrativo no existe allí: los despachos españoles quedan sin
+catalogar o como `professional_services` genérico.
+
+**Fuentes descartadas, con su motivo:**
+
+- `gestorias.es` — directorio **comercial privado**, no censo. Su `robots.txt`
+  prohíbe `/buscar`, que es el único modo de enumerarlo, y no publica sitemap.
+  Al margen de eso, extraer el catálogo de una empresa privada para revenderlo
+  choca de frente con el derecho *sui generis* sobre bases de datos (arts.
+  133-137 LPI). No se toca.
+- `registro.consejogestores.org` — es el censo oficial y bueno, pero su
+  `robots.txt` prohíbe toda URL con parámetros (`Disallow: /*?*`), que es
+  justo la forma del buscador, y la página lleva **reCAPTCHA**. Es una
+  declaración inequívoca de "esto se consulta a mano". No se automatiza.
+
+**Vías abiertas**, por orden de preferencia: pedir el censo al Consejo General
+(`consejo@consejogestores.net`; el registro es público por el art. 10 de la
+Ley 17/2009); comprar un extracto licenciado por CNAE 6920 a Informa D&B o
+similar; o convivir con la cobertura parcial **declarándola** en la interfaz,
+como ya se hace con los abogados.
+
+Son 7.664 registros: el mismo orden que las notarías, no el de las
+inmobiliarias. Geocodificarlo entero son dos horas largas.
+
 ### Pendientes anotados con su razón
 
 - ~~Gestorías y asesorías como capa de demanda.~~ Hecho el 29/08/2026. Quinto
