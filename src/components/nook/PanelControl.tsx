@@ -81,10 +81,12 @@ export default function PanelControl({
             id="selector-municipio"
             value={claveMunicipio}
             onChange={(e) => onMunicipio(e.target.value)}
-            className="w-full cursor-pointer rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm text-tinta outline-none transition-colors hover:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-acento"
+            /* Tarjeta clara sobre el azul, como los bloques DEMANDA /
+               COMPETENCIA / OFERTA EN ALQUILER de la propuesta comercial. */
+            className="tarjeta-crema w-full cursor-pointer font-display text-sm font-semibold uppercase tracking-[0.03em] outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-acento"
           >
             {municipios.map((m) => (
-              <option key={m.clave} value={m.clave} className="bg-panel-alto text-tinta">
+              <option key={m.clave} value={m.clave} className="bg-crema text-[hsl(var(--crema-tinta))]">
                 {m.nombre} · {m.provincia}
               </option>
             ))}

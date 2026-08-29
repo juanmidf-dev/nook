@@ -1,3 +1,7 @@
+/**
+ * La marca, en la línea de la portada de la propuesta comercial: NOOK en
+ * condensada, negrita y mayúsculas, con el descriptivo debajo en cursiva.
+ */
 export default function Marca({ compacta = false }: { compacta?: boolean }) {
   return (
     <div className="flex items-center gap-2.5">
@@ -13,10 +17,12 @@ export default function Marca({ compacta = false }: { compacta?: boolean }) {
         <path d="M13 14.2V19" stroke="hsl(var(--acento))" strokeWidth="1.6" strokeLinecap="round" />
       </svg>
       <div className="leading-none">
-        <div className="font-display text-[22px] tracking-tight text-tinta">Nook</div>
+        <div className="font-display text-[23px] font-bold uppercase tracking-[0.02em] text-tinta">
+          Nook
+        </div>
         {!compacta && (
-          <div className="mt-1 text-[10.5px] uppercase tracking-[0.16em] text-tinta-tenue">
-            Ubicación notarial
+          <div className="mt-1 font-sans text-[10.5px] italic text-tinta-suave">
+            Descubre dónde abrir tu próxima notaría
           </div>
         )}
       </div>

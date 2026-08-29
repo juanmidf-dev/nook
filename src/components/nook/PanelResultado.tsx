@@ -97,7 +97,7 @@ export default function PanelResultado({
     return (
       <aside className="panel-flotante pointer-events-auto flex w-[350px] max-h-[calc(100vh-2rem)] flex-col overflow-hidden">
         <header className="border-b border-white/[0.07] px-5 py-4">
-          <h2 className="text-sm font-semibold text-tinta">Mejores ubicaciones</h2>
+          <h2 className="titulo-seccion">Mejores ubicaciones</h2>
           <p className="mt-1 text-xs leading-relaxed text-tinta-tenue">
             Pulsa cualquier hexágono del mapa para ver su detalle y los puntos de demanda que tiene
             alrededor.
@@ -123,7 +123,7 @@ export default function PanelResultado({
                     demanda {c.demanda.toFixed(1)} · competencia {c.competencia.toFixed(1)}
                   </span>
                 </span>
-                <span className="cifra text-lg font-semibold text-tinta">{c.score.toFixed(0)}</span>
+                <span className="cifra font-display text-xl font-bold text-tinta">{c.score.toFixed(0)}</span>
               </button>
             </li>
           ))}

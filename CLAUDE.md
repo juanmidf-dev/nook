@@ -44,7 +44,23 @@ notaría sin coordenadas: **una notaría ausente de la capa de competencia hace
 que el mapa recomiende el portal de al lado de una notaría ya abierta.** Nunca
 se inventan coordenadas para tapar un hueco.
 
-### 4. El color está reservado para el score
+### 4. La identidad sale de la propuesta comercial, y el color del score no se toca
+
+Paleta tomada del PDF de la propuesta (`Presentacion comercial/`), medida sobre
+el documento: **azul marino `#002C77`** (31 % de la superficie), **crema
+`#FFFDF3`** (40 %), **azul profundo `#001760`** y **dorado `#FFC000`**.
+Titulares en condensada, negrita y mayúsculas —Oswald—; cuerpo humanista con
+cursiva para los descriptivos —Lato, que es lo más cercano a la Calibri del
+original—. Los paneles son azul marino con texto crema, y los bloques
+destacados invierten a tarjeta crema con texto marino, como los rótulos
+DEMANDA / COMPETENCIA / OFERTA EN ALQUILER de la diapositiva 4.
+
+**La cartografía sigue siendo oscura y no azul marino, a propósito.** La rampa
+del score es azul: sobre un fondo azul marino su extremo bajo desaparecería y
+el mapa dejaría de tener relieve. El mapa necesita un fondo neutro para que el
+dato se lea, y la identidad vive en el cromo, que es donde se percibe.
+
+### 4.bis. El color está reservado para el score
 
 Rampa secuencial azul de un solo tono (`src/lib/colores.ts`). Las categorías se
 distinguen **por forma**: cuadrado = banco, triángulo = inmobiliaria, rombo =

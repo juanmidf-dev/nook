@@ -19,11 +19,12 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-				display: ['"Instrument Serif"', 'Georgia', 'serif'],
+				sans: ['Lato', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				display: ['Oswald', '"Arial Narrow"', 'ui-sans-serif', 'sans-serif'],
 			},
 			colors: {
 				lienzo: 'hsl(var(--lienzo))',
+				crema: 'hsl(var(--crema))',
 				panel: 'hsl(var(--panel))',
 				'panel-alto': 'hsl(var(--panel-alto))',
 				tinta: {

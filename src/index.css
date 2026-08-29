@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,6 +10,15 @@
   La herramienta es un mapa a pantalla completa, así que toda la interfaz es
   cromo flotante sobre cartografía oscura. Dos decisiones que mandan sobre el
   resto:
+
+  La identidad sale de la propuesta comercial: azul marino #002C77, crema
+  #FFFDF3, dorado #FFC000, y titulares en condensada, negrita y mayúsculas.
+  Los paneles son azul marino con texto crema, que es la combinación dominante
+  del documento.
+
+  La cartografía sigue siendo oscura y no azul marino, y es deliberado: la
+  rampa del score es azul, y sobre un fondo azul marino su extremo bajo
+  desaparecería. El mapa necesita un fondo neutro para que el dato se lea.
 
   1. El color está reservado para el score. Las categorías de puntos se
      distinguen por forma, no por color. El motivo es medible: la terna de
@@ -23,19 +32,25 @@
 
 @layer base {
   :root {
-    /* Superficies: azul tinta, en la línea de la propuesta comercial. */
-    --lienzo: 220 33% 6%;
-    --panel: 220 28% 9%;
-    --panel-alto: 220 24% 13%;
-    --borde: 220 20% 20%;
+    /* Superficies. Los hex de la propuesta comercial, en HSL para Tailwind:
+       #002C77 marino, #001760 marino profundo, #FFFDF3 crema. */
+    --lienzo: 218 100% 23%;      /* #002C77 */
+    --panel: 226 100% 19%;       /* #001760 */
+    --panel-alto: 218 100% 27%;
+    --borde: 218 45% 42%;
 
-    --tinta: 210 30% 97%;
-    --tinta-suave: 214 15% 72%;
-    --tinta-tenue: 215 14% 52%;
+    --tinta: 50 100% 98%;        /* #FFFDF3 */
+    --tinta-suave: 214 45% 84%;
+    --tinta-tenue: 214 32% 68%;
 
-    /* Acento cálido, solo cromo. */
-    --acento: 41 68% 58%;
-    --acento-tinta: 220 33% 8%;
+    /* Crema como superficie: las tarjetas destacadas del documento son
+       bloques claros con texto marino sobre el fondo azul. */
+    --crema: 50 100% 98%;
+    --crema-tinta: 218 100% 23%;
+
+    /* Dorado de la propuesta, solo cromo. */
+    --acento: 45 100% 50%;       /* #FFC000 */
+    --acento-tinta: 226 100% 15%;
 
     /* La rampa del score vive en src/lib/colores.ts: Mapbox necesita hex
        literales en sus expresiones y la leyenda debe leer los mismos
@@ -81,7 +96,6 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: 'cv05', 'ss01';
   }
 
   /* Las cifras se comparan en columna en el panel lateral: siempre tabulares. */
@@ -92,11 +106,22 @@
 
 @layer components {
   .panel-flotante {
-    @apply rounded-xl border border-white/[0.07] bg-[hsl(var(--panel))]/85 shadow-2xl shadow-black/50 backdrop-blur-xl;
+    @apply rounded-lg border border-white/10 bg-[hsl(var(--panel))]/90 shadow-2xl shadow-black/50 backdrop-blur-xl;
   }
 
+  /* Las etiquetas del documento van en condensada, mayúsculas y apretadas. */
   .etiqueta-campo {
-    @apply text-[11px] font-medium uppercase tracking-[0.09em] text-[hsl(var(--tinta-tenue))];
+    @apply font-display text-[11px] font-medium uppercase tracking-[0.07em] text-[hsl(var(--tinta-suave))];
+  }
+
+  /* Titular de sección, como los rótulos de la propuesta. */
+  .titulo-seccion {
+    @apply font-display text-[13px] font-semibold uppercase tracking-[0.05em] text-[hsl(var(--tinta))];
+  }
+
+  /* Tarjeta clara sobre el azul, como los bloques DEMANDA / COMPETENCIA. */
+  .tarjeta-crema {
+    @apply rounded-md bg-[hsl(var(--crema))] px-3 py-2 text-[hsl(var(--crema-tinta))];
   }
 }
 
