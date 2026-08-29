@@ -1,0 +1,80 @@
+name: Exportar corte para el mapa
+
+# Genera `src/data/<municipio>.json` desde Supabase y lo commitea.
+#
+# El navegador no consulta la base de datos: la clave publicable viaja en el
+# bundle de JavaScript, así que dar lectura al rol anónimo sobre `pois`
+# permitiría descargarse el censo entero de una petición. Aquí lee el runner
+# con la clave secreta, que vive en los secretos del repositorio, y deja un
+# fichero con lo justo para pintar un municipio.
+
+on:
+  workflow_dispatch:
+    inputs:
+      municipio:
+        description: Municipio a exportar
+        required: true
+        default: sabadell
+        type: choice
+        options: [sabadell, barcelona, madrid]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: exportar-${{ github.event.inputs.municipio }}
+  cancel-in-progress: true
+
+jobs:
+  exportar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar dependencias
+        working-directory: pipelines
+        run: pip install -r requirements.txt
+
+      - name: Exportar desde Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          MUNICIPIO: ${{ github.event.inputs.municipio }}
+        run: python scripts/exportar_municipio.py "$MUNICIPIO"
+
+      - name: Comprobar que el corte no viene vacío
+        env:
+          MUNICIPIO: ${{ github.event.inputs.municipio }}
+        run: |
+          # Misma regla que en la ingesta: cero registros no significa "no hay
+          # datos", significa que algo dejó de encajar. Mejor fallar que
+          # commitear un mapa en blanco.
+          python - <<'PY'
+          import json, os, pathlib, sys
+          f = pathlib.Path("src/data") / (os.environ["MUNICIPIO"] + ".json")
+          d = json.loads(f.read_text(encoding="utf-8"))
+          n = len(d["pois"])
+          print(f"{f}: {n} puntos")
+          if n == 0:
+              sys.exit("el corte ha salido vacío; no se commitea")
+          PY
+
+      - name: Commitear el corte
+        env:
+          MUNICIPIO: ${{ github.event.inputs.municipio }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "src/data/$MUNICIPIO.json"
+          if git diff --cached --quiet; then
+            echo "::notice::El corte no ha cambiado desde la última exportación."
+            exit 0
+          fi
+          git commit -m "Actualizar el corte de $MUNICIPIO desde Supabase"
+          git push
