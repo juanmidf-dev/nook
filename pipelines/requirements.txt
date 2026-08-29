@@ -3,3 +3,18 @@
 requests==2.32.3
 duckdb==1.1.3
 pytest==8.3.4
+
+# Motor de calor (nook/heat.py). Faltaban: el modulo las importaba y ninguna
+# estaba declarada, asi que no se podia ni importar y nunca se habia ejecutado
+# en CI.
+#
+# La version de h3 va emparejada con la de h3-js del frontend. Si se separan,
+# los dos motores pueden dejar de dar el mismo numero y el informe en PDF
+# discreparia del mapa que ve el notario.
+#
+# pyproj ya no hace falta: la proyeccion es ahora la misma equirectangular
+# local que usa el navegador, escrita a mano en heat.py. Ver el comentario de
+# _proyector.
+h3==4.5.0
+numpy==2.5.2
+scipy==1.18.1

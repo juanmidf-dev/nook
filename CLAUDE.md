@@ -54,16 +54,34 @@ separación ΔE de 1,6 en deuteranopía, indistinguible para cerca del 6 % de lo
 hombres. El acento dorado vive solo en el cromo de la interfaz, nunca sobre el
 mapa.
 
-### 5. El motor de calor está duplicado a propósito
+### 5. El motor de calor está duplicado a propósito, y ahora se comprueba
 
 - `src/lib/heat.ts` — corre en el navegador para que los sliders recalculen en
-  vivo (~24 ms por municipio). Sin esto, arrastrar un slider haría una ida y
-  vuelta al servidor y la herramienta sería inservible.
+  vivo (159 ms para los 4.444 puntos de Madrid). Sin esto, arrastrar un slider
+  haría una ida y vuelta al servidor y la herramienta sería inservible.
 - `pipelines/nook/heat.py` — el mismo modelo, para precálculo por lotes e
   informes en PDF.
 
-**Las dos implementaciones tienen que dar el mismo número.** Falta un test que
-lo compruebe con datos reales; es una tarea pendiente que merece la pena.
+**Las dos implementaciones tienen que dar el mismo número**, y desde el
+29/08/2026 hay un test que lo verifica: `pipelines/tests/test_heat.py` compara
+contra la salida real de `heat.ts`, que genera
+`scripts/exportar_heat_ts.mjs`. Cinco configuraciones distintas, tolerancia de
+0,01 puntos de score, y además el orden del ranking.
+
+Cuando se escribió, **no coincidían**: hasta 1,6 puntos de score. La causa era
+la proyección —`heat.ts` usaba una equirectangular local y `heat.py` una UTM de
+pyproj, y encima la zona 30N, válida hasta el meridiano 0, con Barcelona a
+2,1° **este**—. Ahora `heat.py` usa la misma fórmula escrita a mano, así que la
+equivalencia no depende de que dos librerías coincidan. `pyproj` ya no es
+dependencia.
+
+Si tocas cualquiera de los dos motores, regenera el fixture:
+`node scripts/exportar_heat_ts.mjs`. CI falla si no está al día, porque si no
+el test seguiría pasando contra la versión antigua y la comprobación dejaría
+de comprobar nada.
+
+La versión de `h3` en `requirements.txt` va emparejada con la de `h3-js` en
+`package.json` por el mismo motivo.
 
 ### 6. En Supabase, `geom` la rellena un trigger y `cod_ine` no tiene FK
 

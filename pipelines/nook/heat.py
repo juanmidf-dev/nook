@@ -29,14 +29,14 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+import math
+
 import h3
 import numpy as np
-from pyproj import Transformer
 from scipy.spatial import cKDTree
 
 # ETRS89 / UTM 30N: sistema métrico oficial para la España peninsular.
 # Se trabaja en metros porque el kernel se define en metros.
-_TO_M = Transformer.from_crs("EPSG:4326", "EPSG:25830", always_xy=True)
 
 # Más allá de 3 sigma la aportación es < 1,2 % del peso: se recorta el cálculo
 # ahí para que el KDTree no tenga que mirar toda España por cada celda.
@@ -76,9 +76,35 @@ def celdas_de_poligono(poligono_lonlat: list[tuple[float, float]], resolucion: i
     return list(h3.polygon_to_cells(shape, resolucion))
 
 
-def _proyectar(lons: np.ndarray, lats: np.ndarray) -> np.ndarray:
-    x, y = _TO_M.transform(lons, lats)
-    return np.column_stack([x, y])
+def _proyector(lat_ref: float):
+    """
+    Equirectangular local, **idéntica a la de `src/lib/heat.ts`**.
+
+    Antes esto era una UTM de pyproj, y traía dos problemas. El primero, que no
+    coincidía con la del navegador: distancias distintas dan pesos gaussianos
+    distintos, y los dos motores discrepaban hasta 1,6 puntos de score. El
+    segundo, que la zona fijada era la 30N —válida de 6°O a 0°— mientras
+    Barcelona está a 2,1° **este**, cinco grados fuera de su meridiano central.
+
+    A escala de ciudad, menos de 50 km, el error de la equirectangular es
+    inferior al 0,1 %, muy por debajo de la incertidumbre de la
+    geocodificación. Y al ser la misma fórmula que la del navegador, la
+    equivalencia entre los dos motores deja de depender de que dos librerías
+    distintas coincidan.
+
+    `lat_ref` es la latitud de la primera celda, igual que en TypeScript: lo
+    que importa no es cuál se elija, sino que ambos elijan la misma.
+    """
+    m_por_grado_lat = 111132.95
+    m_por_grado_lon = 111320.0 * math.cos(math.radians(lat_ref))
+
+    def proyecta(lons: np.ndarray, lats: np.ndarray) -> np.ndarray:
+        return np.column_stack([
+            np.asarray(lons, dtype=float) * m_por_grado_lon,
+            np.asarray(lats, dtype=float) * m_por_grado_lat,
+        ])
+
+    return proyecta
 
 
 def calcular(
@@ -100,7 +126,9 @@ def calcular(
         return {}
 
     centros = np.array([h3.cell_to_latlng(c) for c in celdas])        # (n, 2) lat, lon
-    xy_celdas = _proyectar(centros[:, 1], centros[:, 0])
+    # La latitud de referencia es la de la primera celda, como en heat.ts.
+    proyecta = _proyector(float(centros[0][0]))
+    xy_celdas = proyecta(centros[:, 1], centros[:, 0])
 
     sigma = cfg.bandwidth_m
     radio = CORTE_SIGMAS * sigma
@@ -111,7 +139,7 @@ def calcular(
 
     for tipo in {p.tipo for p in puntos}:
         del_tipo = [p for p in puntos if p.tipo == tipo]
-        xy_pts = _proyectar(
+        xy_pts = proyecta(
             np.array([p.lon for p in del_tipo]), np.array([p.lat for p in del_tipo])
         )
         acumulado = np.zeros(len(celdas))

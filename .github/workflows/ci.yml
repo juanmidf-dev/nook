@@ -23,6 +23,19 @@ jobs:
           VITE_MAPBOX_TOKEN: pk.ci
         run: npm run build
 
+      - name: El fixture del motor de calor sigue al día
+        # `pipelines/tests/test_heat.py` compara heat.py contra la salida real
+        # de heat.ts, guardada en ese fixture. Si alguien toca heat.ts y no lo
+        # regenera, el test seguiría pasando contra la versión antigua y la
+        # equivalencia dejaría de estar comprobada sin que nadie lo notara.
+        run: |
+          node scripts/exportar_heat_ts.mjs
+          if ! git diff --quiet pipelines/tests/fixtures/heat_ts.json; then
+            echo "::error::heat.ts ha cambiado y el fixture no. Ejecuta 'node scripts/exportar_heat_ts.mjs' y commitea el resultado."
+            git --no-pager diff --stat pipelines/tests/fixtures/heat_ts.json
+            exit 1
+          fi
+
   pipeline:
     runs-on: ubuntu-latest
     steps:
