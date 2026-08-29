@@ -208,3 +208,78 @@ class _Respuesta200:
     status_code = 200
     headers: dict = {}
     text = "{}"
+
+
+class TestCalidadesNoUbicables:
+    """
+    Una notaria colocada en el centro del pueblo hace mas dano que una
+    ausente: mete competencia donde no la hay y la quita de donde si. A sigma
+    600 m, un centroide municipal no es "aproximadamente bien", es otro sitio.
+    """
+
+    def test_municipio_no_es_ubicable(self):
+        from nook.geocode import CALIDADES_NO_UBICABLES
+
+        assert "municipio" in CALIDADES_NO_UBICABLES
+
+    def test_portal_y_via_si_lo_son(self):
+        from nook.geocode import CALIDADES_NO_UBICABLES
+
+        assert "portal" not in CALIDADES_NO_UBICABLES
+        assert "via" not in CALIDADES_NO_UBICABLES
+
+
+class TestResumenDistingueLosHuecos:
+    """
+    "No lo encontre" y "lo encontre mal" se arreglan de formas distintas.
+    Sumarlos en un solo `sin_coordenadas` oculta cual toca.
+    """
+
+    def _poi(self, lat=None, lon=None, calidad="desconocida", fuente=None):
+        from nook.modelo import Poi
+
+        # `geocode_calidad` vale "desconocida" por defecto, asi que replicar
+        # ese default importa: es justo lo que hacia que un no-encontrado
+        # pareciera un descartado.
+        return Poi(
+            tipo="notaria", fuente="notariado",
+            fuente_id=f"x{lat}{calidad}{fuente}{id(object())}",
+            nombre="N", lat=lat, lon=lon,
+            geocode_calidad=calidad, geocode_fuente=fuente,
+        )
+
+    def test_separa_descartadas_de_no_encontradas(self):
+        from nook.salida import resumen
+
+        pois = [
+            self._poi(41.5, 2.1, "portal", "cartociudad"),
+            self._poi(41.6, 2.2, "via", "cartociudad"),
+            # Encontrada, pero solo a nivel de municipio: se le quita la
+            # coordenada y conserva fuente y calidad como explicacion.
+            self._poi(None, None, "municipio", "cartociudad"),
+            # Nunca la vio nadie: calidad al valor por defecto y sin fuente.
+            self._poi(None, None),
+            self._poi(None, None),
+        ]
+        r = resumen(pois)
+        assert r["total"] == 5
+        assert r["sin_coordenadas"] == 3
+        assert r["descartadas_por_calidad"] == {"municipio": 1}
+        assert r["no_encontradas"] == 2
+
+    def test_no_encontrada_no_cuenta_como_descartada(self):
+        # El caso que se colo en la primera version: sin mirar la fuente, las
+        # 176 que nadie encontro salian como "descartadas por calidad".
+        from nook.salida import resumen
+
+        r = resumen([self._poi(None, None)])
+        assert r["descartadas_por_calidad"] == {}
+        assert r["no_encontradas"] == 1
+
+    def test_todo_bien_no_inventa_huecos(self):
+        from nook.salida import resumen
+
+        r = resumen([self._poi(41.5, 2.1, "portal", "cartociudad")])
+        assert r["sin_coordenadas"] == 0
+        assert r["descartadas_por_calidad"] == {}
+        assert r["no_encontradas"] == 0

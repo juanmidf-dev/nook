@@ -69,6 +69,25 @@ def para_cartociudad(direccion: str) -> str:
     return d
 
 
+# Calidades con las que una coordenada NO puede entrar en el mapa.
+#
+# `municipio` significa que el geocodificador no encontró la vía y devolvió el
+# centro del pueblo. El kernel gaussiano trabaja con sigma de 600 m: a esa
+# escala eso no es "aproximadamente bien", es otro sitio. Y una notaría mal
+# colocada hace más daño que una ausente —mete competencia donde no la hay y
+# la quita de donde sí—, así que se descarta la coordenada y el registro pasa
+# al grupo de los declarados sin ubicar.
+#
+# Es la misma regla que prohíbe inventarse coordenadas para tapar un hueco:
+# un centroide municipal es una coordenada inventada con mejor presentación.
+#
+# `desconocida` se conserva de momento: son respuestas concretas de
+# CartoCiudad cuyo `type` no reconocemos, no aproximaciones declaradas. Tirarlas
+# sería descartar dato posiblemente bueno por sospecha. Salen contadas aparte
+# en el resumen para poder revisarlas.
+CALIDADES_NO_UBICABLES: set[Calidad] = {"municipio"}
+
+
 @dataclass
 class Resultado:
     lat: float

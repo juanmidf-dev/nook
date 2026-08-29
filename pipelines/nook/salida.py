@@ -37,17 +37,32 @@ def resumen(pois: list[Poi]) -> dict:
     from collections import Counter
 
     por_tipo = Counter(p.tipo for p in pois)
-    sin_coord = sum(1 for p in pois if not p.geolocalizado)
+    sin_coord = [p for p in pois if not p.geolocalizado]
     por_calidad = Counter(p.geocode_calidad for p in pois if p.geolocalizado)
+
+    # Los que se quedaron sin coordenada no son todos el mismo caso, y
+    # mezclarlos oculta el que importa. "No lo encontré" se arregla mejorando
+    # la consulta; "lo encontré pero solo a nivel de municipio" se arregla
+    # buscando la dirección a mano, y hasta entonces es un hueco conocido en
+    # la capa de competencia. Separarlos es lo que permite saber cuál toca.
+    # El discriminador es `geocode_fuente`, no `geocode_calidad`: esta última
+    # arranca valiendo "desconocida" por defecto, así que un registro que
+    # ningún geocodificador llegó a ver es indistinguible por calidad de uno
+    # que sí se resolvió con precisión dudosa. La fuente solo se rellena
+    # cuando alguien respondió de verdad.
+    descartadas = Counter(p.geocode_calidad for p in sin_coord if p.geocode_fuente)
+
     return {
         "total": len(pois),
         "por_tipo": dict(por_tipo),
-        "sin_coordenadas": sin_coord,
+        "sin_coordenadas": len(sin_coord),
         "por_calidad": dict(por_calidad),
-        # Una tasa alta de "municipio" significa que el geocodificador está
-        # devolviendo el centro del pueblo en vez del portal: los puntos
-        # existen pero no sirven para medir distancias a 600 m.
-        "solo_municipio": por_calidad.get("municipio", 0),
+        # Encontradas, pero con una precisión que no sirve al modelo: su
+        # coordenada se descarta a propósito en vez de colocar la notaría en
+        # el centro del pueblo. Ver CALIDADES_NO_UBICABLES en geocode.py.
+        "descartadas_por_calidad": dict(descartadas),
+        # No aparecieron en ningún geocodificador.
+        "no_encontradas": len(sin_coord) - sum(descartadas.values()),
     }
 
 

@@ -45,8 +45,18 @@ def geocodifica_pendientes(pois: list[Poi], limite: int | None = None) -> None:
             continue
         r = g.geocodifica(p.direccion, p.municipio, p.provincia)
         if r:
-            p.lat, p.lon = r.lat, r.lon
+            # La calidad y la fuente se anotan siempre, también cuando la
+            # coordenada se descarta: son la explicación del hueco. Sin ellas
+            # el registro aparecería como "no se encontró", que es falso y
+            # manda a buscar en el sitio equivocado.
             p.geocode_fuente, p.geocode_calidad = r.fuente, r.calidad
+            if r.calidad in geocode.CALIDADES_NO_UBICABLES:
+                log.warning(
+                    "solo a nivel de %s, se deja sin coordenada: %s (%s)",
+                    r.calidad, p.direccion, p.municipio,
+                )
+            else:
+                p.lat, p.lon = r.lat, r.lon
         if (i + 1) % 100 == 0:
             log.info("  %d/%d", i + 1, len(pendientes))
 
