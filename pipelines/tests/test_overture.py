@@ -44,7 +44,6 @@ class TestClasifica:
     def test_categoria_principal(self):
         assert clasifica("real_estate_agent", None) == "inmobiliaria"
         assert clasifica("lawyer", None) == "abogados"
-        assert clasifica("banks", None) == "banco"
 
     def test_mira_tambien_las_alternativas(self):
         # Muchos despachos se clasifican como servicios profesionales y solo
@@ -321,7 +320,6 @@ class TestNoCuentaNotariasComoDemanda:
 
     def test_no_arrastra_a_las_demas_categorias(self):
         assert clasifica("real_estate_agent", None) == "inmobiliaria"
-        assert clasifica("banks", None) == "banco"
 
 
 class TestCategoriasExistenDeVerdad:
@@ -412,3 +410,28 @@ class TestFiltroDePais:
         sql = consulta_sql(BBox.de_centro(41.5431, 2.1097, 6000))
         assert "addresses[1].country" in sql
         assert "'ES'" in sql
+
+
+class TestBancosVienenDelBancoDeEspana:
+    """
+    Overture da 6.322 bancos en Cataluna y Madrid donde el Registro de
+    Oficinas del BdE da 4.054: un 56 % mas, que son cajeros, oficinas cerradas
+    y duplicados. Ingerir las dos capas inflaria la demanda bancaria al doble
+    donde coincidieran, porque la deduplicacion entre fuentes exige que el
+    nombre case y "Banco De Sabadell, S.A." no casa con "Banc Sabadell".
+    """
+
+    def test_overture_no_aporta_bancos(self):
+        for c in ("banks", "credit_union", "bank_credit_union"):
+            assert clasifica(c, None) is None, c
+
+    def test_tampoco_por_categoria_alternativa(self):
+        assert clasifica("professional_services", ["banks"]) is None
+
+    def test_banco_no_es_un_tipo_que_overture_produzca(self):
+        assert "banco" not in CATEGORIAS
+
+    def test_las_demas_capas_siguen_intactas(self):
+        assert clasifica("real_estate_agent", None) == "inmobiliaria"
+        assert clasifica("lawyer", None) == "abogados"
+        assert clasifica("accountant", None) == "gestoria"

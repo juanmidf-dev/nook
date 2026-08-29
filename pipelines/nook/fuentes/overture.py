@@ -78,10 +78,6 @@ CATEGORIAS: dict[Tipo, set[str]] = {
         "wills_trusts_and_probate", "workers_compensation_law",
         "court_reporter", "process_servers",
     },
-    # Subárbol `bank_credit_union`. El Banco de España sigue siendo la fuente
-    # buena para esta capa —es registro oficial y trae el código INE—; Overture
-    # solo la completa donde el volcado del BdE no llegue.
-    "banco": {"bank_credit_union", "banks", "credit_union"},
     # Gestorías administrativas y asesorías fiscales y contables. En España
     # canalizan constitución y modificación de sociedades, poderes,
     # compraventa de vehículos y tramitación de herencias: un polígono con
@@ -96,17 +92,29 @@ CATEGORIAS: dict[Tipo, set[str]] = {
     },
 }
 
-# `notary_public` NO va en abogados, aunque sea lo primero que apetece.
+# Categorías que Overture sí trae y que deliberadamente NO se recogen, porque
+# de ésas ya hay fuente oficial. Las dos por el mismo motivo de fondo: meter
+# un dato bueno por una segunda vía peor solo produce duplicados.
 #
-# Una notaría española catalogada en Overture entraría entonces como demanda,
-# sumando peso justo encima de donde ya hay una notaría instalada: el error
-# que el modelo entero existe para evitar. Y ademas duplicaria un punto que ya
-# tenemos de la Guia Notarial, que es censo oficial y completo.
+# **Notarías.** Una notaría española catalogada en Overture entraría como
+# demanda, sumando peso justo encima de donde ya hay una notaría instalada: el
+# error que el modelo entero existe para evitar. Y duplicaría un punto que ya
+# da la Guía Notarial, que es censo oficial y completo. La exclusión se evalúa
+# antes que ninguna coincidencia porque en Overture una notaría suele llevar
+# también `lawyer`.
 #
-# Se descarta en vez de mapearse a `notaria` precisamente por eso: la
-# competencia ya la tenemos bien, y meterla por una segunda via solo añade
-# duplicados que habria que deduplicar.
-CATEGORIAS_EXCLUIDAS = {"notary_public"}
+# **Bancos.** Medido el 29/08/2026 sobre Cataluña y Madrid: Overture devuelve
+# 6.322 donde el Registro de Oficinas del Banco de España da 4.054, un 56 %
+# más. Son cajeros, oficinas cerradas y duplicados; el BdE es registro oficial
+# y solo lista oficinas operativas. Ingerir las dos capas inflaría la demanda
+# bancaria al doble donde coincidieran, porque la deduplicación entre fuentes
+# exige que el nombre case, y "Banco De Sabadell, S.A." no casa con "Banc
+# Sabadell". Si algún día hace falta una comunidad de la que no haya volcado
+# del BdE, la respuesta es descargar ese volcado, no reactivar esto.
+CATEGORIAS_EXCLUIDAS = {
+    "notary_public",
+    "bank_credit_union", "banks", "credit_union",
+}
 
 # Overture arrastra registros de baja confianza procedentes de fuentes
 # automáticas. Por debajo de este umbral hay bastante ruido —negocios
