@@ -1,12 +1,17 @@
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
  import { CATEGORIAS, CATEGORIAS_DEMANDA, ETIQUETAS, type Categoria, type Config } from '@/lib/heat';
-import { INCIDENCIAS, type Municipio } from '@/data/sabadell';
+import type { Incidencia, Municipio } from '@/data/sabadell';
+import type { EntradaMunicipio } from '@/data/municipios';
 import Marca from '@/components/nook/Marca';
 import Leyenda from '@/components/nook/Leyenda';
 
 interface Props {
   municipio: Municipio;
+  municipios: EntradaMunicipio[];
+  claveMunicipio: string;
+  onMunicipio: (clave: string) => void;
+  incidencias: Incidencia[];
   cfg: Config;
   onCfg: (c: Config) => void;
   capas: Record<Categoria, boolean>;
@@ -45,6 +50,10 @@ function Campo({
 
 export default function PanelControl({
   municipio,
+  municipios,
+  claveMunicipio,
+  onMunicipio,
+  incidencias,
   cfg,
   onCfg,
   capas,
@@ -65,16 +74,24 @@ export default function PanelControl({
 
       <div className="lista-scroll flex-1 space-y-6 overflow-y-auto px-5 py-5">
         <div className="space-y-2">
-          <span className="etiqueta-campo">Zona de análisis</span>
-          <div className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5">
-            <div className="text-sm text-tinta">{municipio.nombre}</div>
-            <div className="text-[11px] text-tinta-tenue">
-              {municipio.provincia} · INE {municipio.codIne}
-            </div>
-          </div>
+          <label className="etiqueta-campo" htmlFor="selector-municipio">
+            Zona de análisis
+          </label>
+          <select
+            id="selector-municipio"
+            value={claveMunicipio}
+            onChange={(e) => onMunicipio(e.target.value)}
+            className="w-full cursor-pointer rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm text-tinta outline-none transition-colors hover:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-acento"
+          >
+            {municipios.map((m) => (
+              <option key={m.clave} value={m.clave} className="bg-panel-alto text-tinta">
+                {m.nombre} · {m.provincia}
+              </option>
+            ))}
+          </select>
           <p className="text-[11px] leading-snug text-tinta-tenue">
-            El resto de municipios se activan cuando el pipeline de ingesta cargue los
-            datos nacionales.
+            INE {municipio.codIne}. Las capas de demanda solo cubren Cataluña y Madrid:
+            fuera de ahí el mapa saldrá vacío hasta que se ingiera esa zona.
           </p>
         </div>
 
@@ -183,19 +200,19 @@ export default function PanelControl({
           })}
         </section>
 
-        {INCIDENCIAS.length > 0 && (
+        {incidencias.length > 0 && (
           <div className="rounded-lg border border-[hsl(var(--competencia))]/25 bg-[hsl(var(--competencia))]/[0.07] px-3 py-2.5">
             <div className="text-[11.5px] font-medium text-tinta-suave">
-              {INCIDENCIAS.length === 1
+              {incidencias.length === 1
                 ? '1 registro descartado del volcado'
-                : `${INCIDENCIAS.length} registros descartados del volcado`}
+                : `${incidencias.length} registros descartados del volcado`}
             </div>
             <details className="group">
               <summary className="cursor-pointer list-none pt-0.5 text-[11px] text-tinta-tenue underline decoration-dotted underline-offset-2">
                 ver detalle
               </summary>
               <ul className="lista-scroll mt-1.5 max-h-40 space-y-1 overflow-y-auto pr-1">
-                {INCIDENCIAS.map((inc, i) => (
+                {incidencias.map((inc, i) => (
                   <li key={i} className="text-[11px] leading-snug text-tinta-tenue">
                     <span className="text-tinta-suave">{inc.nombre}</span> — {inc.motivo}
                   </li>
