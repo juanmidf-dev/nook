@@ -102,7 +102,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("comando", choices=["reconocimiento", "bancos", "overture", "notarias"])
     ap.add_argument("--prueba", action="store_true", help="no escribe en Supabase")
     ap.add_argument("--entrada", type=pathlib.Path, help="carpeta de ficheros de entrada (bancos)")
-    ap.add_argument("--bbox", help="min_lat,min_lon,max_lat,max_lon (overture)")
+    ap.add_argument("--bbox", help="min_lat,min_lon,max_lat,max_lon (overture); varias cajas con ';'")
     ap.add_argument("--sin-geocodificar", action="store_true")
     args = ap.parse_args(argv)
 
@@ -127,8 +127,17 @@ def main(argv: list[str] | None = None) -> int:
     elif args.comando == "overture":
         cajas = None
         if args.bbox:
-            a, b, c, d = (float(x) for x in args.bbox.split(","))
-            cajas = [overture.BBox(a, b, c, d)]
+            # Varias cajas separadas por ';'. Una comunidad autónoma no cabe
+            # siempre en un rectángulo razonable, y pedir España de una vez
+            # arrastra medio Atlántico: es más barato encadenar cajas
+            # ajustadas que filtrar después lo que sobra.
+            cajas = []
+            for trozo in args.bbox.split(";"):
+                trozo = trozo.strip()
+                if not trozo:
+                    continue
+                a, b, c, d = (float(x) for x in trozo.split(","))
+                cajas.append(overture.BBox(a, b, c, d))
         pois = overture.extrae(cajas)
 
     else:

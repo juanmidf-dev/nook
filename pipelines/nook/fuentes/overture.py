@@ -114,6 +114,13 @@ CATEGORIAS_EXCLUIDAS = {"notary_public"}
 # la precisión que el volumen.
 CONFIANZA_MINIMA = 0.5
 
+# Overture es mundial y las cajas son rectangulos, pero España no lo es. La
+# caja de Cataluña se mete en Francia por el norte, y la peninsular del
+# `ESPANA` de abajo arrastra medio Atlántico y parte de Marruecos. Sin este
+# filtro entrarían POIs de otros países que después nadie sabría de dónde
+# salieron. `country` viene en ISO 3166-1 alfa-2.
+PAIS = "ES"
+
 
 @dataclass
 class BBox:
@@ -199,6 +206,7 @@ def consulta_sql(b: BBox, geometria: str = GEOM_WKB) -> str:
       AND bbox.xmin BETWEEN {b.min_lon} AND {b.max_lon}
       AND confidence >= {CONFIANZA_MINIMA}
       AND names.primary IS NOT NULL
+      AND addresses[1].country = '{PAIS}'
     """
 
 

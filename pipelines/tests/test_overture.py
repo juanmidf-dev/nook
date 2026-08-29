@@ -131,28 +131,35 @@ class TestConsultaSQL:
                 ('ov-1', {{'primary': 'Finques Exemple'}},
                  {{'primary': 'real_estate_agent', 'alternate': ['agency']}}, 0.91::DOUBLE,
                  [{{'freeform': 'CL SANT JOAN 39', 'postcode': '08202',
-                    'locality': 'Sabadell', 'region': 'Barcelona'}}],
+                    'locality': 'Sabadell', 'region': 'Barcelona', 'country': 'ES'}}],
                  ['https://ejemplo.test'], ['937000000'], ['hola@ejemplo.test'],
                  ST_AsWKB(ST_Point(2.1099, 41.5474)),
                  {{'xmin': 2.1099, 'xmax': 2.1099, 'ymin': 41.5474, 'ymax': 41.5474}}),
+                ('ov-5', {{'primary': 'Immobilier Exemple'}},
+                 {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.95::DOUBLE,
+                 [{{'freeform': 'RUE DE LA PAIX 1', 'postcode': '66000',
+                    'locality': 'Perpignan', 'region': 'Pyrenees-Orientales', 'country': 'FR'}}],
+                 [NULL], [NULL], [NULL],
+                 ST_AsWKB(ST_Point(2.1080, 41.5460)),
+                 {{'xmin': 2.1080, 'xmax': 2.1080, 'ymin': 41.5460, 'ymax': 41.5460}}),
                 ('ov-2', {{'primary': 'Bufete Exemple'}},
                  {{'primary': 'professional_services', 'alternate': ['lawyer']}}, 0.80::DOUBLE,
                  [{{'freeform': 'CL ADVOCATS 1', 'postcode': '08201',
-                    'locality': 'Sabadell', 'region': 'Barcelona'}}],
+                    'locality': 'Sabadell', 'region': 'Barcelona', 'country': 'ES'}}],
                  [NULL], [NULL], [NULL],
                  ST_AsWKB(ST_Point(2.1050, 41.5500)),
                  {{'xmin': 2.1050, 'xmax': 2.1050, 'ymin': 41.5500, 'ymax': 41.5500}}),
                 ('ov-3', {{'primary': 'Baja confianza'}},
                  {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.20::DOUBLE,
                  [{{'freeform': 'CL DUDOSA 9', 'postcode': '08201',
-                    'locality': 'Sabadell', 'region': 'Barcelona'}}],
+                    'locality': 'Sabadell', 'region': 'Barcelona', 'country': 'ES'}}],
                  [NULL], [NULL], [NULL],
                  ST_AsWKB(ST_Point(2.1060, 41.5510)),
                  {{'xmin': 2.1060, 'xmax': 2.1060, 'ymin': 41.5510, 'ymax': 41.5510}}),
                 ('ov-4', {{'primary': 'Fuera de la caja'}},
                  {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.95::DOUBLE,
                  [{{'freeform': 'CL LEJOS 1', 'postcode': '28001',
-                    'locality': 'Madrid', 'region': 'Madrid'}}],
+                    'locality': 'Madrid', 'region': 'Madrid', 'country': 'ES'}}],
                  [NULL], [NULL], [NULL],
                  ST_AsWKB(ST_Point(-3.7038, 40.4168)),
                  {{'xmin': -3.7038, 'xmax': -3.7038, 'ymin': 40.4168, 'ymax': 40.4168}})
@@ -206,6 +213,9 @@ class TestConsultaSQL:
         assert "Baja confianza" not in nombres
         # Madrid queda fuera de la caja de Sabadell.
         assert "Fuera de la caja" not in nombres
+        # Y este cae dentro de la caja y tiene confianza de sobra, pero es
+        # francés: lo descarta el filtro de país, no la geometría.
+        assert "Immobilier Exemple" not in nombres
 
         bufete = next(p for p in pois if p.nombre == "Bufete Exemple")
         assert bufete.tipo == "abogados"
@@ -235,25 +245,25 @@ class TestFiltrosSinSpatial:
                 ('ov-1', {{'primary': 'Finques Exemple'}},
                  {{'primary': 'real_estate_agent', 'alternate': ['agency']}}, 0.91::DOUBLE,
                  [{{'freeform': 'CL SANT JOAN 39', 'postcode': '08202',
-                    'locality': 'Sabadell', 'region': 'Barcelona'}}],
+                    'locality': 'Sabadell', 'region': 'Barcelona', 'country': 'ES'}}],
                  ['https://ejemplo.test'], ['937000000'], ['hola@ejemplo.test'], 41.5474, 2.1099,
                  {{'xmin': 2.1099, 'xmax': 2.1099, 'ymin': 41.5474, 'ymax': 41.5474}}),
                 ('ov-3', {{'primary': 'Baja confianza'}},
                  {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.20::DOUBLE,
                  [{{'freeform': 'CL DUDOSA 9', 'postcode': '08201',
-                    'locality': 'Sabadell', 'region': 'Barcelona'}}],
+                    'locality': 'Sabadell', 'region': 'Barcelona', 'country': 'ES'}}],
                  [NULL], [NULL], [NULL], 41.5510, 2.1060,
                  {{'xmin': 2.1060, 'xmax': 2.1060, 'ymin': 41.5510, 'ymax': 41.5510}}),
                 ('ov-4', {{'primary': 'Fuera de la caja'}},
                  {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.95::DOUBLE,
                  [{{'freeform': 'CL LEJOS 1', 'postcode': '28001',
-                    'locality': 'Madrid', 'region': 'Madrid'}}],
+                    'locality': 'Madrid', 'region': 'Madrid', 'country': 'ES'}}],
                  [NULL], [NULL], [NULL], 40.4168, -3.7038,
                  {{'xmin': -3.7038, 'xmax': -3.7038, 'ymin': 40.4168, 'ymax': 40.4168}}),
                 ('ov-5', NULL,
                  {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.99::DOUBLE,
                  [{{'freeform': 'CL SIN NOMBRE 1', 'postcode': '08201',
-                    'locality': 'Sabadell', 'region': 'Barcelona'}}],
+                    'locality': 'Sabadell', 'region': 'Barcelona', 'country': 'ES'}}],
                  [NULL], [NULL], [NULL], 41.5480, 2.1090,
                  {{'xmin': 2.1090, 'xmax': 2.1090, 'ymin': 41.5480, 'ymax': 41.5480}})
               ) AS t(id, names, categories, confidence, addresses, websites, phones, emails, lat_p, lon_p, bbox)
@@ -388,3 +398,17 @@ class TestGestorias:
     def test_no_pisa_a_los_abogados(self):
         # `tax_law` es un despacho de abogados fiscalista, no una gestoria.
         assert clasifica("tax_law", None) == "abogados"
+
+
+class TestFiltroDePais:
+    """
+    Overture es mundial y las cajas son rectangulos, pero Espana no lo es: la
+    caja de Cataluna se mete en Francia por el norte y la peninsular arrastra
+    parte de Marruecos. Sin filtro entrarian POIs de otros paises que despues
+    nadie sabria de donde salieron.
+    """
+
+    def test_la_consulta_filtra_por_pais(self):
+        sql = consulta_sql(BBox.de_centro(41.5431, 2.1097, 6000))
+        assert "addresses[1].country" in sql
+        assert "'ES'" in sql
