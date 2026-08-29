@@ -33,16 +33,46 @@ BASE = f"s3://overturemaps-us-west-2/release/{RELEASE}/theme=places/type=place/*
 # contra la categoría principal como contra las alternativas, porque muchos
 # despachos se clasifican como "professional_services" con "lawyer" en la
 # lista secundaria.
+# Los códigos salen de la taxonomía oficial de Overture (2.117 categorías,
+# `overture_categories.csv` del repositorio de esquema), no de suponer cómo se
+# llamarían. La versión anterior de este diccionario tenía seis nombres
+# inventados que no casaban con nada: `bank` —el código real es `banks`—,
+# `real_estate_agency`, `law_firm`, `attorney`, `solicitor` y
+# `banking_and_finance`. Una categoría que no existe no da error: simplemente
+# no coincide nunca, y la capa sale más pobre de lo que debería sin que nada
+# lo anuncie.
 CATEGORIAS: dict[Tipo, set[str]] = {
+    # Subárbol `real_estate`, pero solo lo que intermedia operaciones. Quedan
+    # fuera `apartments`, `condominium`, `holiday_park`, `university_housing`
+    # y compañía: son inmuebles, no negocios que generen trabajo notarial.
     "inmobiliaria": {
-        "real_estate_agency", "real_estate_agent", "real_estate",
-        "real_estate_service", "property_management",
+        "real_estate", "real_estate_agent", "apartment_agent",
+        "real_estate_service", "commercial_real_estate", "property_management",
+        "mortgage_broker", "escrow_services", "builders", "home_developer",
+        "estate_liquidation",
     },
+    # Subárbol `lawyer` completo más `legal_services`. Se incluyen las
+    # especialidades (`tax_law`, `real_estate_law`, `estate_planning_law`...)
+    # porque en Overture un despacho especializado lleva la especialidad como
+    # categoría principal, no `lawyer`: sin ellas se perdían justo los que más
+    # trabajo notarial generan. Algunas son de EE. UU. y en España no
+    # aparecerán; no molestan.
     "abogados": {
-        "lawyer", "law_firm", "legal_services", "attorney",
-        "solicitor", "legal",
+        "lawyer", "legal_services", "paralegal_services",
+        "appellate_practice_lawyers", "bankruptcy_law", "business_law",
+        "civil_rights_lawyers", "contract_law", "criminal_defense_law",
+        "disability_law", "divorce_and_family_law", "dui_law",
+        "employment_law", "entertainment_law", "estate_planning_law",
+        "general_litigation", "immigration_law", "ip_and_internet_law",
+        "medical_law", "personal_injury_law", "real_estate_law",
+        "social_security_law", "tax_law", "traffic_ticketing_law",
+        "wills_trusts_and_probate", "workers_compensation_law",
+        "court_reporter", "process_servers",
     },
-    "banco": {"bank", "banking_and_finance", "credit_union"},
+    # Subárbol `bank_credit_union`. El Banco de España sigue siendo la fuente
+    # buena para esta capa —es registro oficial y trae el código INE—; Overture
+    # solo la completa donde el volcado del BdE no llegue.
+    "banco": {"bank_credit_union", "banks", "credit_union"},
 }
 
 # `notary_public` NO va en abogados, aunque sea lo primero que apetece.
@@ -55,7 +85,7 @@ CATEGORIAS: dict[Tipo, set[str]] = {
 # Se descarta en vez de mapearse a `notaria` precisamente por eso: la
 # competencia ya la tenemos bien, y meterla por una segunda via solo añade
 # duplicados que habria que deduplicar.
-CATEGORIAS_EXCLUIDAS = {"notary_public", "notary"}
+CATEGORIAS_EXCLUIDAS = {"notary_public"}
 
 # Overture arrastra registros de baja confianza procedentes de fuentes
 # automáticas. Por debajo de este umbral hay bastante ruido —negocios

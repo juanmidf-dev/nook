@@ -16,6 +16,8 @@ import pytest
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from nook.fuentes.overture import (
+    CATEGORIAS,
+    CATEGORIAS_EXCLUIDAS,
     BBox,
     clasifica,
     consulta_sql,
@@ -40,9 +42,9 @@ def _exige_duckdb():
 
 class TestClasifica:
     def test_categoria_principal(self):
-        assert clasifica("real_estate_agency", None) == "inmobiliaria"
+        assert clasifica("real_estate_agent", None) == "inmobiliaria"
         assert clasifica("lawyer", None) == "abogados"
-        assert clasifica("bank", None) == "banco"
+        assert clasifica("banks", None) == "banco"
 
     def test_mira_tambien_las_alternativas(self):
         # Muchos despachos se clasifican como servicios profesionales y solo
@@ -59,7 +61,7 @@ class TestFilaAPoi:
         fila = {
             "id": "ov-1",
             "nombre": "Finques Exemple",
-            "categoria": "real_estate_agency",
+            "categoria": "real_estate_agent",
             "categorias_alt": None,
             "confianza": 0.9,
             "direccion": "CL SANT JOAN 39",
@@ -127,7 +129,7 @@ class TestConsultaSQL:
             COPY (
               SELECT * FROM (VALUES
                 ('ov-1', {{'primary': 'Finques Exemple'}},
-                 {{'primary': 'real_estate_agency', 'alternate': ['agency']}}, 0.91::DOUBLE,
+                 {{'primary': 'real_estate_agent', 'alternate': ['agency']}}, 0.91::DOUBLE,
                  [{{'freeform': 'CL SANT JOAN 39', 'postcode': '08202',
                     'locality': 'Sabadell', 'region': 'Barcelona'}}],
                  ['https://ejemplo.test'], ['937000000'],
@@ -141,14 +143,14 @@ class TestConsultaSQL:
                  ST_AsWKB(ST_Point(2.1050, 41.5500)),
                  {{'xmin': 2.1050, 'xmax': 2.1050, 'ymin': 41.5500, 'ymax': 41.5500}}),
                 ('ov-3', {{'primary': 'Baja confianza'}},
-                 {{'primary': 'real_estate_agency', 'alternate': [NULL]}}, 0.20::DOUBLE,
+                 {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.20::DOUBLE,
                  [{{'freeform': 'CL DUDOSA 9', 'postcode': '08201',
                     'locality': 'Sabadell', 'region': 'Barcelona'}}],
                  [NULL], [NULL],
                  ST_AsWKB(ST_Point(2.1060, 41.5510)),
                  {{'xmin': 2.1060, 'xmax': 2.1060, 'ymin': 41.5510, 'ymax': 41.5510}}),
                 ('ov-4', {{'primary': 'Fuera de la caja'}},
-                 {{'primary': 'real_estate_agency', 'alternate': [NULL]}}, 0.95::DOUBLE,
+                 {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.95::DOUBLE,
                  [{{'freeform': 'CL LEJOS 1', 'postcode': '28001',
                     'locality': 'Madrid', 'region': 'Madrid'}}],
                  [NULL], [NULL],
@@ -231,25 +233,25 @@ class TestFiltrosSinSpatial:
             COPY (
               SELECT * FROM (VALUES
                 ('ov-1', {{'primary': 'Finques Exemple'}},
-                 {{'primary': 'real_estate_agency', 'alternate': ['agency']}}, 0.91::DOUBLE,
+                 {{'primary': 'real_estate_agent', 'alternate': ['agency']}}, 0.91::DOUBLE,
                  [{{'freeform': 'CL SANT JOAN 39', 'postcode': '08202',
                     'locality': 'Sabadell', 'region': 'Barcelona'}}],
                  ['https://ejemplo.test'], ['937000000'], 41.5474, 2.1099,
                  {{'xmin': 2.1099, 'xmax': 2.1099, 'ymin': 41.5474, 'ymax': 41.5474}}),
                 ('ov-3', {{'primary': 'Baja confianza'}},
-                 {{'primary': 'real_estate_agency', 'alternate': [NULL]}}, 0.20::DOUBLE,
+                 {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.20::DOUBLE,
                  [{{'freeform': 'CL DUDOSA 9', 'postcode': '08201',
                     'locality': 'Sabadell', 'region': 'Barcelona'}}],
                  [NULL], [NULL], 41.5510, 2.1060,
                  {{'xmin': 2.1060, 'xmax': 2.1060, 'ymin': 41.5510, 'ymax': 41.5510}}),
                 ('ov-4', {{'primary': 'Fuera de la caja'}},
-                 {{'primary': 'real_estate_agency', 'alternate': [NULL]}}, 0.95::DOUBLE,
+                 {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.95::DOUBLE,
                  [{{'freeform': 'CL LEJOS 1', 'postcode': '28001',
                     'locality': 'Madrid', 'region': 'Madrid'}}],
                  [NULL], [NULL], 40.4168, -3.7038,
                  {{'xmin': -3.7038, 'xmax': -3.7038, 'ymin': 40.4168, 'ymax': 40.4168}}),
                 ('ov-5', NULL,
-                 {{'primary': 'real_estate_agency', 'alternate': [NULL]}}, 0.99::DOUBLE,
+                 {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.99::DOUBLE,
                  [{{'freeform': 'CL SIN NOMBRE 1', 'postcode': '08201',
                     'locality': 'Sabadell', 'region': 'Barcelona'}}],
                  [NULL], [NULL], 41.5480, 2.1090,
@@ -308,5 +310,56 @@ class TestNoCuentaNotariasComoDemanda:
         assert clasifica("professional_services", ["lawyer"]) == "abogados"
 
     def test_no_arrastra_a_las_demas_categorias(self):
-        assert clasifica("real_estate_agency", None) == "inmobiliaria"
-        assert clasifica("bank", None) == "banco"
+        assert clasifica("real_estate_agent", None) == "inmobiliaria"
+        assert clasifica("banks", None) == "banco"
+
+
+class TestCategoriasExistenDeVerdad:
+    """
+    Una categoria que no existe en la taxonomia de Overture no da error:
+    simplemente no coincide nunca. La capa sale vacia o a medias y nada lo
+    anuncia.
+
+    Paso de verdad. La primera version de CATEGORIAS tenia seis codigos
+    inventados, entre ellos `bank` —el real es `banks`— y `real_estate_agency`,
+    que no existe. Con eso, la capa de bancos de Overture habria casado solo
+    con `credit_union`.
+    """
+
+    def _taxonomia(self):
+        import pathlib
+
+        csv = (
+            pathlib.Path(__file__).resolve().parents[1]
+            / "datos" / "referencia" / "overture_categorias.csv"
+        )
+        if not csv.exists():
+            pytest.skip(f"falta la taxonomia de referencia en {csv}")
+        codigos = set()
+        for linea in csv.read_text(encoding="utf-8-sig").splitlines()[1:]:
+            if ";" in linea:
+                codigos.add(linea.split(";", 1)[0].strip())
+        return codigos
+
+    def test_la_taxonomia_de_referencia_se_lee(self):
+        tax = self._taxonomia()
+        assert len(tax) > 2000, f"solo {len(tax)} categorias, el fichero no encaja"
+        # Anclas conocidas, para detectar que el formato cambio.
+        assert {"lawyer", "banks", "real_estate_agent"} <= tax
+
+    def test_ninguna_categoria_usada_es_inventada(self):
+        tax = self._taxonomia()
+        usadas = {c for cs in CATEGORIAS.values() for c in cs}
+        fantasma = sorted(usadas - tax)
+        assert not fantasma, f"categorias que no existen en Overture: {fantasma}"
+
+    def test_las_excluidas_tambien_existen(self):
+        # Si `notary_public` dejara de llamarse asi, la exclusion dejaria de
+        # aplicarse en silencio y las notarias volverian a contar como demanda.
+        tax = self._taxonomia()
+        fantasma = sorted(CATEGORIAS_EXCLUIDAS - tax)
+        assert not fantasma, f"exclusiones que ya no existen: {fantasma}"
+
+    def test_ningun_tipo_se_queda_sin_categorias(self):
+        for tipo, cs in CATEGORIAS.items():
+            assert cs, f"{tipo} no tiene ninguna categoria"
