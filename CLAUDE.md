@@ -48,7 +48,7 @@ se inventan coordenadas para tapar un hueco.
 
 Rampa secuencial azul de un solo tono (`src/lib/colores.ts`). Las categorías se
 distinguen **por forma**: cuadrado = banco, triángulo = inmobiliaria, rombo =
-abogados, anillo rojo = notaría, cruz = local en alquiler. No es estética: la
+abogados, círculo = gestoría, anillo rojo = notaría, cruz = local en alquiler. No es estética: la
 terna de colores que se planteó para las tres categorías de demanda daba una
 separación ΔE de 1,6 en deuteranopía, indistinguible para cerca del 6 % de los
 hombres. El acento dorado vive solo en el cromo de la interfaz, nunca sobre el
@@ -112,9 +112,11 @@ src/components/nook/         mapa (Mapbox GL) y paneles
 src/pages/Index.tsx          composición y estado
 scripts/convertir_raw.py     Excel -> JSON, reproducible
 infra/schema.sql             esquema PostGIS para Supabase
+infra/verificar_ingesta.sql  comprobaciones posteriores a una ingesta real
 pipelines/                   ingesta: extractores, geocodificación, escritura
-.github/workflows/           ci, reconocimiento, ingesta
-_obsoleto/                   restos del MVP de Lovable; no se usa
+pipelines/datos/bde/         CSV del Banco de España, descargado a mano
+pipelines/datos/referencia/  taxonomía de Overture, para validar categorías
+.github/workflows/           ci, reconocimiento, ingesta, mantener-supabase
 ```
 
 ## Comandos
@@ -126,8 +128,9 @@ npm run build
 
 cd pipelines
 pip install -r requirements.txt
-python -m pytest tests -q           # 38 tests, ninguno toca la red
-python cli.py bancos --prueba --entrada datos/entrada/bde
+python -m pytest tests -q           # 114 tests, ninguno toca la red
+python cli.py bancos --prueba       # lee datos/bde/*.csv
+python cli.py notarias --prueba
 ```
 
 `.env` no está en el repositorio. Copia `.env.example` y pon
@@ -141,14 +144,20 @@ restricción lo usa cualquiera que abra el inspector.
 
 | Pieza | Estado |
 |---|---|
-| Frontend Nook v2 | Funcionando con datos reales de Sabadell |
-| Motor de calor (TS y Python) | Hecho y verificado |
-| Esquema PostGIS | Escrito, sin desplegar |
-| Extractor Banco de España | **Listo y probado** contra un fichero real |
-| Extractor Overture Maps | Listo; consulta y transformación probadas contra parquet local, sin ejecutar aún contra S3 |
-| Extractor Guía Notarial | **Listo y probado** contra el endpoint real |
-| Supabase | No existe todavía |
-| Idealista | Sin solicitar la API |
+*Actualizado el 29/08/2026.*
+
+| Pieza | Estado |
+|---|---|
+| Frontend | Funciona, pero sigue leyendo `src/data/sabadell.json`, no Supabase |
+| Motor de calor en TypeScript | Hecho y en uso |
+| Motor de calor en Python | **No se ejecuta**: `h3`, `numpy`, `pyproj` y `scipy` no están en `requirements.txt`, nadie lo importa y no tiene tests |
+| Supabase | **Desplegada y verificada.** Trigger de `geom` comprobado: 0 filas con lat/lon y sin geometría, desvío 0 m |
+| Extractor Guía Notarial | **En producción.** 2.641 notarías escritas, 2.458 ubicadas |
+| Extractor Banco de España | **En producción** para Cataluña y Madrid: 4.024 oficinas, 93,5 % geocodificadas. Faltan 15 comunidades |
+| Extractor Overture Maps | Categorías corregidas contra la taxonomía real; **sin ejecutar nunca contra S3** |
+| Geocodificación | 93 % del censo notarial a nivel de portal |
+| Locales en alquiler | Sin fuente. Idealista sin solicitar |
+| Abogados y gestorías | Dependen de Overture, que no se ha estrenado |
 
 ### Pendientes anotados con su razón
 
