@@ -16,9 +16,11 @@
   Los paneles son azul marino con texto crema, que es la combinación dominante
   del documento.
 
-  La cartografía sigue siendo oscura y no azul marino, y es deliberado: la
-  rampa del score es azul, y sobre un fondo azul marino su extremo bajo
-  desaparecería. El mapa necesita un fondo neutro para que el dato se lea.
+  La cartografía es clara, en crema. Con el mapa oscuro costaba orientarse:
+  los nombres de calle y de barrio son lo que dice al notario dónde está
+  mirando, y sobre fondo oscuro se perdían. La contrapartida es que la rampa
+  del score va ahora de crema a marino, al revés que antes: lo que se funde
+  con el fondo tiene que ser siempre el extremo bajo.
 
   1. El color está reservado para el score. Las categorías de puntos se
      distinguen por forma, no por color. El motivo es medible: la terna de
@@ -143,10 +145,11 @@
   filter: invert(1) brightness(1.6);
 }
 .mapboxgl-ctrl-attrib {
-  @apply bg-black/50 text-[10px];
+  /* Cartografía clara: la atribución va sobre crema, no sobre negro. */
+  @apply bg-white/70 text-[10px] text-[hsl(var(--crema-tinta))];
 }
 .mapboxgl-ctrl-attrib a {
-  @apply text-[hsl(var(--tinta-tenue))];
+  @apply text-[hsl(var(--crema-tinta))];
 }
 
 /* Scrollbar del listado de puntos de demanda. */

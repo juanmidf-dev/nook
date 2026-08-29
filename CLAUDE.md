@@ -55,10 +55,21 @@ original—. Los paneles son azul marino con texto crema, y los bloques
 destacados invierten a tarjeta crema con texto marino, como los rótulos
 DEMANDA / COMPETENCIA / OFERTA EN ALQUILER de la diapositiva 4.
 
-**La cartografía sigue siendo oscura y no azul marino, a propósito.** La rampa
-del score es azul: sobre un fondo azul marino su extremo bajo desaparecería y
-el mapa dejaría de tener relieve. El mapa necesita un fondo neutro para que el
-dato se lea, y la identidad vive en el cromo, que es donde se percibe.
+**La cartografía es clara, en crema `#F7F4E9`.** Se cambió desde el mapa
+oscuro porque costaba orientarse: los nombres de calle y de barrio son lo que
+le dice al notario dónde está mirando, y sobre fondo oscuro se perdían.
+
+Eso obligó a **invertir la rampa del score**, que ahora va de crema a marino.
+No es estética: el extremo bajo tiene que fundirse con el fondo, o el
+municipio queda cubierto por una sábana uniforme y desaparece el relieve del
+dato. Con la misma lógica se invirtieron la tinta de los marcadores (marino
+sobre halo crema) y el rojo de la competencia, que pasó de claro a `#B3241F`
+porque un rojo pálido sobre crema no alcanza contraste, y las notarías son
+justo lo que no puede pasar desapercibido.
+
+El fondo del estilo de Mapbox se tiñe buscando las capas **por tipo**, no por
+nombre: la primera versión pedía la capa `background` y en el estilo claro se
+llama `land`, así que lanzaba y el mapa se quedaba gris sin decir nada.
 
 ### 4.bis. El color está reservado para el score
 

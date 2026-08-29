@@ -6,6 +6,7 @@ import type { Celda, Categoria, Local, Poi } from '@/lib/heat';
 import { contorno, ETIQUETAS } from '@/lib/heat';
 import {
   COLOR_COMPETENCIA,
+  FONDO_MAPA,
   FORMA_LOCAL,
   FORMA_POR_CATEGORIA,
   HALO_MARCADOR,
@@ -182,7 +183,7 @@ export default function MapaCalor({
     mapboxgl.accessToken = token;
     const m = new mapboxgl.Map({
       container: contenedor.current,
-      style: 'mapbox://styles/mapbox/dark-v11',
+      style: 'mapbox://styles/mapbox/light-v11',
       center: municipio.centro,
       zoom: municipio.zoom,
       attributionControl: true,
@@ -192,6 +193,23 @@ export default function MapaCalor({
     m.addControl(new mapboxgl.ScaleControl({ unit: 'metric' }), 'bottom-right');
 
     m.on('load', () => {
+      // El estilo claro de Mapbox trae fondo gris; se tiñe al crema de la
+      // propuesta.
+      //
+      // Se buscan las capas por TIPO y no por nombre. La primera versión de
+      // esto pedía la capa 'background' y, como en el estilo claro se llama
+      // 'land', lanzaba en la primera línea y el catch se comía también la
+      // segunda: el mapa se quedaba gris sin que nada lo dijera.
+      try {
+        for (const capa of m.getStyle().layers ?? []) {
+          if (capa.type === 'background') {
+            m.setPaintProperty(capa.id, 'background-color', FONDO_MAPA);
+          }
+        }
+      } catch {
+        /* el estilo no expone capas de fondo: se queda con el suyo */
+      }
+
       for (const forma of ['cuadrado', 'triangulo', 'rombo', 'cruz', 'circulo'] as Forma[]) {
         const img = crearIcono(forma);
         if (img && !m.hasImage(forma)) {
@@ -231,7 +249,10 @@ export default function MapaCalor({
         type: 'line',
         source: SRC_CELDAS,
         filter: ['==', ['get', 'h3'], ''],
-        paint: { 'line-color': '#ffffff', 'line-width': 2 },
+        // Marino y no blanco: sobre cartografía clara un contorno blanco
+        // desaparece justo en las celdas de score bajo, que son las más
+        // claras y las que más cuesta señalar.
+        paint: { 'line-color': '#002C77', 'line-width': 2.5 },
       });
 
       m.addLayer({
