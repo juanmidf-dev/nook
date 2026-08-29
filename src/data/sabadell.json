@@ -11,699 +11,3032 @@
  },
  "pois": [
   {
-   "id": "not-1",
+   "id": "082520011",
    "categoria": "notaria",
-   "nombre": "Alejandro Sáez Ripoll",
-   "direccion": "Avenida Francesc Macià, número 60 Planta 6 , 08208 - Sabadell (Barcelona)",
-   "lat": 41.555318,
-   "lon": 2.098193
+   "nombre": "Sofía Bañuelos Romero",
+   "direccion": "Avenida Verge de Montserrat, número 73 Bajo",
+   "lat": 41.5154240238248,
+   "lon": 2.12188532941063,
+   "telefono": "937.292.568"
   },
   {
-   "id": "not-2",
+   "id": "082384001",
    "categoria": "notaria",
-   "nombre": "Juan Gómez Martínez",
-   "direccion": "Avenida Francesc Macià, número 60 Planta 6 (Torre Millenium), 08208 - Sabadell (Barcelona)",
-   "lat": 41.555318,
-   "lon": 2.098193
+   "nombre": "Alfonso Carbonell Aguilar",
+   "direccion": "Calle Sant Jaume, número 11 Bis",
+   "lat": 41.5323098676239,
+   "lon": 2.08409313677286,
+   "telefono": "937.210.016"
   },
   {
-   "id": "not-3",
-   "categoria": "notaria",
-   "nombre": "Aurora Cristina Díaz-Fraile del Monte",
-   "direccion": "Plaza Del Farell, número 3 Local 4, 08207 - Sabadell (Barcelona)",
-   "lat": 41.568624,
-   "lon": 2.08797
-  },
-  {
-   "id": "not-4",
-   "categoria": "notaria",
-   "nombre": "María Mercedes Lázaro Velo",
-   "direccion": "Calle Filadors, número 35 Pl 5 1, 08204 - Sabadell (Barcelona)",
-   "lat": 41.553321,
-   "lon": 2.098682
-  },
-  {
-   "id": "not-5",
-   "categoria": "notaria",
-   "nombre": "Marta Navarro Redondo",
-   "direccion": "Calle República, número 36 Bajo , 08202 - Sabadell (Barcelona)",
-   "lat": 41.546057,
-   "lon": 2.110994
-  },
-  {
-   "id": "not-6",
-   "categoria": "notaria",
-   "nombre": "Ignacio Corbí González",
-   "direccion": "Calle De la República, número 3 Bajo , 08202 - Sabadell (Barcelona)",
-   "lat": 41.545949,
-   "lon": 2.110078
-  },
-  {
-   "id": "not-7",
-   "categoria": "notaria",
-   "nombre": "Joan Bosch Boada",
-   "direccion": "Calle Lacy, número 23 , 08202 - Sabadell (Barcelona)",
-   "lat": 41.544454,
-   "lon": 2.111108
-  },
-  {
-   "id": "not-8",
-   "categoria": "notaria",
-   "nombre": "María Lara Domínguez Martínez",
-   "direccion": "Calle Sant Pau, número 2 Pl 1 1, 08201 - Sabadell (Barcelona)",
-   "lat": 41.545893,
-   "lon": 2.108191
-  },
-  {
-   "id": "not-9",
+   "id": "081878170",
    "categoria": "notaria",
    "nombre": "Jesús Cembrano Zaldivar",
-   "direccion": "Calle Del Sol, número 1 Pl 2 , 08201 - Sabadell (Barcelona)",
-   "lat": 41.546052,
-   "lon": 2.108921
+   "direccion": "Calle Del Sol, número 1 Pl 2",
+   "lat": 41.5459037678124,
+   "lon": 2.10884413311461,
+   "telefono": "937.262.244"
   },
   {
-   "id": "not-10",
+   "id": "081878169",
    "categoria": "notaria",
-   "nombre": "Montserrat Prieto Santos",
-   "direccion": "Calle República, número 18 Planta 3 , 08202 - Sabadell (Barcelona)",
-   "lat": 41.545843,
-   "lon": 2.110675
+   "nombre": "Ignacio Corbí González",
+   "direccion": "Calle De la República, número 3 Bajo",
+   "lat": 41.5457216005897,
+   "lon": 2.11009844519925,
+   "telefono": "936.559.646"
   },
   {
-   "id": "not-12",
+   "id": "081878168",
+   "categoria": "notaria",
+   "nombre": "Aurora Cristina Díaz-Fraile del Monte",
+   "direccion": "Plaza Del Farell, número 3 Local 4",
+   "lat": 41.5672718746144,
+   "lon": 2.08778635651593,
+   "telefono": "937.174.372"
+  },
+  {
+   "id": "081878016",
+   "categoria": "notaria",
+   "nombre": "María Lara Domínguez Martínez",
+   "direccion": "Calle Sant Pau, número 2 Pl 1 1",
+   "lat": 41.5456519478738,
+   "lon": 2.10813305675868,
+   "telefono": "937.155.514"
+  },
+  {
+   "id": "081878014",
+   "categoria": "notaria",
+   "nombre": "Sergio García-Rosado Cutillas",
+   "direccion": "Calle De la República, número 18 Planta 3",
+   "lat": 41.5456972985056,
+   "lon": 2.11051140689269,
+   "telefono": "937.457.800"
+  },
+  {
+   "id": "081878164",
+   "categoria": "notaria",
+   "nombre": "Juan Gómez Martínez",
+   "direccion": "Avenida Francesc Macià, número 60 Planta 6 (Torre Millenium)",
+   "lat": 41.5551529665988,
+   "lon": 2.09799158441088,
+   "telefono": "937.238.080"
+  },
+  {
+   "id": "082520171",
+   "categoria": "notaria",
+   "nombre": "Regina Elena Izquierdo Muñoz",
+   "direccion": "Paseo Doctor Moragas, número 200 Bajo",
+   "lat": 41.5144123321995,
+   "lon": 2.12510564880782,
+   "telefono": "937.115.561"
+  },
+  {
+   "id": "081878017",
+   "categoria": "notaria",
+   "nombre": "María Mercedes Lázaro Velo",
+   "direccion": "Calle Filadors, número 35 Pl 5 1",
+   "lat": 41.5529963320363,
+   "lon": 2.09871105526223,
+   "telefono": "938.558.092"
+  },
+  {
+   "id": "081878166",
    "categoria": "notaria",
    "nombre": "Javier Micó Giner",
-   "direccion": "Calle Narcis Giralt, número 57 Bajo , 08202 - Sabadell (Barcelona)",
-   "lat": 41.545219,
-   "lon": 2.111315
+   "direccion": "Calle Narcis Giralt, número 57 Bajo",
+   "lat": 41.5448711168768,
+   "lon": 2.11122795259611,
+   "telefono": "937.255.766"
   },
   {
-   "id": "not-13",
+   "id": "081878171",
    "categoria": "notaria",
-   "nombre": "José Antonio Simón Hernández",
-   "direccion": "Calle Republica, número 36 Bajo , 08202 - Sabadell (Barcelona)",
-   "lat": 41.546033,
-   "lon": 2.110972
+   "nombre": "Marta Navarro Redondo",
+   "direccion": "Calle República, número 36 Bajo",
+   "lat": 41.5458761921978,
+   "lon": 2.11102747253225,
+   "telefono": "937.450.787"
   },
   {
-   "id": "ban-1",
+   "id": "081878167",
+   "categoria": "notaria",
+   "nombre": "Montserrat Prieto Santos",
+   "direccion": "Calle República, número 18 Planta 3",
+   "lat": 41.5456972985056,
+   "lon": 2.11051140689269,
+   "telefono": "937.457.800"
+  },
+  {
+   "id": "081878015",
+   "categoria": "notaria",
+   "nombre": "Alejandro Sáez Ripoll",
+   "direccion": "Avenida Francesc Macià, número 60 Planta 6",
+   "lat": 41.5551529665988,
+   "lon": 2.09799158441088,
+   "telefono": "937.238.080"
+  },
+  {
+   "id": "330241012",
+   "categoria": "notaria",
+   "nombre": "José Ricardo Serrano Fernández",
+   "direccion": "Calle Begoña, número 28 Bajo",
+   "lat": 41.559562687356,
+   "lon": 2.130704567374,
+   "telefono": "985.349.803"
+  },
+  {
+   "id": "200b5026-99ed-4a7b-8891-f211fec7f7d9",
+   "categoria": "inmobiliaria",
+   "nombre": "Grupo Habitax",
+   "direccion": "Rambla dels Pinetons, 9",
+   "lat": 41.50263,
+   "lon": 2.15808,
+   "telefono": "+34627174555"
+  },
+  {
+   "id": "cb1432d4ee2c1d82",
    "categoria": "banco",
-   "nombre": "Deutsche Bank S.A.E.",
+   "nombre": "Caja Laboral Popular Coop. Credito",
+   "direccion": "Rambla 68",
+   "lat": 41.5551675925939,
+   "lon": 2.15462176083566
+  },
+  {
+   "id": "b8394d5b756ff997",
+   "categoria": "banco",
+   "nombre": "Deutsche Bank, S.A.E.",
    "direccion": "Passeig Plaça Major 62-64",
-   "lat": 41.54805,
-   "lon": 2.109,
-   "entidad": "0019"
+   "lat": 41.5481188873577,
+   "lon": 2.10845948729942
   },
   {
-   "id": "ban-2",
+   "id": "3dca9a2079e41162",
    "categoria": "banco",
-   "nombre": "Banco Santander S.A.",
-   "direccion": "Po. Plaça Major 32",
-   "lat": 41.547392,
-   "lon": 2.10909,
-   "entidad": "0049"
-  },
-  {
-   "id": "ban-3",
-   "categoria": "banco",
-   "nombre": "Banco Santander S.A.",
-   "direccion": "Rambla De Sabadell 118",
-   "lat": 41.543238,
-   "lon": 2.11054,
-   "entidad": "0049"
-  },
-  {
-   "id": "ban-4",
-   "categoria": "banco",
-   "nombre": "Banco Santander S.A.",
-   "direccion": "Rambla 95",
-   "lat": 41.543634,
-   "lon": 2.110744,
-   "entidad": "0049"
-  },
-  {
-   "id": "ban-5",
-   "categoria": "banco",
-   "nombre": "Banco Santander S.A.",
+   "nombre": "Banco Santander, S.A.",
    "direccion": "Via Massague 6 - 8",
-   "lat": 41.549472,
-   "lon": 2.10801,
-   "entidad": "0049"
+   "lat": 41.5504244,
+   "lon": 2.1074529
   },
   {
-   "id": "ban-6",
+   "id": "802deb9d232c0c85",
    "categoria": "banco",
-   "nombre": "Banco Santander S.A.",
-   "direccion": "Av. Matadepera 63",
-   "lat": 41.565152,
-   "lon": 2.089622,
-   "entidad": "0049"
+   "nombre": "Banco Santander, S.A.",
+   "direccion": "Avenida Matadepera, 63",
+   "lat": 41.5651584385608,
+   "lon": 2.08971471751252
   },
   {
-   "id": "ban-7",
+   "id": "63c000f6c336c8d2",
    "categoria": "banco",
-   "nombre": "Banco De Sabadell S.A.",
-   "direccion": "Avinguda De Matadepera 46. 0",
-   "lat": 41.565231,
-   "lon": 2.090039,
-   "entidad": "0081"
+   "nombre": "Banco Santander, S.A.",
+   "direccion": "Rambla, 95",
+   "lat": 41.5549028188153,
+   "lon": 2.15508052315609
   },
   {
-   "id": "ban-8",
+   "id": "3e10caf4415abc04",
    "categoria": "banco",
-   "nombre": "Banco De Sabadell S.A.",
-   "direccion": "Avinguda De Barbera 385. 0",
-   "lat": 41.529391,
-   "lon": 2.117517,
-   "entidad": "0081"
+   "nombre": "Banco Santander, S.A.",
+   "direccion": "Placa Major, 32",
+   "lat": 41.5473967467768,
+   "lon": 2.10896881210584
   },
   {
-   "id": "ban-9",
+   "id": "26833b86338aca00",
    "categoria": "banco",
-   "nombre": "Banco De Sabadell S.A.",
-   "direccion": "Plaça Sant Roc 20 0",
-   "lat": 41.545956,
-   "lon": 2.108275,
-   "entidad": "0081"
+   "nombre": "Banco Santander, S.A.",
+   "direccion": "Calle Paisos Catalans 5",
+   "lat": 41.5314961015394,
+   "lon": 2.08794761165247
   },
   {
-   "id": "ban-10",
+   "id": "84e01ce822ab9865",
    "categoria": "banco",
-   "nombre": "Banco De Sabadell S.A.",
-   "direccion": "Coromines 7. 0",
-   "lat": 41.54689,
-   "lon": 2.104597,
-   "entidad": "0081"
+   "nombre": "Banco Santander, S.A.",
+   "direccion": "Ronda De L'Est 85",
+   "lat": 41.5139433,
+   "lon": 2.126623
   },
   {
-   "id": "ban-11",
+   "id": "b9b1159b2703d26d",
    "categoria": "banco",
-   "nombre": "Banco De Sabadell S.A.",
-   "direccion": "Via Massague 105. 0",
-   "lat": 41.551846,
-   "lon": 2.106297,
-   "entidad": "0081"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Avenida De Sentmenat, 101",
+   "lat": 41.5604187711277,
+   "lon": 2.15590884948929
   },
   {
-   "id": "ban-12",
+   "id": "5100a0eedfdca3bd",
    "categoria": "banco",
-   "nombre": "Banco De Sabadell S.A.",
-   "direccion": "Gustavo Adolfo Becquer 117",
-   "lat": 41.551872,
-   "lon": 2.082229,
-   "entidad": "0081"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Rambla Sant Esteve, 43, Esq. Pizarro",
+   "lat": 41.5007759612703,
+   "lon": 2.15720703885482
   },
   {
-   "id": "ban-13",
+   "id": "3dd2c705f8bebe6b",
    "categoria": "banco",
-   "nombre": "Banco De Sabadell S.A.",
-   "direccion": "Barberà 25",
-   "lat": 41.538769,
-   "lon": 2.112987,
-   "entidad": "0081"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Avenida Barberà 25",
+   "lat": 41.5387877774757,
+   "lon": 2.11298063118224
   },
   {
-   "id": "ban-14",
+   "id": "fcbf3b8729f7e140",
    "categoria": "banco",
-   "nombre": "Banco De Sabadell S.A.",
-   "direccion": "Plaça De Catalunya 1. 0",
-   "lat": 41.549776,
-   "lon": 2.098839,
-   "entidad": "0081"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Plaça De Catalunya, 1",
+   "lat": 41.5496563166271,
+   "lon": 2.09877468759355
   },
   {
-   "id": "ban-15",
+   "id": "70847adf2efec651",
    "categoria": "banco",
-   "nombre": "Banco De Sabadell S.A.",
-   "direccion": "Plaça Sant Roc 20. 0",
-   "lat": 41.545956,
-   "lon": 2.108275,
-   "entidad": "0081"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Avinguda De Matadepera, 46",
+   "lat": 41.5652097413239,
+   "lon": 2.0899786331412
   },
   {
-   "id": "ban-16",
+   "id": "1c15f80f536d4604",
    "categoria": "banco",
-   "nombre": "Banco De Sabadell S.A.",
-   "direccion": "Passeig Bernat Metge 73. 0",
-   "lat": 41.529914,
-   "lon": 2.101539,
-   "entidad": "0081"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Avinguda De Barbera, 385",
+   "lat": 41.5294120685736,
+   "lon": 2.11752671934671
   },
   {
-   "id": "ban-17",
+   "id": "a15195b58ced0907",
    "categoria": "banco",
-   "nombre": "Renta 4 Banco S.A.",
-   "direccion": "Tres Creus 87",
-   "lat": 41.546255,
-   "lon": 2.112742,
-   "entidad": "0083"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Plaça Sant Roc, 20",
+   "lat": 41.5459450312734,
+   "lon": 2.10825362334463
   },
   {
-   "id": "ban-18",
+   "id": "a31385386a1ef8d8",
    "categoria": "banco",
-   "nombre": "Bankinter S.A.",
-   "direccion": "De Manresa 2. 0",
-   "lat": 41.546764,
-   "lon": 2.108925,
-   "entidad": "0128"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Calle Gustavo Adolfo Becquer 117",
+   "lat": 41.5518677186777,
+   "lon": 2.08218243830832
   },
   {
-   "id": "ban-19",
+   "id": "82ebf254dc212ec8",
    "categoria": "banco",
-   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
-   "direccion": "Va Alexandra",
-   "lat": 41.546764,
-   "lon": 2.108925,
-   "entidad": "0182"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Via Massague, 105",
+   "lat": 41.5518471552009,
+   "lon": 2.10631747941692
   },
   {
-   "id": "ban-20",
+   "id": "52fcfec1b8146845",
    "categoria": "banco",
-   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
-   "direccion": "De Europa",
-   "lat": 41.546764,
-   "lon": 2.108925,
-   "entidad": "0182"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Coromines, 7",
+   "lat": 41.5468373186778,
+   "lon": 2.10458877497397
   },
   {
-   "id": "ban-21",
+   "id": "0995f1adf2bfaf1b",
    "categoria": "banco",
-   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
-   "direccion": "Banyoles",
-   "lat": 41.546764,
-   "lon": 2.108925,
-   "entidad": "0182"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Passeig Bernat Metge, 73",
+   "lat": 41.529867225706,
+   "lon": 2.10155663024506
   },
   {
-   "id": "ban-22",
+   "id": "09093ebd77fbced2",
    "categoria": "banco",
-   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
-   "direccion": "Concordia 61",
-   "lat": 41.560846,
-   "lon": 2.093182,
-   "entidad": "0182"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Cami Del Mas, 2A",
+   "lat": 41.5312483116265,
+   "lon": 2.08672895991938
   },
   {
-   "id": "ban-23",
+   "id": "19a066d14a22cf82",
    "categoria": "banco",
-   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
-   "direccion": "Sol I Padrs",
-   "lat": 41.546764,
-   "lon": 2.108925,
-   "entidad": "0182"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Ctra De Mogoda, 1. Locals 7-8-9",
+   "lat": 41.5156729876603,
+   "lon": 2.15052261086495
   },
   {
-   "id": "ban-24",
+   "id": "719a2f9032e090ae",
    "categoria": "banco",
-   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
-   "direccion": "De Terrassa",
-   "lat": 41.546764,
-   "lon": 2.108925,
-   "entidad": "0182"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Avinguda De La Generalitat, 68",
+   "lat": 41.5155615966457,
+   "lon": 2.12430605528848
   },
   {
-   "id": "ban-25",
+   "id": "20745d4e78d05c6a",
    "categoria": "banco",
-   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
-   "direccion": "Matadepera",
-   "lat": 41.565552,
-   "lon": 2.089507,
-   "entidad": "0182"
+   "nombre": "Banco De Sabadell, S.A.",
+   "direccion": "Plaza Del Pi, 3 Local C (Bellaterra)",
+   "lat": 41.5011425012458,
+   "lon": 2.0900335590324
   },
   {
-   "id": "ban-26",
+   "id": "e8a8c046512c3f85",
    "categoria": "banco",
-   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
-   "direccion": "De Prats",
-   "lat": 41.546764,
-   "lon": 2.108925,
-   "entidad": "0182"
+   "nombre": "Renta 4 Banco, S.A.",
+   "direccion": "Calle Tres Creus 87",
+   "lat": 41.546244024023,
+   "lon": 2.11257848709467
   },
   {
-   "id": "ban-27",
+   "id": "4261b2735451f745",
    "categoria": "banco",
-   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
-   "direccion": "Espronceda",
-   "lat": 41.546764,
-   "lon": 2.108925,
-   "entidad": "0182"
+   "nombre": "Bankinter, S.A.",
+   "direccion": "Paseo De Manresa, 2",
+   "lat": 41.5482868419418,
+   "lon": 2.10866374797449
   },
   {
-   "id": "ban-28",
+   "id": "c6d3b137a388c829",
    "categoria": "banco",
-   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
-   "direccion": "Sant Quirze 4",
-   "lat": 41.546749,
-   "lon": 2.107425,
-   "entidad": "0182"
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Va Alexandra 37",
+   "lat": 41.5545949107121,
+   "lon": 2.08876148671889
   },
   {
-   "id": "ban-29",
+   "id": "22d4fe17333fd7f5",
    "categoria": "banco",
-   "nombre": "Banco Bilbao Vizcaya Argentaria Sa",
-   "direccion": "Rb De Sabadell 164",
-   "lat": 41.546764,
-   "lon": 2.108925,
-   "entidad": "0182"
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Calle Sant Quirze 4",
+   "lat": 41.5467412623664,
+   "lon": 2.10740284891859
   },
   {
-   "id": "ban-30",
+   "id": "8897fe1f5323231c",
    "categoria": "banco",
-   "nombre": "Ibercaja Banco S.A.",
-   "direccion": "De La Republica 18",
-   "lat": 41.545667,
-   "lon": 2.110643,
-   "entidad": "2085"
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Avenida Concordia 61",
+   "lat": 41.5608930533809,
+   "lon": 2.09326405333796
   },
   {
-   "id": "ban-31",
+   "id": "c2bcd335e567c1d6",
    "categoria": "banco",
-   "nombre": "Kutxabank S.A",
-   "direccion": "Alfonso Xiii 36 S/N",
-   "lat": 41.546764,
-   "lon": 2.108925,
-   "entidad": "2095"
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Rambla De Sabadell 164",
+   "lat": 41.5401135784995,
+   "lon": 2.11186585498392
   },
   {
-   "id": "ban-32",
+   "id": "a95e39291c2ff71b",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "Granados 16",
-   "lat": 41.551208,
-   "lon": 2.103484,
-   "entidad": "2100"
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Sol I Padrs 88",
+   "lat": 41.5368533196065,
+   "lon": 2.11866856918815
   },
   {
-   "id": "ban-33",
+   "id": "ee0f44231d117c7e",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "De Matadepera 00143",
-   "lat": 41.568945,
-   "lon": 2.08612,
-   "entidad": "2100"
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Ronda De Europa 535",
+   "lat": 41.5625363621488,
+   "lon": 2.08157758869672
   },
   {
-   "id": "ban-34",
+   "id": "5a2a5099e8ef6ec9",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "Rda. Europa 00524",
-   "lat": 41.557949,
-   "lon": 2.082985,
-   "entidad": "2100"
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Paseo Espronceda 1",
+   "lat": 41.5288279296116,
+   "lon": 2.11701665515189
   },
   {
-   "id": "ban-35",
+   "id": "2ad240996f814831",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Banyoles 2",
+   "lat": 41.5494793079347,
+   "lon": 2.12833177507456
+  },
+  {
+   "id": "1b75438da9b9e8d4",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Carretera De Prats 188",
+   "lat": 41.5594574572618,
+   "lon": 2.10164937763322
+  },
+  {
+   "id": "7bfb06ce22a7a4e0",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Avenida Matadepera 79",
+   "lat": 41.5655393372327,
+   "lon": 2.08951539603798
+  },
+  {
+   "id": "a1c18eae9d9c37d4",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Carretera De Terrassa 335",
+   "lat": 41.5474209595739,
+   "lon": 2.0882099369542
+  },
+  {
+   "id": "0a3bcfb06c3279df",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Rambla Lluis Companys 2",
+   "lat": 41.5322940155852,
+   "lon": 2.08499746190613
+  },
+  {
+   "id": "c6a9df1fb3885cca",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Paseo Doctor Moragas 220",
+   "lat": 41.515298097806,
+   "lon": 2.12454843937302
+  },
+  {
+   "id": "566e1c8232fdff73",
+   "categoria": "banco",
+   "nombre": "Banco Bilbao Vizcaya Argentaria, Sa",
+   "direccion": "Avenida Tibidabo 48",
+   "lat": 41.5085285499564,
+   "lon": 2.11893462270606
+  },
+  {
+   "id": "92b89aaae3accf9a",
+   "categoria": "banco",
+   "nombre": "Ibercaja Banco, S.A.",
+   "direccion": "Calle Tres Creus 77",
+   "lat": 41.5462706013456,
+   "lon": 2.11235496798783
+  },
+  {
+   "id": "17801de09db75621",
+   "categoria": "banco",
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Carretera Sentmenat 70",
+   "lat": 41.5517906133034,
+   "lon": 2.15836492056685
+  },
+  {
+   "id": "07d56e0f8bade19f",
+   "categoria": "banco",
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Ronda Europa 524",
+   "lat": 41.5624535570225,
+   "lon": 2.08212081116006
+  },
+  {
+   "id": "37f6369483df1c35",
+   "categoria": "banco",
+   "nombre": "Caixabank, S.A.",
    "direccion": "Rambla 1",
-   "lat": 41.546076,
-   "lon": 2.109392,
-   "entidad": "2100"
+   "lat": 41.5438880333275,
+   "lon": 2.11003223353795
   },
   {
-   "id": "ban-36",
+   "id": "b08a57b622f605c1",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "San Isidoro 21",
-   "lat": 41.546764,
-   "lon": 2.108925,
-   "entidad": "2100"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Calle Baells 2",
+   "lat": 41.5467304543776,
+   "lon": 2.12894332695318
   },
   {
-   "id": "ban-37",
+   "id": "d1fc22da32d03c56",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "Josep Tarradellas 4",
-   "lat": 41.559127,
-   "lon": 2.097292,
-   "entidad": "2100"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Plaza Doctor Robert 4",
+   "lat": 41.5467024330057,
+   "lon": 2.10906982315746
   },
   {
-   "id": "ban-38",
+   "id": "bdec18802035b054",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "De Terrassa 346",
-   "lat": 41.547574,
-   "lon": 2.088793,
-   "entidad": "2100"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Plaza De Cataluña 8",
+   "lat": 41.5505460226718,
+   "lon": 2.09870272025034
   },
   {
-   "id": "ban-39",
+   "id": "321ea51eb1eff753",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "C. Pedregar 00006",
-   "lat": 41.546817,
-   "lon": 2.109339,
-   "entidad": "2100"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Rambla 184",
+   "lat": 41.5401135784995,
+   "lon": 2.11186585498392
   },
   {
-   "id": "ban-40",
+   "id": "4e5cab7a45807bbd",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "De Barberà 397",
-   "lat": 41.529423,
-   "lon": 2.117564,
-   "entidad": "2100"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Avenida Josep Tarradellas 4",
+   "lat": 41.5591109872239,
+   "lon": 2.09729898562865
   },
   {
-   "id": "ban-41",
+   "id": "a967215f578698f3",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "Doctor Robert 4",
-   "lat": 41.54674,
-   "lon": 2.109055,
-   "entidad": "2100"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Avenida De Barberà 397",
+   "lat": 41.52906484439,
+   "lon": 2.11790815235741
   },
   {
-   "id": "ban-42",
+   "id": "f596a1d6331536a8",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "RB Rambla 184",
-   "lat": 41.540054,
-   "lon": 2.111995,
-   "entidad": "2100"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Avenida De Matadepera 143",
+   "lat": 41.5675506380624,
+   "lon": 2.08787255552265
   },
   {
-   "id": "ban-43",
+   "id": "d7d6666aee598f94",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "C. Baells 00002",
-   "lat": 41.546997,
-   "lon": 2.129148,
-   "entidad": "2100"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Carretera De Terrassa 346",
+   "lat": 41.5476059362526,
+   "lon": 2.08859468164642
   },
   {
-   "id": "ban-44",
+   "id": "260f1957dc5c2e22",
    "categoria": "banco",
-   "nombre": "Caixabank S.A.",
-   "direccion": "De Cataluña 8",
-   "lat": 41.550608,
-   "lon": 2.098628,
-   "entidad": "2100"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Plaza Granados 16",
+   "lat": 41.5510338280652,
+   "lon": 2.1036395170736
   },
   {
-   "id": "ban-45",
+   "id": "4816dd310663dbe1",
    "categoria": "banco",
-   "nombre": "Caixa C. Dels Enginyers S.C.C.",
-   "direccion": "Indústria 18",
-   "lat": 41.547012,
-   "lon": 2.111274,
-   "entidad": "3025"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Avenida Pau Casals 7",
+   "lat": 41.5308782717835,
+   "lon": 2.08466402264271
   },
   {
-   "id": "ban-47",
+   "id": "916dfc3df27aacb9",
    "categoria": "banco",
-   "nombre": "Cajamar Caja Rural S.C.C.",
-   "direccion": "Matadepera 00054",
-   "lat": 41.568945,
-   "lon": 2.08612,
-   "entidad": "3058"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Avenida Tibidabo 50",
+   "lat": 41.5087787636105,
+   "lon": 2.11847299217592
   },
   {
-   "id": "ban-48",
+   "id": "9e85fc1121623fe0",
    "categoria": "banco",
-   "nombre": "Ing Bank N.V. S.E.",
-   "direccion": "Pi i Margall 10-12",
-   "lat": 41.554212,
-   "lon": 2.099548,
-   "entidad": "1465"
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Paseo Doctor Moragas 216",
+   "lat": 41.5151276214891,
+   "lon": 2.12465060415229
   },
   {
-   "id": "inm-1",
+   "id": "970b1d8650639542",
+   "categoria": "banco",
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Calle Sant Ramon De Penyafort 36",
+   "lat": 41.5358944433462,
+   "lon": 2.10698113827266
+  },
+  {
+   "id": "db488ef997a4eea4",
+   "categoria": "banco",
+   "nombre": "Currency Market, S.A.",
+   "direccion": "Avenida De Barberá 121",
+   "lat": 41.5366469735291,
+   "lon": 2.11402244795608
+  },
+  {
+   "id": "4990386c09fc4b23",
+   "categoria": "banco",
+   "nombre": "Caixa C. Dels Enginyers, S.C.C.",
+   "direccion": "Calle Indústria 18",
+   "lat": 41.5471011909286,
+   "lon": 2.11125869054965
+  },
+  {
+   "id": "6224b0ac38c984bd",
+   "categoria": "banco",
+   "nombre": "Cajamar Caja Rural, S.C.C.",
+   "direccion": "Avenida Matadepera 54",
+   "lat": 41.565527122277,
+   "lon": 2.0898071607181
+  },
+  {
+   "id": "42ef1c25d634c036",
+   "categoria": "banco",
+   "nombre": "Cajamar Caja Rural, S.C.C.",
+   "direccion": "Calle Les Tres Creus 87",
+   "lat": 41.546244024023,
+   "lon": 2.11257848709467
+  },
+  {
+   "id": "c261dcd60128556e",
+   "categoria": "banco",
+   "nombre": "Ing Bank, N.V. S.E.",
+   "direccion": "Calle Pi i Margall 10-12",
+   "lat": 41.5542133823751,
+   "lon": 2.09958319556218
+  },
+  {
+   "id": "1c6443fbf59832a0",
+   "categoria": "banco",
+   "nombre": "Caixabank, S.A.",
+   "direccion": "Calle Manuel De Falla 71",
+   "lat": 41.5168570829399,
+   "lon": 2.12447744608001
+  },
+  {
+   "id": "27766569-dd39-4506-959c-b8e8773f9e40",
+   "categoria": "inmobiliaria",
+   "nombre": "Regus",
+   "direccion": "Camí de Can Camps 17-19, Vallsolana Garden Business Park",
+   "lat": 41.49855469,
+   "lon": 2.0735585,
+   "telefono": "917936740",
+   "web": "https://www.regus.com/es-es/spain/sant-cugat-del-valles/vallsolana-garden-business-park-6441?utm_source=bing_uberall&utm_medium=places&utm_campaign=uberall&utm_content=uberall"
+  },
+  {
+   "id": "192b6607-917e-4d18-9b4c-bae14bb41aef",
+   "categoria": "inmobiliaria",
+   "nombre": "Ascensores Jaca",
+   "direccion": "Carrer de Pedres Blanques, 28 bis",
+   "lat": 41.54189709,
+   "lon": 2.06576809,
+   "telefono": "+34937213793",
+   "web": "http://www.ascensoresjaca.es/"
+  },
+  {
+   "id": "4a76947e-bb39-4652-8a28-1a442dd76133",
+   "categoria": "inmobiliaria",
+   "nombre": "Sabadell suD",
+   "direccion": "",
+   "lat": 41.5274237187951,
+   "lon": 2.10943365600374
+  },
+  {
+   "id": "d216d4a7-5d00-4110-8684-3d71437f43fe",
+   "categoria": "inmobiliaria",
+   "nombre": "ABB",
+   "direccion": "Polígono industrial S.O, Carrer Illa de Buda, 55",
+   "lat": 41.52798978,
+   "lon": 2.093174,
+   "telefono": "+34901760762",
+   "web": "http://abb.es"
+  },
+  {
+   "id": "c5b054c2-6214-45a1-ad89-dce5aa534039",
+   "categoria": "inmobiliaria",
+   "nombre": "Cis Finques",
+   "direccion": "Avenida Pau Casals, 14 Bajo",
+   "lat": 41.5307734577004,
+   "lon": 2.08527842135791,
+   "telefono": "937 21 02 17",
+   "web": "http://www.cisfinques.com"
+  },
+  {
+   "id": "e849d938-bd02-45a8-aabf-93ab13ffa480",
+   "categoria": "gestoria",
+   "nombre": "Creditoh",
+   "direccion": "Ronda Maiols 1",
+   "lat": 41.5339,
+   "lon": 2.07998,
+   "telefono": "+34900808720",
+   "web": "http://www.creditoh.com/"
+  },
+  {
+   "id": "d0d4e687-8d83-4e79-a695-e45810ea65e3",
+   "categoria": "abogados",
+   "nombre": "Montal Assessors i Advocats",
+   "direccion": "Rambla Lluís Companys, 4, B",
+   "lat": 41.53244425,
+   "lon": 2.0855542,
+   "telefono": "+34937211525",
+   "web": "http://www.montalassessorsiadvocats.com/"
+  },
+  {
+   "id": "02cb3153-2589-4572-a6a3-7da271f79180",
+   "categoria": "inmobiliaria",
+   "nombre": "Alfi SQV Agencia Inmobiliaria",
+   "direccion": "Rambla Lluís Companys, 4",
+   "lat": 41.53241821,
+   "lon": 2.08556481,
+   "telefono": "+34937215850",
+   "web": "http://www.alfisqv.cat/"
+  },
+  {
+   "id": "dd2c54c4-1c0d-4fbb-90b9-c357e3fa7953",
+   "categoria": "inmobiliaria",
+   "nombre": "Mas Duran",
+   "direccion": "Rambla Lluís Companya",
+   "lat": 41.53264,
+   "lon": 2.08571,
+   "telefono": "+34937210169",
+   "web": "http://www.gardenmasduran.com/"
+  },
+  {
+   "id": "9978dac0-7fb4-4943-ba4d-6fa4cb6e2cb3",
+   "categoria": "inmobiliaria",
+   "nombre": "Barri de Gràcia (Sabadell)",
+   "direccion": "",
+   "lat": 41.5387952053271,
+   "lon": 2.10089859875363
+  },
+  {
+   "id": "29261d4b-3131-4ab5-b175-bf138c9e932f",
+   "categoria": "inmobiliaria",
+   "nombre": "Immohabitat",
+   "direccion": "Carretera de Terrassa, 45",
+   "lat": 41.54386879,
+   "lon": 2.10167229,
+   "telefono": "+34938235660",
+   "web": "http://www.immohabitat.es/"
+  },
+  {
+   "id": "95e243b9-25c5-4cf6-b4bd-c1609f304b72",
+   "categoria": "abogados",
+   "nombre": "Escuder Advocats",
+   "direccion": "Rambla, 109",
+   "lat": 41.5432193160619,
+   "lon": 2.11087990279829,
+   "telefono": "937 26 92 22",
+   "web": "http://www.escuderadvocats.com"
+  },
+  {
+   "id": "85c1428e-7573-4538-b9b7-06eef6eefd52",
+   "categoria": "abogados",
+   "nombre": "Agper Economistes i Advocats",
+   "direccion": "Carrer de Montserrat, 22 -26, BAJO",
+   "lat": 41.54312745,
+   "lon": 2.10942097,
+   "telefono": "+34937277090",
+   "web": "http://www.agper.cat"
+  },
+  {
+   "id": "2d20e057-427d-4cc3-ba3c-cae572b37629",
+   "categoria": "gestoria",
+   "nombre": "Playoff Informàtica",
+   "direccion": "Calle Montserrat, 22",
+   "lat": 41.5431262,
+   "lon": 2.1094505,
+   "telefono": "935158115",
+   "web": "https://www.playoffinformatica.com/"
+  },
+  {
+   "id": "66a015e1-5ad9-4d03-9bd7-726c41a0f9bc",
+   "categoria": "inmobiliaria",
+   "nombre": "STH Finance",
+   "direccion": "Rambla, 139, 3º",
+   "lat": 41.54232784,
+   "lon": 2.1113209,
+   "telefono": "+34655171465",
+   "web": "https://solucionatuhipoteca.es/"
+  },
+  {
+   "id": "dd5a78da-bd4f-4936-b80b-8a144f92a50a",
+   "categoria": "inmobiliaria",
+   "nombre": "Toni Tio Gestion de Inmuebles",
+   "direccion": "Carrer de Cervantes, 17",
+   "lat": 41.54162407,
+   "lon": 2.11084112,
+   "telefono": "+34690644232",
+   "web": "http://tonitio.com/"
+  },
+  {
+   "id": "4e09620f-c315-40e7-9605-3495cfdef1e8",
+   "categoria": "gestoria",
+   "nombre": "Gestoría Piqué",
+   "direccion": "Calle Alemania, 37, local 1",
+   "lat": 41.5421637,
+   "lon": 2.1093589,
+   "telefono": "937276486",
+   "web": "http://www.pique.cat/"
+  },
+  {
+   "id": "bdc18a84-ed08-4e1a-9a2c-8bc1ad80a083",
+   "categoria": "inmobiliaria",
+   "nombre": "Habital",
+   "direccion": "Carrer de Zurbano, 12",
+   "lat": 41.54081,
+   "lon": 2.11028,
+   "telefono": "+34937155588",
+   "web": "http://www.inmobiliariahabital.com/"
+  },
+  {
+   "id": "5cc32390-8fef-4f28-926f-1f317234d2ec",
+   "categoria": "inmobiliaria",
+   "nombre": "Tradyng",
+   "direccion": "Rambla, 174",
+   "lat": 41.5413631,
+   "lon": 2.11144343,
+   "telefono": "+34662089370",
+   "web": "http://www.tradyng.es/"
+  },
+  {
+   "id": "187a5e17-b970-4b80-aaca-0fa6f61e7bad",
+   "categoria": "inmobiliaria",
+   "nombre": "Gespa",
+   "direccion": "Carrer de Zurbano, 3",
+   "lat": 41.54093,
+   "lon": 2.11127,
+   "telefono": "+34931050803"
+  },
+  {
+   "id": "537c217e-6d29-40ec-bd2b-983050bca14c",
+   "categoria": "abogados",
+   "nombre": "Obdulia de la Rocha Abogados Penalistas",
+   "direccion": "Carrer del Sol, 167",
+   "lat": 41.54052525,
+   "lon": 2.11065338,
+   "telefono": "+34931687605",
+   "web": "http://obduliadelarocha.es/"
+  },
+  {
+   "id": "bedd0cc4-7203-47b1-8a89-cb83dc3301ec",
+   "categoria": "inmobiliaria",
+   "nombre": "Suberna Gestio Immobiliaria",
+   "direccion": "Carrer de Duran i Sors, 16",
+   "lat": 41.54009214,
+   "lon": 2.11064388,
+   "telefono": "+34937203103",
+   "web": "http://suberna.com/"
+  },
+  {
+   "id": "071e0428-680c-411e-8557-c6d10f6f2989",
+   "categoria": "abogados",
+   "nombre": "Gestoria Boronat SLP",
+   "direccion": "Carrer de Latorre, 46",
+   "lat": 41.5392282,
+   "lon": 2.11126374,
+   "telefono": "+34937110718",
+   "web": "http://www.gestoriaboronat.com/"
+  },
+  {
+   "id": "de608759-c065-4642-8b01-395864540bb3",
+   "categoria": "abogados",
+   "nombre": "Abogado Laboral Sabadell",
+   "direccion": "Carrer de Zurbano, 111",
+   "lat": 41.53983,
+   "lon": 2.1072,
+   "telefono": "+34671670909",
+   "web": "http://abogadolaboralsabadell.com/"
+  },
+  {
+   "id": "5c5bbc10-2a72-48cc-8bfa-7d04482f9f58",
+   "categoria": "inmobiliaria",
+   "nombre": "Revilla y Gayetano S.C.P",
+   "direccion": "Carrer de Sardà, 1",
+   "lat": 41.53871837,
+   "lon": 2.11150235,
+   "telefono": "+34937116178"
+  },
+  {
+   "id": "db621c15-d567-437c-8966-b7e057502185",
+   "categoria": "inmobiliaria",
+   "nombre": "Toposcan B30",
+   "direccion": "Carrer de Girona, 107",
+   "lat": 41.53440451,
+   "lon": 2.10906462,
+   "telefono": "+34658940959",
+   "web": "http://toposcanb30.com/"
+  },
+  {
+   "id": "cc475589-956e-4d10-908a-6297ec32aa9e",
+   "categoria": "inmobiliaria",
+   "nombre": "RUZAFA Alquiler de Furgonetas y Camiones",
+   "direccion": "Calle Domenech I Montaner, 34",
+   "lat": 41.53615,
+   "lon": 2.10491,
+   "telefono": "937123090",
+   "web": "https://www.ruzafa.com/"
+  },
+  {
+   "id": "d6fb2345-6b7d-4d94-9eb3-1ca7e006ef60",
+   "categoria": "abogados",
+   "nombre": "Madrona & Asociados - Ley de la Segunda Oportunidad",
+   "direccion": "Ronda Maiols, 1 (Edificio BMC)",
+   "lat": 41.5338922526749,
+   "lon": 2.0931091781839,
+   "telefono": "+34662191917",
+   "web": "https://madronaasociados.com/"
+  },
+  {
+   "id": "318cf263-5e4f-43c4-a1b1-f3071ecc1d73",
+   "categoria": "inmobiliaria",
+   "nombre": "House Solutions",
+   "direccion": "Carrer de Sol i Padrís, 97",
+   "lat": 41.53666769,
+   "lon": 2.11937415,
+   "telefono": "+34930078102",
+   "web": "http://www.fotocasa.es/inmobiliaria-house-solutions-9202753824542"
+  },
+  {
+   "id": "8e3657a0-4499-484f-bec5-5be58f9322ad",
+   "categoria": "inmobiliaria",
+   "nombre": "Finques Ferran Pladellorens",
+   "direccion": "Carrer de Salvany, 110",
+   "lat": 41.53713236,
+   "lon": 2.11723208,
+   "telefono": "+34937112750",
+   "web": "http://WWW.FINQUESFERRAN.COM/"
+  },
+  {
+   "id": "75fde127-054c-4549-99ff-d5a81f8c92aa",
+   "categoria": "gestoria",
+   "nombre": "ALDI",
+   "direccion": "Carretera de Barcelona 403",
+   "lat": 41.534973,
+   "lon": 2.112612,
+   "telefono": "900902466",
+   "web": "https://www.aldi.es/"
+  },
+  {
+   "id": "aac4444f-f70f-4eb1-9fc4-8ac1e40f4228",
+   "categoria": "inmobiliaria",
+   "nombre": "assessoria l'avinguda",
+   "direccion": "Carrer de Salvany 12, Local 6",
+   "lat": 41.5363019,
+   "lon": 2.11452029,
+   "telefono": "937108405"
+  },
+  {
+   "id": "d4a1dc0f-043d-436c-8a58-6fee976de94d",
+   "categoria": "inmobiliaria",
+   "nombre": "Pisos y Casas Sabadell",
+   "direccion": "Carrer de Brutau, 104",
+   "lat": 41.53711,
+   "lon": 2.11417,
+   "telefono": "+34629781222",
+   "web": "https://youtube.com/@juanreyesinmobiliario"
+  },
+  {
+   "id": "168361f4-461c-4126-9e35-28d987de4ac9",
+   "categoria": "inmobiliaria",
+   "nombre": "Gesfime Asesores Inmobiliarios",
+   "direccion": "Carrer de Brutau, 104",
+   "lat": 41.5370608,
+   "lon": 2.11392396,
+   "telefono": "+34937192303",
+   "web": "https://heyzine.com/flip-book/7d716d6b9d.html"
+  },
+  {
+   "id": "324791ed-ddb6-4e68-aa59-25368de7f4c0",
+   "categoria": "inmobiliaria",
+   "nombre": "Tecnocasa agencia inmobiliaria",
+   "direccion": "avenida De Barberà 37",
+   "lat": 41.5384971,
+   "lon": 2.113111,
+   "telefono": "930129239",
+   "web": "https://sabadell1.tecnocasa.es/"
+  },
+  {
+   "id": "46f0bc04-5399-4917-8330-712c8a95dda1",
+   "categoria": "inmobiliaria",
+   "nombre": "Tecnocasa Sabadell",
+   "direccion": "Avenida de Barberà, 37",
+   "lat": 41.53853451,
+   "lon": 2.11310976,
+   "telefono": "+34930129239",
+   "web": "https://sabadell1.tecnocasa.es/sabadell/sabadell/"
+  },
+  {
+   "id": "74efe489-30e8-4c1c-8cfe-2f87bfb22c68",
+   "categoria": "abogados",
+   "nombre": "D&S Advocats",
+   "direccion": "Carrer de Brutau, 180",
+   "lat": 41.53788845,
+   "lon": 2.11675594,
+   "telefono": "+34937118730",
+   "web": "http://dsadvocats.com/"
+  },
+  {
+   "id": "770ae135-e645-4efc-bd66-c2dd620c80be",
+   "categoria": "abogados",
+   "nombre": "AsesorExpert",
+   "direccion": "Calle Güell i Ferrer 1",
+   "lat": 41.5395968825197,
+   "lon": 2.11479707934571,
+   "telefono": "930107122",
+   "web": "https://www.asesorexpert.com/"
+  },
+  {
+   "id": "3c8972a2-c2d9-4d9b-a8f9-db919c43e529",
+   "categoria": "inmobiliaria",
+   "nombre": "Solvia Inmobiliaria",
+   "direccion": "Rambla, 184",
+   "lat": 41.54024357,
+   "lon": 2.11215333,
+   "telefono": "+34919049337",
+   "web": "http://www.solvia.es/"
+  },
+  {
+   "id": "ea939e39-ab8f-471c-8a61-4a685b4c8dc2",
+   "categoria": "inmobiliaria",
+   "nombre": "Salas",
+   "direccion": "Rambla, 221",
+   "lat": 41.54034125,
+   "lon": 2.11213691,
+   "telefono": "+34937457301",
+   "web": "https://www.salas.plus/"
+  },
+  {
+   "id": "ea3e77e8-3fc6-41cb-ab0e-3b2743925c1d",
+   "categoria": "inmobiliaria",
+   "nombre": "FotoPrix La Rambla",
+   "direccion": "Rambla, 180",
+   "lat": 41.5407444,
+   "lon": 2.11171,
+   "telefono": "937255037",
+   "web": "https://www.fotoprix.com/es/"
+  },
+  {
+   "id": "e7ae163d-4d2a-476f-be00-a0500abbe216",
+   "categoria": "abogados",
+   "nombre": "Sbd Advocats",
+   "direccion": "SBD Advocats, Rambla, 207, 4-1",
+   "lat": 41.5408722,
+   "lon": 2.11188172,
+   "telefono": "+34937070445",
+   "web": "http://www.abogadodivorciosabadell.com/"
+  },
+  {
+   "id": "418b5320-f2a4-40f4-994b-eef0c0f379f3",
+   "categoria": "abogados",
+   "nombre": "Napej Abogados y Gestoría Administrativa",
+   "direccion": "Carrer de Sol i Padrís, 8",
+   "lat": 41.5407815,
+   "lon": 2.11698388,
+   "telefono": "+34669337540",
+   "web": "http://www.napej.com/"
+  },
+  {
+   "id": "97bf98f3-33c8-4df6-846a-694510f726e0",
+   "categoria": "inmobiliaria",
+   "nombre": "corval",
+   "direccion": "Passeig de Gaudí 37, Nave",
+   "lat": 41.54078006,
+   "lon": 2.12072222,
+   "telefono": "937156828",
+   "web": "http://www.instalacionescorval.com/"
+  },
+  {
+   "id": "80f83c31-2dfa-4a01-ac98-d749f829a18e",
+   "categoria": "gestoria",
+   "nombre": "Grup Servicón Argos",
+   "direccion": "Pasaje Arrahona, 33, - 37, Módulo 4",
+   "lat": 41.52674,
+   "lon": 2.14678,
+   "telefono": "937294224"
+  },
+  {
+   "id": "4be8cd69-f2a1-45ad-87d2-a53e861a81ca",
+   "categoria": "inmobiliaria",
+   "nombre": "Track Vallès",
+   "direccion": "Carrer Llobateres, 7, TALLERES NAVE 33-35",
+   "lat": 41.5253650139499,
+   "lon": 2.14260234247582,
+   "telefono": "616955189",
+   "web": "http://trackvalles.com/"
+  },
+  {
+   "id": "87c4d95e-d2fb-45e6-bd16-851d2d39201e",
+   "categoria": "inmobiliaria",
+   "nombre": "M.R.M Asesores Inmobiliarios",
+   "direccion": "Carrer de Baygual, 21",
+   "lat": 41.52802,
+   "lon": 2.12556,
+   "telefono": "+34600160955",
+   "web": "http://www.m-r-m.es/"
+  },
+  {
+   "id": "a9053ce4-4b07-477a-a6ce-215ac172b92e",
+   "categoria": "inmobiliaria",
+   "nombre": "Expofinques Sabadell SUD",
+   "direccion": "Avinguda de Barberà, 363",
+   "lat": 41.5299151,
+   "lon": 2.11724317,
+   "telefono": "+34937124122",
+   "web": "http://www.expofinques.com/Agencia.xsp?codigo=592"
+  },
+  {
+   "id": "5ea068ad-4b61-4107-905a-e51654394f1d",
+   "categoria": "inmobiliaria",
+   "nombre": "Bona Llar Sabadell",
+   "direccion": "Carrer de Fontanella, 3",
+   "lat": 41.52980954,
+   "lon": 2.11412757,
+   "telefono": "+34931836012",
+   "web": "http://www.bonallarsbd.es/"
+  },
+  {
+   "id": "a4de1c8c-8193-4391-9e90-b4d3d7cbb0fe",
+   "categoria": "inmobiliaria",
+   "nombre": "Tecnocasa Agencia Inmobiliaria",
+   "direccion": "Avenida de Barberà, 439",
+   "lat": 41.5281087,
+   "lon": 2.11821275,
+   "telefono": "+34934533633",
+   "web": "https://sabadell5.tecnocasa.es/"
+  },
+  {
+   "id": "46a42edd-1ccf-43f3-91b7-3c21a7f3dc42",
+   "categoria": "inmobiliaria",
+   "nombre": "Interiorismo Sabadell",
+   "direccion": "Plaça de Sant Pius X, 7",
+   "lat": 41.52609546,
+   "lon": 2.12109672,
+   "telefono": "+34615437069",
+   "web": "https://interiorismosabadell.com/"
+  },
+  {
+   "id": "72ce5136-1df7-4a07-af04-bc6c32ce7151",
+   "categoria": "gestoria",
+   "nombre": "Asesoría Vi-car",
+   "direccion": "Carretera de Barcelona, 671",
+   "lat": 41.5256765884811,
+   "lon": 2.12033644411087,
+   "telefono": "937122209",
+   "web": "https://www.asesoriavicar.es/"
+  },
+  {
+   "id": "e8aa2a58-a1ce-42c9-b53f-fa8ef275c3ca",
+   "categoria": "inmobiliaria",
+   "nombre": "Instalacions F Ramos",
+   "direccion": "Carrer Ramon Berenguer, 4, BAJO",
+   "lat": 41.5249171,
+   "lon": 2.121603,
+   "telefono": "937290697",
+   "web": "http://www.reforam.com/"
+  },
+  {
+   "id": "35ba7014-1091-46ba-bb6b-828149d37047",
+   "categoria": "inmobiliaria",
+   "nombre": "Europastry Barberà",
+   "direccion": "",
+   "lat": 41.5240024521226,
+   "lon": 2.12926020570755
+  },
+  {
+   "id": "317f9c25-f85a-4fa8-9489-8030f9aa1d2d",
+   "categoria": "inmobiliaria",
+   "nombre": "Assessoria 3",
+   "direccion": "Calle Navarra, 13, LOCAL 2",
+   "lat": 41.5227471686498,
+   "lon": 2.11865738514097,
+   "telefono": "937 29 73 58",
+   "web": "https://www.a3assessoria.com"
+  },
+  {
+   "id": "f075fad1-2dcd-49c0-b8f5-a93bca854bc7",
+   "categoria": "inmobiliaria",
+   "nombre": "Premier- Cèntric Sabadell",
+   "direccion": "Carrer Pau Vila, 90",
+   "lat": 41.52268,
+   "lon": 2.11515,
+   "web": "http://www.pisosnuevossabadell.com/"
+  },
+  {
+   "id": "ab873d88-00e0-4c92-993a-10a42681ee27",
+   "categoria": "inmobiliaria",
+   "nombre": "Grupo FAS Servicios Integrales, S. L.",
+   "direccion": "Carrer Marquesos de Barberá, 66. Local",
+   "lat": 41.5192072,
+   "lon": 2.1197468,
+   "telefono": "937297086",
+   "web": "https://www.grupofas.es/"
+  },
+  {
+   "id": "0b5420a9-e538-498e-ba63-2bd9ebc9c886",
+   "categoria": "inmobiliaria",
+   "nombre": "Finques SP",
+   "direccion": "Ronda de l'Oest, 112",
+   "lat": 41.51816785,
+   "lon": 2.12119696,
+   "telefono": "+34722814955",
+   "web": "http://www.finquessantaperpetua.com/"
+  },
+  {
+   "id": "f979b2e5-53fc-48e3-a7e5-a88d0b94ff17",
+   "categoria": "inmobiliaria",
+   "nombre": "Caterpillar",
+   "direccion": "Calle Casal De Santa Coloma 6",
+   "lat": 41.517918,
+   "lon": 2.147596,
+   "telefono": "+34935740090"
+  },
+  {
+   "id": "2eea1bdb-45b2-4eaf-bcaa-b2b8e9ef2f74",
+   "categoria": "gestoria",
+   "nombre": "JJM Assessors",
+   "direccion": "Carrer de Nemesi Valls, 84",
+   "lat": 41.51667103,
+   "lon": 2.13087924,
+   "telefono": "+34937297117",
+   "web": "http://jjmassessors.wix.com/jjmassessors"
+  },
+  {
+   "id": "e3a0ee95-1d99-4d66-b923-b2d9a6db1ccf",
+   "categoria": "inmobiliaria",
+   "nombre": "i-moments.com",
+   "direccion": "Ronda Indústria, 48",
+   "lat": 41.5159672,
+   "lon": 2.1312107,
+   "telefono": "937293326",
+   "web": "https://www.i-moments.com/"
+  },
+  {
+   "id": "63db42d9-4774-4f97-9887-962dbee6f374",
+   "categoria": "inmobiliaria",
+   "nombre": "AP Photo Industries Central",
+   "direccion": "Ronda Indústria, 48",
+   "lat": 41.5161121,
+   "lon": 2.1314365,
+   "telefono": "936091277",
+   "web": "https://www.apphoto.es/"
+  },
+  {
+   "id": "4b111932-76a1-40fa-821e-8d58e9440c01",
+   "categoria": "inmobiliaria",
+   "nombre": "Toyota Material Handling España",
+   "direccion": "Avinguda d'Arraona, 25",
+   "lat": 41.512911,
+   "lon": 2.145699,
+   "telefono": "+34902420422",
+   "web": "https://toyota-forklifts.es/"
+  },
+  {
+   "id": "8a705e23-8f76-4880-a0dd-d6ece50dbffc",
+   "categoria": "inmobiliaria",
+   "nombre": "GAME Baricentro",
+   "direccion": "Carretera Nacional 150, Km, 6",
+   "lat": 41.508263,
+   "lon": 2.138187,
+   "telefono": "938277389",
+   "web": "https://www.game.es/"
+  },
+  {
+   "id": "972e1802-f3c7-403f-a576-097077aefde6",
+   "categoria": "inmobiliaria",
+   "nombre": "My Lodgingfy - Barcelona",
+   "direccion": "Carrer de Sant Jaume, 9",
+   "lat": 41.50803,
+   "lon": 2.12256,
+   "telefono": "+34616433450",
+   "web": "http://www.mylodgingfy.com/"
+  },
+  {
+   "id": "f71856ae-7f88-4f4b-94c7-08f406a053c2",
+   "categoria": "inmobiliaria",
+   "nombre": "Carrer de Santander",
+   "direccion": "Carrer de Santander, 4",
+   "lat": 41.50879634,
+   "lon": 2.11581436
+  },
+  {
+   "id": "9801d750-cf5e-4c84-9323-3fe8af7363dc",
+   "categoria": "inmobiliaria",
+   "nombre": "Iberfurgo",
+   "direccion": "Carretera de Barcelona, 114",
+   "lat": 41.51330847,
+   "lon": 2.12881912,
+   "telefono": "937190232",
+   "web": "https://www.iberfurgo.com/oficinas/alquiler-furgonetas-barbera-del-valles/"
+  },
+  {
+   "id": "8c805560-dbf5-4620-b1a1-0a5bee429ade",
+   "categoria": "inmobiliaria",
+   "nombre": "Donpiso",
+   "direccion": "Ronda De L´Est 83",
+   "lat": 41.51378,
+   "lon": 2.12591,
+   "telefono": "+34931028894",
+   "web": "http://www.donpiso.com/"
+  },
+  {
+   "id": "cfd056e3-cd44-4d69-88b3-c328de3ea41a",
+   "categoria": "inmobiliaria",
+   "nombre": "ImmoTESA",
+   "direccion": "Passeig del Dr. Moragas, 182",
+   "lat": 41.51372174,
+   "lon": 2.12573478,
+   "telefono": "+34935184224",
+   "web": "http://www.immotesa.com/"
+  },
+  {
+   "id": "c5042e6a-f890-41eb-91cc-85f8a62a8b9e",
+   "categoria": "inmobiliaria",
+   "nombre": "Inmobiliaria Franjo",
+   "direccion": "Passeig del Doctor Moragas, 181",
+   "lat": 41.51511572,
+   "lon": 2.12439802,
+   "telefono": "+34937190707",
+   "web": "http://www.opfranjo.com/"
+  },
+  {
+   "id": "a4bf444e-60b1-4009-aeb8-a4b8a150809f",
+   "categoria": "inmobiliaria",
+   "nombre": "Grupo Inmobiliario Ortega",
+   "direccion": "Ronda Indústria, 9",
+   "lat": 41.5148506,
+   "lon": 2.1280701,
+   "telefono": "937193949",
+   "web": "https://www.giortega.com/"
+  },
+  {
+   "id": "f8597151-fe96-4e22-967b-b94b06e59d01",
+   "categoria": "abogados",
+   "nombre": "Dom and G Asociados",
+   "direccion": "Carrer del Canigó, 1",
+   "lat": 41.51561466,
+   "lon": 2.12705213,
+   "telefono": "+34937180507",
+   "web": "http://www.elsmeusdrets.com/"
+  },
+  {
+   "id": "9652c019-f03b-4a19-b5b7-64f868336ccd",
+   "categoria": "inmobiliaria",
+   "nombre": "Barimotor",
+   "direccion": "Calle cial. baricentro N150 Klm. 6-7 frente parking 4",
+   "lat": 41.5151047779056,
+   "lon": 2.12728936094075,
+   "telefono": "+34618615914"
+  },
+  {
+   "id": "e357117e-27c8-4399-aa95-61bf150de360",
+   "categoria": "gestoria",
+   "nombre": "BERTRAL ASSESSORS",
+   "direccion": "Carrer Nemesi Valls, 25, BARBERA DEL VALLES, BARCELONA",
+   "lat": 41.5166610626201,
+   "lon": 2.1278699662531,
+   "telefono": "937190011",
+   "web": "http://www.bertral.com/"
+  },
+  {
+   "id": "72a7786c-cb5e-4b05-b0e6-0b9268a0f5da",
+   "categoria": "inmobiliaria",
+   "nombre": "Gesinvallès",
+   "direccion": "Carretera de Barcelona, 205",
+   "lat": 41.5171178,
+   "lon": 2.12600075,
+   "telefono": "+34937476808",
+   "web": "http://www.gesinvalles.com/"
+  },
+  {
+   "id": "bdb38508-d62e-458a-a276-2e6eba09722a",
+   "categoria": "inmobiliaria",
+   "nombre": "CLAU Immobilària",
+   "direccion": "Carrer del Pintor Murillo, 73",
+   "lat": 41.51748932,
+   "lon": 2.12352375,
+   "telefono": "+34937185789",
+   "web": "http://www.infoclau.com/"
+  },
+  {
+   "id": "f032827e-02ee-426e-ba1a-3ab80598de51",
+   "categoria": "inmobiliaria",
+   "nombre": "Tecnocasa agencia inmobiliaria",
+   "direccion": "Paseo Doctor Moragas, 242",
+   "lat": 41.517032,
+   "lon": 2.123896,
+   "telefono": "930 00 55 58",
+   "web": "https://www.tecnocasa.es/venta/inmuebles/cataluna/barcelona/barbera-del-valles.html"
+  },
+  {
+   "id": "bd760eb4-44b1-48bd-88f8-12ebcc522415",
+   "categoria": "inmobiliaria",
+   "nombre": "Vila Universitària UAB",
+   "direccion": "Carrer De La Vila S/N",
+   "lat": 41.49949581,
+   "lon": 2.09624712,
+   "telefono": "+34935817004",
+   "web": "https://vilauniversitaria.uab.cat"
+  },
+  {
+   "id": "005b1f97-f79a-4ff6-806d-c26b992fdccb",
+   "categoria": "inmobiliaria",
+   "nombre": "Maria Mar Eslava Torrets",
+   "direccion": "Carrer MOSTAR, 34, BAJO D",
+   "lat": 41.56437,
+   "lon": 2.08089,
+   "telefono": "647305065"
+  },
+  {
+   "id": "2f739542-ffb1-442f-9f03-a7d060f996fd",
+   "categoria": "inmobiliaria",
+   "nombre": "Araceli, agente inmobiliario",
+   "direccion": "Carrer de Zuric, 2",
+   "lat": 41.56405,
+   "lon": 2.08193,
+   "telefono": "+34646581658",
+   "web": "http://www.jardiparkimmobiliaria.es/"
+  },
+  {
+   "id": "cfbc7b4b-433c-4e27-bca7-87a12f495b68",
+   "categoria": "inmobiliaria",
+   "nombre": "Solespai Inmobiliaria",
+   "direccion": "Carrer de Sarajevo, 145",
+   "lat": 41.56281549,
+   "lon": 2.08281962,
+   "telefono": "+34634348899",
+   "web": "https://www.solespai.com/"
+  },
+  {
+   "id": "ab5f4377-5857-4eb8-953b-79f73645667d",
+   "categoria": "abogados",
+   "nombre": "Iglesias Advocats",
+   "direccion": "Carrer de Costabona, 22",
+   "lat": 41.5706222,
+   "lon": 2.0815349,
+   "telefono": "637745283"
+  },
+  {
+   "id": "044557b0-748d-4c98-8c5a-1dd2db16cad5",
+   "categoria": "inmobiliaria",
+   "nombre": "Reformas Moval",
+   "direccion": "Carrer de Zuric, 17",
+   "lat": 41.5646063,
+   "lon": 2.0786878,
+   "telefono": "610088127"
+  },
+  {
+   "id": "b9b3fea8-8559-4176-9817-65618d1cae03",
+   "categoria": "inmobiliaria",
+   "nombre": "Terraminium Sabadell",
+   "direccion": "Calle Plini el Vell, 19 Local",
+   "lat": 41.5577771027224,
+   "lon": 2.08510391450937,
+   "telefono": "937 16 50 00",
+   "web": "http://www.sabadell.terraminium.com"
+  },
+  {
+   "id": "43fa281f-9853-4005-b50e-9f4299cd8ccf",
+   "categoria": "inmobiliaria",
+   "nombre": "Finques Nostrallar",
+   "direccion": "Plaça Madrid 5, local 10",
+   "lat": 41.5592159,
+   "lon": 2.0833508,
+   "telefono": "937246041",
+   "web": "http://www.finques-nostrallar.com/"
+  },
+  {
+   "id": "10b5780c-6769-43e5-a2d2-d5efe89491e8",
+   "categoria": "abogados",
+   "nombre": "Comaposada Advocats",
+   "direccion": "Carretera de Terrassa, 402",
+   "lat": 41.54874835,
+   "lon": 2.08416513,
+   "telefono": "+34692946891",
+   "web": "http://www.comaposadaadvocats.com/"
+  },
+  {
+   "id": "21909bb4-fce5-4cc7-960e-f281b2cae3e8",
+   "categoria": "inmobiliaria",
+   "nombre": "titania topografia",
+   "direccion": "Carrer de Víctor Català, 10",
+   "lat": 41.55060546,
+   "lon": 2.0848409,
+   "telefono": "+34651150582",
+   "web": "http://www.titaniatopografia.es/"
+  },
+  {
+   "id": "369d7053-9362-403b-9773-d44692edbcbe",
+   "categoria": "abogados",
+   "nombre": "Torrico Conde Associats",
+   "direccion": "Carrer de Prudenci, 15",
+   "lat": 41.55521,
+   "lon": 2.08583,
+   "telefono": "+34937172208",
+   "web": "http://clijosavic.org/"
+  },
+  {
+   "id": "7ecbf6f5-78eb-4aad-8456-1004770d0e02",
+   "categoria": "inmobiliaria",
+   "nombre": "Agincat Gestió Immobiliària",
+   "direccion": "Carrer de Sant Isidor, 20",
+   "lat": 41.55452425,
+   "lon": 2.0864685,
+   "telefono": "+34937238804",
+   "web": "http://www.agincat.com/"
+  },
+  {
+   "id": "43a01aa6-2b58-48fd-b7dc-8e156b0d73da",
+   "categoria": "inmobiliaria",
+   "nombre": "Abiu Finques",
+   "direccion": "Carrer de Demòstenes, 13",
+   "lat": 41.55488758,
+   "lon": 2.08696655,
+   "telefono": "+34635540814",
+   "web": "http://www.abiufinques.com/"
+  },
+  {
+   "id": "3f973264-c67f-4854-8acf-cf98d756cb9c",
+   "categoria": "gestoria",
+   "nombre": "TRANSFFIN",
+   "direccion": "Carretera Terrassa Nº 389",
+   "lat": 41.5478397,
+   "lon": 2.0867171,
+   "telefono": "640271481",
+   "web": "https://tftransffines.ueniweb.com/"
+  },
+  {
+   "id": "44900ad2-5dc0-4050-95eb-56b1afc338f8",
+   "categoria": "inmobiliaria",
+   "nombre": "Administracio de Finques Mozart",
+   "direccion": "Carrer de Madrazo, 26",
+   "lat": 41.54841614,
+   "lon": 2.08844363,
+   "telefono": "+34935152594",
+   "web": "http://www.gestio-mozart.com/"
+  },
+  {
+   "id": "fefb22c0-7996-4f5f-a0b8-abe59ad137f2",
+   "categoria": "inmobiliaria",
+   "nombre": "Fincas Nogales",
+   "direccion": "Carretera de Terrassa, 328, local",
+   "lat": 41.54726436,
+   "lon": 2.0899186,
+   "telefono": "+34613065192",
+   "web": "https://fincasnogales.com/"
+  },
+  {
+   "id": "7fcee774-5bc8-4886-bcd5-2467f5a3436c",
+   "categoria": "inmobiliaria",
+   "nombre": "TABOGACN T&BCN S.L",
+   "direccion": "Calle Budapest 79",
+   "lat": 41.561314,
+   "lon": 2.087866,
+   "telefono": "620543965",
+   "web": "http://www.tabogacn.es/"
+  },
+  {
+   "id": "71cfbb63-017a-4779-8ad2-fc1a686c8c68",
+   "categoria": "inmobiliaria",
+   "nombre": "Donpiso",
+   "direccion": "Avinguda de Matadepera, 47",
+   "lat": 41.56477,
+   "lon": 2.08992,
+   "telefono": "+34931616004",
+   "web": "http://www.donpiso.com/"
+  },
+  {
+   "id": "c41d18af-938a-49ac-bf76-b875e7bdaf6e",
+   "categoria": "gestoria",
+   "nombre": "Anvigar Associats",
+   "direccion": "Avinguda Matadepera, 57, 1;1",
+   "lat": 41.565030526,
+   "lon": 2.08985971,
+   "telefono": "937164943",
+   "web": "http://www.anvigar.net/"
+  },
+  {
+   "id": "85b5542b-3910-46a4-9d51-dee104f6876b",
+   "categoria": "inmobiliaria",
+   "nombre": "Nova finques",
+   "direccion": "Avenida de Matadepera, 66",
+   "lat": 41.56582164,
+   "lon": 2.08958535,
+   "telefono": "+34937234241",
+   "web": "http://www.novafinques.com/"
+  },
+  {
+   "id": "ec8c623c-5abd-4764-849e-52cb84c47fda",
+   "categoria": "inmobiliaria",
+   "nombre": "Confort i Descans",
+   "direccion": "Avenida de Matadepera, 9, 11",
+   "lat": 41.56373673,
+   "lon": 2.09051021,
+   "telefono": "+34633940368",
+   "web": "http://confortidescans.com/"
+  },
+  {
+   "id": "73c26180-505d-49ec-8c7e-0c03c9d802da",
+   "categoria": "inmobiliaria",
+   "nombre": "Construcciones Jorki Tres",
+   "direccion": "Carrer de Frederic Mistral 40",
+   "lat": 41.5475007,
+   "lon": 2.0929357,
+   "telefono": "937276778",
+   "web": "https://www.construccionesjorkitres.es/es/"
+  },
+  {
+   "id": "0d20b25b-b56c-46c9-ad12-1a759f580e62",
+   "categoria": "inmobiliaria",
+   "nombre": "Ibusa",
+   "direccion": "Carrer Prat de la Riba, 7",
+   "lat": 41.55022854,
+   "lon": 2.09709724,
+   "telefono": "+34937270505"
+  },
+  {
+   "id": "c9e394ce-77fa-480c-9c6f-90197cffec27",
+   "categoria": "inmobiliaria",
+   "nombre": "Montseandfreddy",
+   "direccion": "Via Júlia, 2",
+   "lat": 41.55578,
+   "lon": 2.09622,
+   "telefono": "+34640122560",
+   "web": "http://www.montseandfreddy.es/"
+  },
+  {
+   "id": "6a7f2da2-55e2-4dbf-8a49-a4a804de9554",
    "categoria": "inmobiliaria",
    "nombre": "Global Llar",
-   "direccion": "Av. de la Concòrdia 7, 08206",
-   "lat": 41.559104,
-   "lon": 2.096147
+   "direccion": "Avenida Concórdia 10",
+   "lat": 41.5592743,
+   "lon": 2.0964094,
+   "telefono": "937230924",
+   "web": "https://www.global-llar.com/"
   },
   {
-   "id": "inm-2",
+   "id": "c4f1174b-dc57-4fa0-bad5-ef3a3f493295",
    "categoria": "inmobiliaria",
-   "nombre": "Fincamps",
-   "direccion": "C. Sant Joan, 39, 08202",
-   "lat": 41.547391,
-   "lon": 2.109857
+   "nombre": "Flamat Sabadell",
+   "direccion": "Avinguda de la Concòrdia, 11, Local 1 y 2",
+   "lat": 41.5593117965944,
+   "lon": 2.09593449016095,
+   "telefono": "937066070",
+   "web": "https://flamat.es/"
   },
   {
-   "id": "inm-3",
+   "id": "3be3fd21-e1ee-4387-b37e-7013cd1c5e21",
    "categoria": "inmobiliaria",
-   "nombre": "Exes Sabadell Centre",
-   "direccion": "C. del Doctor Puig, nº ?, 08202",
-   "lat": 41.549116,
-   "lon": 2.109045
+   "nombre": "INMOBARNA",
+   "direccion": "Avenida Concordia 15 local 2",
+   "lat": 41.5593169,
+   "lon": 2.0957704,
+   "telefono": "937879815",
+   "web": "https://inmobarna.ueniweb.com/"
   },
   {
-   "id": "inm-4",
+   "id": "78fdac88-0bb4-40fb-b106-8c25d30bcfb2",
    "categoria": "inmobiliaria",
-   "nombre": "FS Finques",
-   "direccion": "C. Alguersuari i Pascual 47, 08203",
-   "lat": 41.541178,
-   "lon": 2.11659
+   "nombre": "Abogados Sabadell - Xavier Ruiz",
+   "direccion": "Passeig Fleming, 11 Bajo",
+   "lat": 41.5586622086014,
+   "lon": 2.09550040178994,
+   "telefono": "937 24 31 08",
+   "web": "https://www.abogadosabadellxavierruiz.es"
   },
   {
-   "id": "inm-5",
+   "id": "387b7703-598a-41b7-ab6e-352f280460a9",
    "categoria": "inmobiliaria",
-   "nombre": "Finques Nostra Llar",
-   "direccion": "Plaça Madrid 5, 08206",
-   "lat": 41.559205,
-   "lon": 2.082841
+   "nombre": "Avenida Concordia 15 Sabadell",
+   "direccion": "Avinguda de la Concòrdia, 15",
+   "lat": 41.5549875,
+   "lon": 2.0959884
   },
   {
-   "id": "inm-6",
+   "id": "9ca94bf9-b360-468a-ac31-a15aa0d5ee39",
    "categoria": "inmobiliaria",
-   "nombre": "CANVI DE CASA",
-   "direccion": "Passeig d’Espronceda 42, 08204",
-   "lat": 41.528799,
-   "lon": 2.115897
+   "nombre": "Api GS Serveis Immobiliaris",
+   "direccion": "Carrer de Constantí, 2",
+   "lat": 41.55759138,
+   "lon": 2.09505366,
+   "telefono": "+34936274400",
+   "web": "http://www.apigs.es/"
   },
   {
-   "id": "inm-7",
+   "id": "02f6413d-d3a5-4a53-96af-575092ce136b",
    "categoria": "inmobiliaria",
-   "nombre": "Cameva Serveis Immobiliaris",
-   "direccion": "08206 Sabadell*",
-   "lat": 41.557454,
-   "lon": 2.081229
+   "nombre": "Tanveer Hussain",
+   "direccion": "Passeig de Fleming, 15",
+   "lat": 41.558758,
+   "lon": 2.095398,
+   "telefono": "+34937243112"
   },
   {
-   "id": "inm-9",
+   "id": "c8213a99-3647-4270-8948-c4f30eb5c73c",
    "categoria": "inmobiliaria",
-   "nombre": "Novafinques Centre",
-   "direccion": "Centre, Sabadell*",
-   "lat": 41.546764,
-   "lon": 2.108925
+   "nombre": "IONE real estate",
+   "direccion": "Avenida de l'Alcalde Moix, 19",
+   "lat": 41.56450243,
+   "lon": 2.0978983,
+   "telefono": "+34637657472",
+   "web": "https://ionehipotecas.com/"
   },
   {
-   "id": "inm-10",
+   "id": "6cfee10b-9f63-4c75-8349-deced51ceffe",
+   "categoria": "abogados",
+   "nombre": "Tria Advocats",
+   "direccion": "Avinguda de l'Alcalde Moix, 31",
+   "lat": 41.56503,
+   "lon": 2.09849,
+   "telefono": "+34931878545",
+   "web": "http://triaadvocats.com/"
+  },
+  {
+   "id": "0ee1bbe6-a189-4767-a14d-663aa82e770d",
+   "categoria": "abogados",
+   "nombre": "Procuradora Monica Lopez Manso",
+   "direccion": "Avenida de Francesc Macià, 38",
+   "lat": 41.5527445,
+   "lon": 2.09877078,
+   "telefono": "+34937298452",
+   "web": "http://www.lopezmanso.com/"
+  },
+  {
+   "id": "63e934f6-11c2-429a-bca9-757e8428f57e",
    "categoria": "inmobiliaria",
-   "nombre": "Expofinques",
-   "direccion": "Sabadell Sud, Sabadell*",
-   "lat": 41.528705,
-   "lon": 2.105405
+   "nombre": "SERNAVINSA naus industrials",
+   "direccion": "Avinguda de Francesc Macià, 30",
+   "lat": 41.5521455,
+   "lon": 2.0986521,
+   "telefono": "937110813",
+   "web": "http://sernavinsa.com/"
   },
   {
-   "id": "inm-11",
+   "id": "3c2de98c-20fa-4105-810e-85e33a9776a3",
    "categoria": "inmobiliaria",
-   "nombre": "Falgueras Immobiliària",
-   "direccion": "C. Doctor Puig, 44-A, 08202",
-   "lat": 41.549661,
-   "lon": 2.10909
+   "nombre": "ATTIC Serveis Immobiliaris",
+   "direccion": "Francesc Macià 30, torre A, 2º-3ª",
+   "lat": 41.55206544,
+   "lon": 2.09862357,
+   "telefono": "+34667312851",
+   "web": "http://atticsabadell.com/"
   },
   {
-   "id": "inm-12",
+   "id": "b99e320e-0c01-46ec-92d8-eae3827a6d9f",
    "categoria": "inmobiliaria",
-   "nombre": "Habitaclia listados",
-   "direccion": "C. Prats de Lluçanès, 104, 08208",
-   "lat": 41.557541,
-   "lon": 2.101958
+   "nombre": "Habital Inmobiliaria",
+   "direccion": "Avenida de Francesc Macià, 30, esc.A 1º1º",
+   "lat": 41.5522462,
+   "lon": 2.09860379,
+   "telefono": "+34680812785",
+   "web": "http://www.inmobiliariahabital.com/"
   },
   {
-   "id": "inm-13",
+   "id": "384d5195-da79-4266-80ee-ee359fad4072",
+   "categoria": "abogados",
+   "nombre": "Eix30 Abogados",
+   "direccion": "Avenida de Francesc Macià, 30",
+   "lat": 41.55227478,
+   "lon": 2.09857175,
+   "telefono": "+34937235082",
+   "web": "https://www.eix30abogados.com/"
+  },
+  {
+   "id": "ebba2898-306b-4416-943a-d52b6b0d5ec3",
    "categoria": "inmobiliaria",
-   "nombre": "IGLOO exes Centre",
-   "direccion": "Zona centro, Sabadell*",
-   "lat": 41.54855,
-   "lon": 2.107348
+   "nombre": "FS Finques Sabadell",
+   "direccion": "Carrer Francesc Layret, 40",
+   "lat": 41.55899646,
+   "lon": 2.09866105,
+   "telefono": "+34937246638",
+   "web": "http://www.finquessabadell.es/"
   },
   {
-   "id": "inm-14",
+   "id": "8c5246d9-71e5-4e36-97ae-858b7e848a51",
    "categoria": "inmobiliaria",
-   "nombre": "Inmobity",
-   "direccion": "Sabadell (sin dirección exacta)",
-   "lat": 41.546764,
-   "lon": 2.108925
+   "nombre": "APIGrup Inmobiliaria",
+   "direccion": "Carrer de Felip Pedrell, 77",
+   "lat": 41.5593777,
+   "lon": 2.098355,
+   "telefono": "+34666123566",
+   "web": "http://www.apigrup.com/"
   },
   {
-   "id": "inm-15",
+   "id": "3f65c7ad-c2d9-402c-8e60-607be8da3cb0",
    "categoria": "inmobiliaria",
-   "nombre": "FS Finques (segunda oficina)",
-   "direccion": "Sabadell*",
-   "lat": 41.546764,
-   "lon": 2.108925
+   "nombre": "Alpha Fincas Inmobiliaria",
+   "direccion": "Avenida de Francesc Macià, 76",
+   "lat": 41.5583165,
+   "lon": 2.09756904,
+   "telefono": "+34937247490",
+   "web": "http://www.alphafincas.com/"
   },
   {
-   "id": "inm-16",
+   "id": "664bd2e1-ab7a-49d9-8f15-2af04b11ac72",
+   "categoria": "gestoria",
+   "nombre": "Infinitum Digital",
+   "direccion": "Avenida de Francesc Macià, 60, Planta 10, oficina 2",
+   "lat": 41.5551361861114,
+   "lon": 2.09792085997486,
+   "telefono": "937264199",
+   "web": "https://infinitumdigital.net/"
+  },
+  {
+   "id": "aa856e66-6bbb-4619-9609-6046dcb2edbb",
+   "categoria": "abogados",
+   "nombre": "Francesc Fernández Abogado Divorcios en Sabadell",
+   "direccion": "Avinguda Francesc Macià 60, 4ª",
+   "lat": 41.5551229,
+   "lon": 2.097942,
+   "telefono": "936555525",
+   "web": "http://www.abogadodivorciosabadell.es/"
+  },
+  {
+   "id": "ae11dea5-add3-450f-950e-86964267bc10",
+   "categoria": "abogados",
+   "nombre": "Tatché Advocats",
+   "direccion": "Avenida de Francesc Macià, 60, 5è-3r",
+   "lat": 41.55509993,
+   "lon": 2.09816521,
+   "telefono": "+34937256039",
+   "web": "https://www.tatcheadvocats.org/"
+  },
+  {
+   "id": "96b0da55-3d55-4a13-abba-d00cf6e4dd84",
    "categoria": "inmobiliaria",
-   "nombre": "A‑HOUSE REAL ESTATE",
-   "direccion": "Sabadell (Idealista)",
-   "lat": 41.546764,
-   "lon": 2.108925
+   "nombre": "CALISEA CONSULTING",
+   "direccion": "*Avenida Avda. Francesc Macià, 60 2º 4ª, 60 - 2º 4ª",
+   "lat": 41.55516,
+   "lon": 2.0982,
+   "telefono": "937242836",
+   "web": "https://calisea.es/"
   },
   {
-   "id": "inm-17",
+   "id": "a684afff-158f-472e-adf6-dd34894c82bf",
    "categoria": "inmobiliaria",
-   "nombre": "Doncasa",
-   "direccion": "Sabadell (Idealista)",
-   "lat": 41.546764,
-   "lon": 2.108925
+   "nombre": "FINKERS I Asesor Hipotecario",
+   "direccion": "Avinguda de Francesc Macià, 60, planta 15-1",
+   "lat": 41.5551698,
+   "lon": 2.0981953,
+   "telefono": "931151217",
+   "web": "https://www.finkers.es/"
   },
   {
-   "id": "inm-18",
+   "id": "e5247231-8ccb-491d-9ddf-e4b0e4272842",
+   "categoria": "abogados",
+   "nombre": "Beta Legal Abogados y Asesores",
+   "direccion": "Avenida de Francesc Macià, 60, 7ª planta, puerta 1 y 2",
+   "lat": 41.55515016,
+   "lon": 2.09820508,
+   "telefono": "+34937451614",
+   "web": "http://www.betalegal.com/"
+  },
+  {
+   "id": "9535e534-520f-45e6-a069-a55acaf81bb0",
+   "categoria": "abogados",
+   "nombre": "InformRisk.Juridic",
+   "direccion": "Avenida de Francesc Macià, 60 14a, 2a",
+   "lat": 41.55511329,
+   "lon": 2.09831444,
+   "telefono": "+34937246490",
+   "web": "http://www.informrisk.com"
+  },
+  {
+   "id": "578ceb16-e032-4d3a-974d-7ff34f3c97f9",
    "categoria": "inmobiliaria",
-   "nombre": "Habitalia (?)",
-   "direccion": "Sabadell (Fotocasa indica 606 inmob. activas)",
-   "lat": 41.546764,
-   "lon": 2.108925
+   "nombre": "Finques Alvarez",
+   "direccion": "Avenida de Francesc Macià, 60, Planta 15",
+   "lat": 41.55508893,
+   "lon": 2.09837805,
+   "telefono": "+34645785821"
   },
   {
-   "id": "inm-24",
+   "id": "199cbf15-3a88-453f-8d50-ac1d15f82a3c",
+   "categoria": "abogados",
+   "nombre": "Josep Tortajada",
+   "direccion": "Avenida de Francesc Macià, 60, Planta 13, Local 1",
+   "lat": 41.55503947,
+   "lon": 2.09839204,
+   "telefono": "+34937277406",
+   "web": "http://www.tortajadaadvocats.com/"
+  },
+  {
+   "id": "d5b12720-2f56-4d2e-a9c8-ab30207186e0",
+   "categoria": "gestoria",
+   "nombre": "Group Galater Consulting",
+   "direccion": "Carrer de Picañol, 25",
+   "lat": 41.553176,
+   "lon": 2.098162,
+   "telefono": "932526919",
+   "web": "https://www.gcassessoriaintegral.com/"
+  },
+  {
+   "id": "2b0f862b-3c0b-42ec-83fa-aa39b177c1d7",
+   "categoria": "abogados",
+   "nombre": "Borràs Taulé Advocats",
+   "direccion": "Avenida de Francesc Macià, 40, 44, 4t 4ª",
+   "lat": 41.55313003,
+   "lon": 2.09822168,
+   "telefono": "+34937270763",
+   "web": "https://borrastaule.cat/ca/"
+  },
+  {
+   "id": "e4c19c4a-a4ce-4640-bad5-3df85ca5b361",
+   "categoria": "abogados",
+   "nombre": "Luquez Asociados",
+   "direccion": "Avinguda de Francesc Macià, 46",
+   "lat": 41.55322368,
+   "lon": 2.09822671,
+   "telefono": "+34937450474",
+   "web": "http://www.luquez-asociados.com/"
+  },
+  {
+   "id": "60813172-5943-4935-ad30-2ed99d516e36",
+   "categoria": "gestoria",
+   "nombre": "Kernel Audit",
+   "direccion": "Avenida Francesc Macia, 40 0 6",
+   "lat": 41.5530090099684,
+   "lon": 2.09828538332966,
+   "telefono": "902 02 39 90",
+   "web": "http://www.kernel-audit.com"
+  },
+  {
+   "id": "0cf4d151-da16-41f8-9c23-c09fa3c754c3",
    "categoria": "inmobiliaria",
-   "nombre": "Best House Sabadell Creu Alta",
-   "direccion": "Creu Alta",
-   "lat": 41.555278,
-   "lon": 2.102489
+   "nombre": "Tecnocasa Estudi CreuAlta",
+   "direccion": "Ronda de Zamenhof, 118",
+   "lat": 41.550456,
+   "lon": 2.099213,
+   "telefono": "+34637882196",
+   "web": "https://sabadell3.tecnocasa.es/"
   },
   {
-   "id": "inm-25",
+   "id": "72b4bec6-25b8-4fe6-a9aa-fc50761ed8fd",
+   "categoria": "gestoria",
+   "nombre": "Inforgest",
+   "direccion": "Ronda de Ponent 88",
+   "lat": 41.5472452,
+   "lon": 2.0993152,
+   "telefono": "937277075"
+  },
+  {
+   "id": "8f2bb68c-1568-4f92-9e3c-3635243c4a2f",
+   "categoria": "abogados",
+   "nombre": "Copistería Garriga",
+   "direccion": "Ronda Zamenhof, 98, local",
+   "lat": 41.55062,
+   "lon": 2.10053,
+   "telefono": "937236132",
+   "web": "http://www.copisteria-garriga.com/"
+  },
+  {
+   "id": "12f7db52-04e4-4103-83a4-ce3d227d9b61",
    "categoria": "inmobiliaria",
-   "nombre": "Bona Llar Real Estate",
-   "direccion": "Creu de Barberà",
-   "lat": 41.523295,
-   "lon": 2.113396
+   "nombre": "Urban Finques",
+   "direccion": "Carrer de Roca 31",
+   "lat": 41.55177395,
+   "lon": 2.10027585,
+   "telefono": "931914230",
+   "web": "https://urbanfinques.cat/"
   },
   {
-   "id": "inm-26",
+   "id": "676eaa86-9c5e-4c8f-b060-59b28748f03b",
+   "categoria": "abogados",
+   "nombre": "Assessoria Juridica Mauri & Costa",
+   "direccion": "Carrer de Piferrer, 18",
+   "lat": 41.55847173,
+   "lon": 2.09980849,
+   "telefono": "+34937177386",
+   "web": "https://assessoriajuridicamauricosta.wordpress.com/"
+  },
+  {
+   "id": "f9c99bd7-7ddd-40bf-b55d-77a39c71e597",
+   "categoria": "abogados",
+   "nombre": "Internacional Jurídica de Trabajadores",
+   "direccion": "Carrer de Francesc Bellapart, 72",
+   "lat": 41.55859274,
+   "lon": 2.10060735,
+   "telefono": "+34607390977"
+  },
+  {
+   "id": "e0bbc795-724c-4666-98ca-48273797def5",
+   "categoria": "abogados",
+   "nombre": "Abogados Herencia Sabadell",
+   "direccion": "Carrer de Josep Aparici, 2, 2º-2ª",
+   "lat": 41.55930918,
+   "lon": 2.10179784,
+   "telefono": "+34937244082",
+   "web": "http://www.abogadosherenciasabadell.com/"
+  },
+  {
+   "id": "fd8c19f6-4513-47ae-8449-14d913750f2b",
+   "categoria": "abogados",
+   "nombre": "Munoz Abogados",
+   "direccion": "Carrer de Josep Aparici, 2",
+   "lat": 41.55930941,
+   "lon": 2.1017963,
+   "telefono": "+34937244082",
+   "web": "http://www.munozabogados.com"
+  },
+  {
+   "id": "d8a05ede-c49d-4312-9e9c-f95d320e9c5c",
    "categoria": "inmobiliaria",
-   "nombre": "Finques Ferran",
-   "direccion": "Eixample",
-   "lat": 41.538236,
-   "lon": 2.111573
+   "nombre": "Cedos Solucions Immobiliaries",
+   "direccion": "Carretera de Prats de Lluçanès, 104",
+   "lat": 41.55749767,
+   "lon": 2.1019389,
+   "telefono": "+34937236000",
+   "web": "http://www.ced2.com/"
   },
   {
-   "id": "inm-27",
+   "id": "7db84331-bc93-4077-974b-eb913a489075",
+   "categoria": "abogados",
+   "nombre": "Agencia Generali Seguros",
+   "direccion": "Carretera de Prats de Lluçanès, 139, Ba",
+   "lat": 41.55790596,
+   "lon": 2.10181054,
+   "telefono": "+34983968024",
+   "web": "https://generali.es/"
+  },
+  {
+   "id": "18b5c0a6-716a-464c-af87-0c99c3df6333",
+   "categoria": "inmobiliaria",
+   "nombre": "Assessoria Integral",
+   "direccion": "Carrer Picañol 25",
+   "lat": 41.5529044,
+   "lon": 2.1014239,
+   "telefono": "932526919",
+   "web": "https://assessoriaintegral.ueniweb.com/"
+  },
+  {
+   "id": "43c11fa6-d326-48cd-9725-d641c1041c65",
+   "categoria": "inmobiliaria",
+   "nombre": "PROIM Primum Vivere",
+   "direccion": "Carrer de Narcís Giralt, 35, 39, 08201 Sabadell, Barcelona",
+   "lat": 41.5459824939073,
+   "lon": 2.10241198539734,
+   "telefono": "938 25 42 42",
+   "web": "https://proimpv.com"
+  },
+  {
+   "id": "fda842b6-1270-43c0-baf3-8664f98b273e",
+   "categoria": "inmobiliaria",
+   "nombre": "Area G3",
+   "direccion": "Carrer Estrella, 157",
+   "lat": 41.548435,
+   "lon": 2.102221,
+   "telefono": "+34937457474"
+  },
+  {
+   "id": "726b10bd-59bd-4161-9ee8-194227eadd8d",
+   "categoria": "inmobiliaria",
+   "nombre": "Afincar",
+   "direccion": "Carrer del Forn, 82",
+   "lat": 41.55111008,
+   "lon": 2.10205857,
+   "telefono": "+34937246045",
+   "web": "http://www.afincar.com/"
+  },
+  {
+   "id": "ba74ff43-04ce-4379-8ddf-6810cab51ed7",
+   "categoria": "abogados",
+   "nombre": "Corbella Advocats",
+   "direccion": "Carrer de Monterols, 52",
+   "lat": 41.55173978,
+   "lon": 2.10409647,
+   "telefono": "+34937271386",
+   "web": "https://corbelladvocats.com/"
+  },
+  {
+   "id": "4e7723d7-339b-4663-a6b6-f13372174355",
+   "categoria": "inmobiliaria",
+   "nombre": "LIDIA TORRENTS PONT",
+   "direccion": "Carrer JOSEP RENOM, 44, BAJO, 1°",
+   "lat": 41.5507241218556,
+   "lon": 2.10323105958732,
+   "telefono": "938 09 16 65",
+   "web": "http://www.toplocation.es"
+  },
+  {
+   "id": "1bb63e5f-5aee-483a-994c-5c5de249860c",
+   "categoria": "inmobiliaria",
+   "nombre": "Toplocation Real Estate",
+   "direccion": "Carrer de Josep Renom, 44",
+   "lat": 41.55068,
+   "lon": 2.10325,
+   "telefono": "+34938091665",
+   "web": "http://www.toplocation.es/"
+  },
+  {
+   "id": "817de758-3008-46c7-8559-31c0364f32df",
+   "categoria": "abogados",
+   "nombre": "Omniumlegal Abogados",
+   "direccion": "Carrer de Josep Renom, 42, LOCAL 2",
+   "lat": 41.55072214,
+   "lon": 2.10345416,
+   "telefono": "+34937243813",
+   "web": "http://www.omniumlegal.com/"
+  },
+  {
+   "id": "aa9d8d77-fc9a-48b5-9bf4-691af17454bc",
+   "categoria": "gestoria",
+   "nombre": "Croman Asesoría Sabadell",
+   "direccion": "Carrer de Vila Cinca, 3",
+   "lat": 41.5546655,
+   "lon": 2.1032864,
+   "telefono": "937174724",
+   "web": "https://croman.es/"
+  },
+  {
+   "id": "3347fe92-9e6d-47b9-8e90-3d566380ab00",
+   "categoria": "gestoria",
+   "nombre": "Moncunill Auditors",
+   "direccion": "Carrer de Sant Miquel 83",
+   "lat": 41.5558203,
+   "lon": 2.1035892,
+   "telefono": "937237513",
+   "web": "http://www.moncunill.net/"
+  },
+  {
+   "id": "08cef6d9-cf39-4496-9374-35d5bf699c55",
+   "categoria": "inmobiliaria",
+   "nombre": "Festa & Fun",
+   "direccion": "8 Carrer del Forn",
+   "lat": 41.5529649,
+   "lon": 2.1042078,
+   "telefono": "687605454",
+   "web": "https://www.fiestasfestafunsabadell.es/es/"
+  },
+  {
+   "id": "65b4310f-0c4a-416c-b187-5bf5b465c95a",
+   "categoria": "inmobiliaria",
+   "nombre": "B & R Homes",
+   "direccion": "Carrer de Borràs, 66",
+   "lat": 41.55291,
+   "lon": 2.10248,
+   "telefono": "+34605630328",
+   "web": "https://b-rhomes.com/"
+  },
+  {
+   "id": "16a63e34-0fa0-4e5a-ba09-9c2dfa66e38c",
+   "categoria": "abogados",
+   "nombre": "Aran Advocats",
+   "direccion": "Carrer de Borràs, 66",
+   "lat": 41.55289843,
+   "lon": 2.10244228,
+   "telefono": "+34937277637",
+   "web": "http://www.aranconsulting.cat/"
+  },
+  {
+   "id": "beb76f24-a9f9-499d-a499-d7479ba9c996",
+   "categoria": "inmobiliaria",
+   "nombre": "Hipoteques Sabadell",
+   "direccion": "Carretera de Prats de Lluçanès, 50",
+   "lat": 41.55624545,
+   "lon": 2.10224105,
+   "telefono": "+34647622307",
+   "web": "http://www.hipoteques.es/"
+  },
+  {
+   "id": "6a7b1dcf-c77d-4bcc-ac6b-a837452fc77a",
+   "categoria": "gestoria",
+   "nombre": "Associacio de Veins Can Puiggener de Sabadell",
+   "direccion": "Passatge de Marco Polo, 10",
+   "lat": 41.565542,
+   "lon": 2.105247,
+   "telefono": "+34937236135"
+  },
+  {
+   "id": "48af8063-2656-4992-bd44-d200af70ca3e",
    "categoria": "inmobiliaria",
    "nombre": "SBD Immobles",
-   "direccion": "La Creu Alta",
-   "lat": 41.555278,
-   "lon": 2.102489
+   "direccion": "Avenida Onze de Setembre, 22",
+   "lat": 41.55243115,
+   "lon": 2.10601361,
+   "telefono": "+34937451812",
+   "web": "http://www.sbdimmobles.com/"
   },
   {
-   "id": "inm-38",
+   "id": "2fd79789-50f6-4f54-9145-c4d93b7dc240",
    "categoria": "inmobiliaria",
-   "nombre": "Monapart",
-   "direccion": "Sabadell/Barcelona",
-   "lat": 41.546764,
-   "lon": 2.108925
+   "nombre": "Jardipark",
+   "direccion": "Calle Sant Maties, 4",
+   "lat": 41.5529235674681,
+   "lon": 2.10577890458924,
+   "telefono": "937 13 60 31",
+   "web": "http://www.jardipark.es"
+  },
+  {
+   "id": "69895ed4-ad4b-47e1-a557-3ae24636592a",
+   "categoria": "abogados",
+   "nombre": "Mor Advocats",
+   "direccion": "Carrer del Montseny, 44",
+   "lat": 41.55541376,
+   "lon": 2.10581937,
+   "telefono": "+34937243303",
+   "web": "http://www.moradvocats.com/"
+  },
+  {
+   "id": "7bd84ddc-2920-4562-a229-51b800a3e904",
+   "categoria": "abogados",
+   "nombre": "COAC Sabadell",
+   "direccion": "Carrer d'Agnès Armengol, 45",
+   "lat": 41.55812,
+   "lon": 2.10561,
+   "telefono": "+34937275210",
+   "web": "http://coacsabadell.cat/"
+  },
+  {
+   "id": "9d928945-5320-4df4-a2be-2dca4be2eef8",
+   "categoria": "gestoria",
+   "nombre": "Mediterranea Services",
+   "direccion": "Onze De Setembre 67",
+   "lat": 41.5530757,
+   "lon": 2.1047671,
+   "telefono": "931599798",
+   "web": "http://mediterraneaservices.com/"
+  },
+  {
+   "id": "274e8a49-2a00-4af7-be90-868fbf6ab2f3",
+   "categoria": "inmobiliaria",
+   "nombre": "Comprarcasa RC Finques",
+   "direccion": "Avinguda Onze de Setembre, 47",
+   "lat": 41.55277918,
+   "lon": 2.10511418,
+   "telefono": "+34937274047",
+   "web": "https://comprarcasasabadell.com/"
+  },
+  {
+   "id": "cca697c2-55fb-472f-917c-9c747af14974",
+   "categoria": "inmobiliaria",
+   "nombre": "Habidecor",
+   "direccion": "Carrer Gràcia, 177",
+   "lat": 41.55053,
+   "lon": 2.10449,
+   "telefono": "+34665201098",
+   "web": "http://www.habidecor.es/"
+  },
+  {
+   "id": "691b78ca-748e-41d4-838c-bb5522539447",
+   "categoria": "inmobiliaria",
+   "nombre": "Caf Hispania",
+   "direccion": "Carrer Torras I Bages, 6, BAJO",
+   "lat": 41.545682856,
+   "lon": 2.105196518,
+   "telefono": "937478936",
+   "web": "http://www.cafvalles.com/"
+  },
+  {
+   "id": "2e1f81d3-8a83-4435-9d5c-181fa9fc3495",
+   "categoria": "inmobiliaria",
+   "nombre": "eficacia",
+   "direccion": "Carrer de Torras i Bages, 2",
+   "lat": 41.54544894,
+   "lon": 2.10546597,
+   "telefono": "+34937220793",
+   "web": "http://www.eficacia.cat/"
+  },
+  {
+   "id": "d6782976-87d2-408b-aefb-3fba9e1c017d",
+   "categoria": "inmobiliaria",
+   "nombre": "Valldeperas Gestio d'Habitatge i Sol",
+   "direccion": "Carrer de Sant Quirze, 46",
+   "lat": 41.54633567,
+   "lon": 2.10612512,
+   "telefono": "+34639383939",
+   "web": "http://www.habitatgeisol.cat/"
+  },
+  {
+   "id": "15ce196b-7314-4e60-8312-1fbe995cf5ee",
+   "categoria": "inmobiliaria",
+   "nombre": "Sabadelloguer",
+   "direccion": "Carrer de Jovellanos, 4-6, local",
+   "lat": 41.54766614,
+   "lon": 2.10585279,
+   "telefono": "+34937277246",
+   "web": "https://www.sabadelloguer.es/"
+  },
+  {
+   "id": "aa45740f-4878-4587-9dab-dbc2c03b134b",
+   "categoria": "abogados",
+   "nombre": "Susin Gabinet Juridic Internacional",
+   "direccion": "Carrer de Sant Quirze, 55, 2º",
+   "lat": 41.54619316,
+   "lon": 2.10586066,
+   "telefono": "+34610384109",
+   "web": "http://www.esthersusin.com/"
+  },
+  {
+   "id": "3474dda2-9a32-4104-9949-8e6a70f74b33",
+   "categoria": "inmobiliaria",
+   "nombre": "Amida Immobles",
+   "direccion": "Carrer d'En Font, 35, local",
+   "lat": 41.54637621,
+   "lon": 2.10569246,
+   "telefono": "+34937481132",
+   "web": "http://www.grupamida.com/"
+  },
+  {
+   "id": "db3c4ede-091c-4712-91d0-2c08de9cd58e",
+   "categoria": "inmobiliaria",
+   "nombre": "novafinca",
+   "direccion": "Carrer de Jovellanos, 6",
+   "lat": 41.54774318,
+   "lon": 2.10564595,
+   "telefono": "+34937277246",
+   "web": "http://www.novafinca.es/"
+  },
+  {
+   "id": "33d99ce5-2f9a-4942-8836-f9d6a0c9a870",
+   "categoria": "inmobiliaria",
+   "nombre": "Tisa Inmobiliaria Sabadell",
+   "direccion": "Ronda de Zamenhof, 15, Local",
+   "lat": 41.5517433,
+   "lon": 2.1056142,
+   "telefono": "937480808",
+   "web": "https://tisasabadell.cat/"
+  },
+  {
+   "id": "5c7bff97-a716-4364-9681-0b299ed2f41c",
+   "categoria": "abogados",
+   "nombre": "Bufet Cánovas",
+   "direccion": "Carrer de Gràcia, 97",
+   "lat": 41.54869864,
+   "lon": 2.10621139,
+   "telefono": "+34937262434",
+   "web": "http://www.bufetcanovas.com"
+  },
+  {
+   "id": "870d019b-54a0-47ca-8576-64dd12680561",
+   "categoria": "inmobiliaria",
+   "nombre": "Allianz Seguros - Agente Jose Luis Castaños Martinez",
+   "direccion": "Calle Sant Quirze 31 , 2",
+   "lat": 41.546459,
+   "lon": 2.106714,
+   "telefono": "654552628",
+   "web": "https://www.allianz.es/"
+  },
+  {
+   "id": "7673fde0-3da2-4a51-9e47-096cf8c0e2dc",
+   "categoria": "inmobiliaria",
+   "nombre": "Gremi de Fabricants de Sabadell",
+   "direccion": "Carrer de Sant Quirze, 30",
+   "lat": 41.54653486,
+   "lon": 2.10657789,
+   "telefono": "+34937450944",
+   "web": "https://gremifab.org/"
+  },
+  {
+   "id": "ef994951-129b-4cd9-bd2e-775f0f584f15",
+   "categoria": "abogados",
+   "nombre": "Convergencia Democratica de Catalunya",
+   "direccion": "Carrer de Sant Quirze, 42",
+   "lat": 41.54638,
+   "lon": 2.1062,
+   "telefono": "+34937258088",
+   "web": "http://www.convergencia.cat/agrupacions_territorial.php?agpc_ID=31"
+  },
+  {
+   "id": "811d20c4-8b1f-4481-9e31-86b8ae0dc0ee",
+   "categoria": "inmobiliaria",
+   "nombre": "Peritax Immobiliària",
+   "direccion": "Carrer de Sant Quirze, 17",
+   "lat": 41.54656854,
+   "lon": 2.10711958,
+   "telefono": "+34937127749",
+   "web": "http://www.peritaxsabadell.com/"
+  },
+  {
+   "id": "2c730e60-65c9-4b83-9303-dfc861537e94",
+   "categoria": "abogados",
+   "nombre": "Bufete Borguño",
+   "direccion": "Carrer de l'Advocat Cirera, 14",
+   "lat": 41.54591872,
+   "lon": 2.1076702,
+   "telefono": "+34937252355",
+   "web": "http://www.borguno.com/"
+  },
+  {
+   "id": "00c7dd3a-e2c9-4fb4-94e5-2b073e99501c",
+   "categoria": "inmobiliaria",
+   "nombre": "Zion Gest",
+   "direccion": "Carrer de Gràcia, 2, 2a planta",
+   "lat": 41.54709796,
+   "lon": 2.10771388,
+   "telefono": "+34930112767",
+   "web": "http://www.ziongest.com/es/contacto"
+  },
+  {
+   "id": "1a8fb849-4e7f-408a-9e04-524bf6135dc4",
+   "categoria": "inmobiliaria",
+   "nombre": "Uiu Promotors",
+   "direccion": "Carrer de Gràcia, 45",
+   "lat": 41.548561,
+   "lon": 2.107601,
+   "web": "http://www.uiu.cat/"
+  },
+  {
+   "id": "3c231c9b-3a23-4e96-88c4-d41ceebfa238",
+   "categoria": "inmobiliaria",
+   "nombre": "Bourgeois Fincas",
+   "direccion": "Carrer de les Valls, 20",
+   "lat": 41.54891577,
+   "lon": 2.10770019,
+   "telefono": "+34937259944",
+   "web": "http://www.ebourgeois.com"
+  },
+  {
+   "id": "aa6f3a38-efc2-4177-868e-153aa4a5a444",
+   "categoria": "inmobiliaria",
+   "nombre": "Marimon Immobles & Jordi Baussà",
+   "direccion": "Carrer de les Valls, 10",
+   "lat": 41.54894633,
+   "lon": 2.10774709,
+   "telefono": "+34937257900",
+   "web": "http://www.marimonimmobles.com/"
+  },
+  {
+   "id": "5146f560-4b6a-4882-b809-57f0e139d96d",
+   "categoria": "abogados",
+   "nombre": "Trevisiol Abogados",
+   "direccion": "Carrer de les Valls, 10, 3-1",
+   "lat": 41.54907437,
+   "lon": 2.10780598,
+   "telefono": "+34663011463",
+   "web": "https://www.trevisiolabogados.com/"
+  },
+  {
+   "id": "8f24460a-056d-4f3d-9bcf-b3a05aea0dda",
+   "categoria": "inmobiliaria",
+   "nombre": "Expofinques Sabadell Centre",
+   "direccion": "Via de Massagué, 61",
+   "lat": 41.55088685,
+   "lon": 2.10714413,
+   "telefono": "+34937155980",
+   "web": "http://www.exessabadellcentre.com/"
+  },
+  {
+   "id": "b682a649-3b8b-4609-8ab2-fb926ec62e21",
+   "categoria": "inmobiliaria",
+   "nombre": "Donpiso",
+   "direccion": "Carrer de Vilarrúbias, 9",
+   "lat": 41.55239491,
+   "lon": 2.10680258,
+   "telefono": "+34937276565",
+   "web": "http://www.donpiso.com/"
+  },
+  {
+   "id": "e58431d6-1e90-4fe4-930c-619be915c94d",
+   "categoria": "abogados",
+   "nombre": "Espai Iuris. Gabinet Jurídic",
+   "direccion": "Carrer de Fra Batlle, 14",
+   "lat": 41.55330305,
+   "lon": 2.10878009,
+   "telefono": "+34937179498",
+   "web": "http://www.espaiuris.com/"
+  },
+  {
+   "id": "d6734a35-39ee-4036-ba34-371788c79d90",
+   "categoria": "inmobiliaria",
+   "nombre": "3xtres Finques",
+   "direccion": "Carrer de Fra Batlle, 18",
+   "lat": 41.553315,
+   "lon": 2.108917,
+   "telefono": "+34937175030",
+   "web": "http://3xtresfinques.com/"
+  },
+  {
+   "id": "d1869ee5-1a4c-42b6-a7e1-e4edcb09f415",
+   "categoria": "inmobiliaria",
+   "nombre": "Falgueras Immobiliària",
+   "direccion": "Carrer del Doctor Puig, 44, A",
+   "lat": 41.54967012,
+   "lon": 2.10905737,
+   "telefono": "+34935182006",
+   "web": "http://www.falgueras.es/"
+  },
+  {
+   "id": "8731b8d8-9a6b-400d-bce3-c452c0cb7061",
+   "categoria": "abogados",
+   "nombre": "Armenteras Blanco Advocats",
+   "direccion": "Pça. de l'Angel, 10, 2º 1ª",
+   "lat": 41.54938974,
+   "lon": 2.10870696,
+   "telefono": "+34640164819",
+   "web": "http://www.armenterasblanco.com/"
+  },
+  {
+   "id": "c6beee55-760b-4693-ac44-2dc32ba6c5dd",
+   "categoria": "inmobiliaria",
+   "nombre": "Finques ATI",
+   "direccion": "Pça. de l'Angel, 4, 2n C",
+   "lat": 41.54910201,
+   "lon": 2.10869575,
+   "telefono": "+34937276900",
+   "web": "http://www.ati.cat/"
+  },
+  {
+   "id": "ed560e64-1c75-46fb-8081-fb104c434458",
+   "categoria": "abogados",
+   "nombre": "TOP ABOGADOS",
+   "direccion": "Carrer ESGLESIA, 2",
+   "lat": 41.547130796,
+   "lon": 2.108136915,
+   "telefono": "900 707 707",
+   "web": "https://top-abogados.es"
+  },
+  {
+   "id": "2b069d04-7470-458a-8676-9dca565a55a0",
+   "categoria": "abogados",
+   "nombre": "Català-Reinón Abogados | Abogados Sabadell",
+   "direccion": "Carrer Església, 7, 08201 Sabadell, Barcelona",
+   "lat": 41.5469864106685,
+   "lon": 2.10819349819263,
+   "telefono": "938 58 99 68",
+   "web": "https://www.catala-reinon.es/despacho-abogados-sabadell"
+  },
+  {
+   "id": "8eef96bb-beb2-41ff-91f8-e693689122f6",
+   "categoria": "inmobiliaria",
+   "nombre": "De una casa a un hogar",
+   "direccion": "Carrer Oest, 11",
+   "lat": 41.54517,
+   "lon": 2.10821,
+   "telefono": "+34645868556"
+  },
+  {
+   "id": "16428fc8-2b5c-4cf6-b96b-e7d7159d2a1f",
+   "categoria": "abogados",
+   "nombre": "Despacho de abogados",
+   "direccion": "Carrer d'Àngel Guimerà, 25",
+   "lat": 41.54464,
+   "lon": 2.10821,
+   "telefono": "+34651411092"
+  },
+  {
+   "id": "20418302-4d76-458e-8f0b-bd54d18c0b23",
+   "categoria": "gestoria",
+   "nombre": "Farrés Junyent Assessors",
+   "direccion": "Carrer Àngel Guimerà, 25, Entresuelo",
+   "lat": 41.5445831,
+   "lon": 2.10828530000003,
+   "telefono": "937270523",
+   "web": "http://farresjunyent.es/"
+  },
+  {
+   "id": "5bbad1c5-7d7c-4d9f-9c9b-9bb247bd3647",
+   "categoria": "inmobiliaria",
+   "nombre": "Gestions Immobiliàries Nayach",
+   "direccion": "Carrer Sant Pere, 13",
+   "lat": 41.54543653,
+   "lon": 2.10841924,
+   "telefono": "+34937127663",
+   "web": "http://www.immobiliariesnayach.com/"
+  },
+  {
+   "id": "f3c7f59c-1bce-4a32-b63d-5e913c0e2d9a",
+   "categoria": "inmobiliaria",
+   "nombre": "Finques M. GÓMEZ",
+   "direccion": "Carrer d'Alfons XIII, 42",
+   "lat": 41.54599303,
+   "lon": 2.10848543,
+   "telefono": "+34937255979",
+   "web": "http://www.finquesmgomez.com/"
+  },
+  {
+   "id": "51e2f7ac-8e0f-4268-9577-426562d70067",
+   "categoria": "abogados",
+   "nombre": "Pierre Abogados Asociados",
+   "direccion": "Passeig de la Plaça Major, 26, 2n",
+   "lat": 41.54726999,
+   "lon": 2.10894356,
+   "telefono": "+34937255600",
+   "web": "http://www.pierre-abogados.com/"
+  },
+  {
+   "id": "380e7f0a-e4da-4b2d-bcb3-bb46f1eb4d83",
+   "categoria": "inmobiliaria",
+   "nombre": "Finques Gràcia-Centre",
+   "direccion": "Carrer d'Àngel Guimerà, 2, 4t",
+   "lat": 41.54490272,
+   "lon": 2.10949394,
+   "telefono": "+34937260700",
+   "web": "http://www.fingracen.com/"
+  },
+  {
+   "id": "7e11356f-c916-409d-b784-35bdbe941ccc",
+   "categoria": "abogados",
+   "nombre": "María Teresa Puig Amat",
+   "direccion": "Carrer de Àngel Guimerà, 2, 1",
+   "lat": 41.54486231,
+   "lon": 2.1095112,
+   "telefono": "+34937270644",
+   "web": "http://www.mafervalegal.com/"
+  },
+  {
+   "id": "101245b9-054f-4220-9ec8-df00498aa69b",
+   "categoria": "abogados",
+   "nombre": "Atencion Legal Abogados y Mediadores",
+   "direccion": "Carrer d'Àngel Guimerà, 1, 1º",
+   "lat": 41.54485344,
+   "lon": 2.10964803,
+   "telefono": "+34938547007",
+   "web": "http://www.atencionlegal.es/"
+  },
+  {
+   "id": "a4c906d7-9234-4912-9c69-6cab1cc87497",
+   "categoria": "abogados",
+   "nombre": "castro y andreu abogados",
+   "direccion": "Carrer de Sant Antoni Maria Claret, 18, 2º 4ª",
+   "lat": 41.54650688,
+   "lon": 2.10965727,
+   "telefono": "+34937255000",
+   "web": "http://www.castroandreu.com/"
+  },
+  {
+   "id": "3023c0d7-97e8-4bd0-a6a6-7e71829037a8",
+   "categoria": "abogados",
+   "nombre": "DL Advocats",
+   "direccion": "Carrer de la Salut, 43",
+   "lat": 41.55040564,
+   "lon": 2.10954044,
+   "telefono": "+34937156277",
+   "web": "http://www.dladvocats.com/"
+  },
+  {
+   "id": "a135c1ad-7c32-404a-8dd1-821057a01cfd",
+   "categoria": "inmobiliaria",
+   "nombre": "SBD Habitat",
+   "direccion": "Carrer de la Creueta, 13, Local",
+   "lat": 41.54880786,
+   "lon": 2.11011774,
+   "telefono": "+34747456628",
+   "web": "https://sbdhabitat.com/"
+  },
+  {
+   "id": "a1f759db-fc60-4751-ab50-5538fdcbfb8b",
+   "categoria": "inmobiliaria",
+   "nombre": "Fincamps Assessors SL",
+   "direccion": "Carrer de Sant Joan, 39",
+   "lat": 41.54737217,
+   "lon": 2.10976842,
+   "telefono": "+34937484848",
+   "web": "http://www.fincamps.es/ca/contacto"
+  },
+  {
+   "id": "bdc9ce2d-81b0-406a-aac1-c8df11fae76a",
+   "categoria": "inmobiliaria",
+   "nombre": "Marbet Finques",
+   "direccion": "Carrer de la Indústria, 2",
+   "lat": 41.54696344,
+   "lon": 2.10998677,
+   "telefono": "+34692192798",
+   "web": "http://www.marbetfinques.com/"
+  },
+  {
+   "id": "26e550fb-86c8-41e4-b49e-63b80c6b5568",
+   "categoria": "abogados",
+   "nombre": "Miralles Assessors - Gestoria Integral",
+   "direccion": "Rambla, 65",
+   "lat": 41.54451336,
+   "lon": 2.11015068,
+   "telefono": "+34937259922",
+   "web": "http://www.mirallesassessors.com/"
+  },
+  {
+   "id": "ea16121d-8d09-4331-83bf-26c5b8327102",
+   "categoria": "abogados",
+   "nombre": "Espai Legal",
+   "direccion": "Rambla, 65",
+   "lat": 41.54452396,
+   "lon": 2.11014465,
+   "telefono": "+34937450844",
+   "web": "http://www.espailegal.net/"
+  },
+  {
+   "id": "1ec0f461-7be9-4a1f-b347-a2339434783a",
+   "categoria": "inmobiliaria",
+   "nombre": "Pym Sabadell Experts Immobiliaris",
+   "direccion": "Carrer del Jardí, 11ppal, C",
+   "lat": 41.5451546,
+   "lon": 2.11053318,
+   "telefono": "+34699733100",
+   "web": "http://www.pymsabadell.com/"
+  },
+  {
+   "id": "480ca349-36f2-4bf0-ba50-527c1d67913e",
+   "categoria": "abogados",
+   "nombre": "Assessorament i Gestió Millán, SL",
+   "direccion": "Carrer de la República, 11",
+   "lat": 41.54583,
+   "lon": 2.1104,
+   "telefono": "+34937264545",
+   "web": "http://www.agmillan.com/"
+  },
+  {
+   "id": "cdda7ffa-50f9-4074-a152-0e87589eb161",
+   "categoria": "inmobiliaria",
+   "nombre": "Mis Finques Sabadell Centro",
+   "direccion": "Carrer de la Indústria, 6",
+   "lat": 41.54704084,
+   "lon": 2.11042004,
+   "telefono": "+34635249324",
+   "web": "https://www.misfinques.com/es"
+  },
+  {
+   "id": "ed27d20a-adfb-490d-be8b-2d3d16f38524",
+   "categoria": "inmobiliaria",
+   "nombre": "PROIM Primum Vivere",
+   "direccion": "Carrer de Narcís Giralt, 35, 39",
+   "lat": 41.54555597,
+   "lon": 2.11086276,
+   "telefono": "+34938254242",
+   "web": "http://www.proimpv.com/"
+  },
+  {
+   "id": "3e6bfc16-e0e5-4310-998a-25d2df6fc3e4",
+   "categoria": "inmobiliaria",
+   "nombre": "Cambra Propietat Urbana Sabadell i Comarca",
+   "direccion": "Carrer de Narcís Giralt, 50",
+   "lat": 41.54535076,
+   "lon": 2.11085527,
+   "telefono": "+34937250924",
+   "web": "http://www.cpropietatsbd.com/"
+  },
+  {
+   "id": "d932216d-872d-4b21-b0a8-3def7fd81f77",
+   "categoria": "abogados",
+   "nombre": "Col·legi d'Advocats de Sabadell",
+   "direccion": "Carrer de Lacy, 15",
+   "lat": 41.54420324,
+   "lon": 2.11090207,
+   "telefono": "+34937265355",
+   "web": "http://www.icasbd.org/"
+  },
+  {
+   "id": "596b67b9-f7be-4242-bc9b-0d6bd7c0e717",
+   "categoria": "abogados",
+   "nombre": "Maria Melero Rodriguez Abogada",
+   "direccion": "Carrer Major, 13",
+   "lat": 41.544377,
+   "lon": 2.111467,
+   "telefono": "+34607227609",
+   "web": "http://www.abogadadivorciossabadell.com"
+  },
+  {
+   "id": "9a59df66-4b81-4534-829e-3f894c29c3bf",
+   "categoria": "abogados",
+   "nombre": "Jaime Lapaz Abogado",
+   "direccion": "Carrer de Vilarrúbias, 123-131, Bajos C",
+   "lat": 41.55307691,
+   "lon": 2.10961342,
+   "telefono": "+34937251732",
+   "web": "https://twitter.com/jlapazabogado"
+  },
+  {
+   "id": "9184cda9-6ea1-4ed5-afdc-0a6e0f913c81",
+   "categoria": "inmobiliaria",
+   "nombre": "Grupo SIFU",
+   "direccion": "Carrer de les Paus, 85",
+   "lat": 41.5511399,
+   "lon": 2.11214,
+   "telefono": "900447447",
+   "web": "http://www.gruposifu.com/"
+  },
+  {
+   "id": "149b0d56-33cc-4b0b-88f3-63e18a59aa36",
+   "categoria": "abogados",
+   "nombre": "Abogados Sabadell",
+   "direccion": "Rambla, 207",
+   "lat": 41.5480995,
+   "lon": 2.1118,
+   "telefono": "+34937070445",
+   "web": "http://www.abogadodivorciosabadell.com/"
+  },
+  {
+   "id": "512c5187-ff8a-4e49-9098-ddca731cbb02",
+   "categoria": "abogados",
+   "nombre": "Sola&Baro Abogados",
+   "direccion": "Carrer Sant Llorenç, 41, 1ª 1ª",
+   "lat": 41.54743,
+   "lon": 2.11191,
+   "telefono": "613033910",
+   "web": "http://www.solabaroabogados.com/"
+  },
+  {
+   "id": "642664a6-5e97-4868-9506-b9069086c497",
+   "categoria": "inmobiliaria",
+   "nombre": "Finques Codina -Sabadell-",
+   "direccion": "Carrer de la Concepció, 25",
+   "lat": 41.546723,
+   "lon": 2.113185,
+   "telefono": "+34937273301",
+   "web": "http://www.finquescodina.cat/"
+  },
+  {
+   "id": "5a8a82c3-7fb1-48a3-a3c9-275c85feb0a7",
+   "categoria": "gestoria",
+   "nombre": "Siscat Assessors",
+   "direccion": "Carrer de la Indústria, 32 bis, 1er",
+   "lat": 41.54730881,
+   "lon": 2.11276453,
+   "telefono": "+34937266564",
+   "web": "http://www.siscat.cat"
+  },
+  {
+   "id": "96016466-adf6-4e4e-86e7-c81151abf811",
+   "categoria": "abogados",
+   "nombre": "Canovas Abogados",
+   "direccion": "Carrer de la Indústria, 59",
+   "lat": 41.54763225,
+   "lon": 2.11483149,
+   "telefono": "+34936933717",
+   "web": "http://www.canovas.cat/"
+  },
+  {
+   "id": "9f637984-d023-4ffc-bf39-9ef00ab88922",
+   "categoria": "inmobiliaria",
+   "nombre": "Artextil",
+   "direccion": "Carrer de Quevedo, 35",
+   "lat": 41.550682,
+   "lon": 2.114139,
+   "telefono": "+34937259890",
+   "web": "http://www.artextil.com"
+  },
+  {
+   "id": "6006803a-9cc9-4c4f-95fd-2d0a2f384284",
+   "categoria": "abogados",
+   "nombre": "Mármol - Gomariz Advocats",
+   "direccion": "Carrer de Alguersuari I Pascual, 149",
+   "lat": 41.54476628,
+   "lon": 2.117224,
+   "telefono": "+34678447917",
+   "web": "http://www.marmolgomarizadvocats.com/"
+  },
+  {
+   "id": "50e1539b-43f8-40db-b831-9a73e1366a6f",
+   "categoria": "inmobiliaria",
+   "nombre": "Firacasa Vallés",
+   "direccion": "Plaça de la Sardana, 7",
+   "lat": 41.54537,
+   "lon": 2.11717,
+   "telefono": "+34675326060",
+   "web": "http://www.firacasa.es/"
+  },
+  {
+   "id": "758904d0-8eee-4c4d-b50d-792b419a7ead",
+   "categoria": "inmobiliaria",
+   "nombre": "Serververticals",
+   "direccion": "Carrer Dels Cardona, 58",
+   "lat": 41.5442527740168,
+   "lon": 2.12027291939069,
+   "telefono": "930092341",
+   "web": "http://www.serververticals.cat/"
+  },
+  {
+   "id": "e95c27a0-65d7-46ea-8246-311ab9c359ed",
+   "categoria": "inmobiliaria",
+   "nombre": "Patricia Rodríguez Iad España",
+   "direccion": "Carrer Susqueda, 15, 3º, Puerta 2ª",
+   "lat": 41.5460855,
+   "lon": 2.1295971,
+   "telefono": "670019476",
+   "web": "http://www.iadespana.es/agente-inmobiliario/patricia.rodriguez"
+  },
+  {
+   "id": "e7899eb4-5ff8-48e1-a2df-98f78dd46f38",
+   "categoria": "inmobiliaria",
+   "nombre": "Enygraf",
+   "direccion": "Carrer de Bellvei, 11",
+   "lat": 41.511566,
+   "lon": 2.150595,
+   "telefono": "+34937192305",
+   "web": "http://www.envasadosenygraf.com"
+  },
+  {
+   "id": "63a7a1f0-152f-4da0-a77b-ca5561a064e5",
+   "categoria": "inmobiliaria",
+   "nombre": "Grupo Noria",
+   "direccion": "Avinguda Puig Dels Tudons, 4",
+   "lat": 41.51966225,
+   "lon": 2.14965405,
+   "telefono": "935922838"
+  },
+  {
+   "id": "8a73027c-59f7-436a-966d-50f935b41864",
+   "categoria": "inmobiliaria",
+   "nombre": "Montcada",
+   "direccion": "8 Avinguda Puig dels Tudons, Nave 2",
+   "lat": 41.5213909,
+   "lon": 2.1498197,
+   "telefono": "937290560",
+   "web": "https://www.montcadasl.es/es/"
+  },
+  {
+   "id": "26c02814-2155-4283-b4ac-f02e023d1bd2",
+   "categoria": "inmobiliaria",
+   "nombre": "CUBIERTAS Y FACHADAS DEL VALLES",
+   "direccion": "8 Carrer de Margarida Xirgu",
+   "lat": 41.5521228,
+   "lon": 2.15637470000001,
+   "telefono": "629878605"
+  },
+  {
+   "id": "b6d46dd2-e662-4bdd-939f-04ce1df7dec2",
+   "categoria": "inmobiliaria",
+   "nombre": "Amindasa",
+   "direccion": "Pintor Vila Cinca Pol. Can Humet de Dalt, 10",
+   "lat": 41.5462390606807,
+   "lon": 2.15772547827153,
+   "telefono": "937 14 93 07",
+   "web": "http://www.amindasa.com"
+  },
+  {
+   "id": "3b767f1a-d1a0-425e-a7d4-0feeb4ff3548",
+   "categoria": "inmobiliaria",
+   "nombre": "J J Miro",
+   "direccion": "Carrer del Pintor Joan Miró, 28",
+   "lat": 41.54799548,
+   "lon": 2.15745091,
+   "telefono": "+34937134209",
+   "web": "http://jjajmiro.com"
+  },
+  {
+   "id": "f8c90360-6401-494f-bd23-d02831573973",
+   "categoria": "inmobiliaria",
+   "nombre": "Plataformas Y Equipos De Elevación",
+   "direccion": "Calle Pintor Fortuny, S/N, Bloque 2, Nave 5 ( Polígono Industrial Sud-Est)",
+   "lat": 41.5488170699374,
+   "lon": 2.16337521163939,
+   "telefono": "937131203",
+   "web": "http://www.plataformaselevacion.net/"
+  },
+  {
+   "id": "1f2bd14f-d0a3-400e-9d9e-8f5186fbc0f5",
+   "categoria": "inmobiliaria",
+   "nombre": "Nidec Motors & Actuators Spain",
+   "direccion": "Guifre el Pilos Pg Ind Can Vinyals, s/n",
+   "lat": 41.534508,
+   "lon": 2.163831,
+   "telefono": "+34935447000",
+   "web": "http://www.nidec.com"
+  },
+  {
+   "id": "cbbc0072-0fc1-47f8-a5d3-5a3047c1565d",
+   "categoria": "inmobiliaria",
+   "nombre": "Finques Pinetons",
+   "direccion": "Carrer Palau Ausit",
+   "lat": 41.50232908,
+   "lon": 2.15817975,
+   "telefono": "+34657803804",
+   "web": "http://www.finquespinetons.es/"
+  },
+  {
+   "id": "4479b3eb-c887-4213-9d6a-dacf08bb5000",
+   "categoria": "gestoria",
+   "nombre": "Btools",
+   "direccion": "Carrer Palau Ausit, 2",
+   "lat": 41.50215298,
+   "lon": 2.15796284,
+   "telefono": "+34935942120",
+   "web": "http://www.btools-empresa.com/"
+  },
+  {
+   "id": "5da6215d-f287-4f93-96b9-92e4bcccbeec",
+   "categoria": "inmobiliaria",
+   "nombre": "EspaiD4",
+   "direccion": "Rambla de Sant Esteve, 14",
+   "lat": 41.49902749,
+   "lon": 2.15773714,
+   "telefono": "+34931756918",
+   "web": "http://www.espaid4.com/"
+  },
+  {
+   "id": "5797f57e-89f8-4568-8a83-58c82fc1bab2",
+   "categoria": "inmobiliaria",
+   "nombre": "Tecnocasa Agencia Inmobiliaria",
+   "direccion": "Rambla de Sant Esteve, 20",
+   "lat": 41.49958349,
+   "lon": 2.15757928,
+   "telefono": "+34935942594",
+   "web": "https://ripollet1.tecnocasa.es/inmuebles-en-venta"
+  },
+  {
+   "id": "c87cc2bf-1647-414e-b304-53d33191b97f",
+   "categoria": "inmobiliaria",
+   "nombre": "Construcciones Cabeza",
+   "direccion": "POL. IND. SUD-ESTE, Carrer del Pintor Sert, NAVE Nº 29",
+   "lat": 41.54348665,
+   "lon": 2.1663042,
+   "telefono": "+34937133507",
+   "web": "https://construccionescabeza.com/reformas-integrales-cabeza/"
+  },
+  {
+   "id": "92f1684c-a0f1-4fef-a4a5-89f286d793b1",
+   "categoria": "inmobiliaria",
+   "nombre": "Finques Polinyà",
+   "direccion": "Carrer de l'Onze de Setembre, 10",
+   "lat": 41.55689264,
+   "lon": 2.15645652,
+   "telefono": "+34937130402",
+   "web": "https://www.finquespolinya.com/"
+  },
+  {
+   "id": "2e87ea05-7c0c-4b48-918b-8a553ce6d75d",
+   "categoria": "inmobiliaria",
+   "nombre": "Inovix. Evita riesgo de accidentes y mejora la seguridad laboral",
+   "direccion": "Avinguda de Sentmenat, 74B",
+   "lat": 41.5552174,
+   "lon": 2.1588438,
+   "telefono": "935182866",
+   "web": "https://inovix.es/"
+  },
+  {
+   "id": "db298750-2d75-42e9-a39e-b50db29dd085",
+   "categoria": "inmobiliaria",
+   "nombre": "Serveis Administratius Palau",
+   "direccion": "Carrer de Sant Galdric, 23",
+   "lat": 41.584042,
+   "lon": 2.165929,
+   "telefono": "+34938645651",
+   "web": "http://www.gestoriapalau.es"
   }
  ],
  "locales": [
@@ -943,123 +3276,9 @@
  "incidencias": [
   {
    "categoria": "notaria",
-   "nombre": "Enrique Ruiz de Bustillo Pont",
-   "direccion": "Calle Sant Antoni Mª. Claret, número 1 Pl 2 , 08202 - Sabadell (Barcelona)",
+   "nombre": "Lluis Colomé Serra",
+   "direccion": "Calle Sant Antoni Mª. Claret, número 1 Pl 2",
    "motivo": "sin coordenadas"
-  },
-  {
-   "categoria": "banco",
-   "nombre": "Cajamar Caja Rural S.C.C.",
-   "direccion": "Les Tres Creus 00087",
-   "motivo": "fuera del municipio (12 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Tecnocasa (varias oficinas en Sabadell)",
-   "direccion": "Zonas: Avinguda‑Eixample, La Creu de Barberà",
-   "motivo": "fuera del municipio (17 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "RealAdvisor – Fincas AGN",
-   "direccion": "C. Mallorca 615, 08026 Barcelona (cercano)",
-   "motivo": "fuera del municipio (16 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "RealAdvisor – IMNOVA AGENCY",
-   "direccion": "L’Hospitalet (cerca)",
-   "motivo": "fuera del municipio (20 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Mes que Finques",
-   "direccion": "Passeig 22 Juliol 512, Terrassa (cerca)",
-   "motivo": "fuera del municipio (8 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "BCN Homes 4You",
-   "direccion": "Barcelona (cerca)",
-   "motivo": "fuera del municipio (18 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "BC Inmo",
-   "direccion": "Barcelona (cerca)",
-   "motivo": "fuera del municipio (18 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Houzz – Monapart Barcelona",
-   "direccion": "Pl. Gal•la Placídia, Barcelona (cerca)",
-   "motivo": "fuera del municipio (16 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Larsson Estate",
-   "direccion": "Plaça Francesc Macià 4, Barcelona (cerca)",
-   "motivo": "fuera del municipio (17 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "The Home Hunter",
-   "direccion": "Barcelona (cerca)",
-   "motivo": "fuera del municipio (18 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Cospedo S.A.",
-   "direccion": "08024 Barcelona (cerca)",
-   "motivo": "fuera del municipio (15 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Alma Rehabitat",
-   "direccion": "08036 Barcelona (cerca)",
-   "motivo": "fuera del municipio (17 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Norvet",
-   "direccion": "Av. Diagonal 418, Barcelona (cerca)",
-   "motivo": "fuera del municipio (17 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Bonavista Developments",
-   "direccion": "Gran Via Corts Catalanes 643, BCN (cerca)",
-   "motivo": "fuera del municipio (18 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Personal Housing",
-   "direccion": "08250 Sant Joan de Vilatorrada (cerca)",
-   "motivo": "fuera del municipio (34 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Figue Galí (?)",
-   "direccion": "08243 Manresa (cerca)",
-   "motivo": "fuera del municipio (29 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Vendopor",
-   "direccion": "C. Agudes 24, 08033 Barcelona (cerca)",
-   "motivo": "fuera del municipio (11 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Fincas AGN",
-   "direccion": "Registro via RealAdvisor (Barcelona)",
-   "motivo": "fuera del municipio (18 km del centro)"
-  },
-  {
-   "categoria": "inmobiliaria",
-   "nombre": "Hello Homes Sitges",
-   "direccion": "Sitges (no relevante local)",
-   "motivo": "fuera del municipio (42 km del centro)"
   }
  ]
 }
