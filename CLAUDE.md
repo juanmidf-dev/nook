@@ -238,6 +238,12 @@ lo que el descubrimiento automático volvía vacío. Ya está corregido a `https
 - **Overture con versión fija, nunca `latest`.** Una ingesta mensual que cambia
   de versión de dataset sin avisar mueve puntos de sitio, y después no hay forma
   de explicarle a un cliente por qué su mapa cambió de un mes a otro.
+  **Pero el pin caduca**: Overture borra de S3 las releases antiguas. El
+  29/08/2026 solo quedaban dos publicadas y la que teníamos fijada, de un año
+  antes, ya no existía; la ingesta murió con `IO Error: No files found`. Falla
+  en alto y en cuatro segundos, que es lo aceptable, pero hay que revisar el
+  pin cada pocos meses. Qué hay publicado ahora, sin credenciales:
+  `https://overturemaps-us-west-2.s3.amazonaws.com/?list-type=2&prefix=release/&delimiter=/`
 
 ## Convenciones
 

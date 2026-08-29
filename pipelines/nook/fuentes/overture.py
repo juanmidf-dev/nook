@@ -26,7 +26,16 @@ log = logging.getLogger("nook.overture")
 # mensual que cambia de versión de dataset sin avisar mueve puntos de sitio y
 # hace imposible explicar por qué el mapa de un cliente cambió de un mes a
 # otro. Se sube de versión a mano, viendo el diff.
-RELEASE = "2025-08-20.0"
+#
+# Pero fijarlo tiene un coste que hay que conocer: **Overture borra de S3 las
+# releases antiguas**. El 29/08/2026 solo quedaban dos publicadas,
+# `2026-07-22.0` y `2026-08-19.0`; la que estaba fijada aquí era de un año
+# antes y ya no existía, así que la ingesta moría con un `IO Error: No files
+# found`. Al menos falla en alto y en cuatro segundos, no en silencio.
+#
+# Para comprobar qué hay publicado ahora mismo, sin credenciales:
+#   https://overturemaps-us-west-2.s3.amazonaws.com/?list-type=2&prefix=release/&delimiter=/
+RELEASE = "2026-08-19.0"
 BASE = f"s3://overturemaps-us-west-2/release/{RELEASE}/theme=places/type=place/*"
 
 # Categorías de Overture que interesan, por tipo de Nook. Se comparan tanto
