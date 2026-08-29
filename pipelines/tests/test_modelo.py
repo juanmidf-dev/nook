@@ -144,3 +144,61 @@ class TestCabecerasSupabase:
     def test_el_upsert_sigue_siendo_upsert(self):
         # Sin merge-duplicates el insert mensual duplicaria el censo entero.
         assert "merge-duplicates" in self._cabeceras("k")["Prefer"]
+
+
+class TestParaSupabase:
+    """
+    PostgREST exige que todos los objetos de un lote compartan claves. Filtrar
+    los campos vacios hacia que una notaria con correo y otra sin el generaran
+    claves distintas, y rechazaba el lote entero con PGRST102. Paso en la
+    primera ingesta real, despues de 45 minutos de geocodificacion.
+    """
+
+    def _poi(self, **kw):
+        from nook.modelo import Poi
+
+        base = dict(tipo="notaria", fuente="notariado", fuente_id="1", nombre="N")
+        base.update(kw)
+        return Poi(**base)
+
+    def test_dos_registros_desiguales_comparten_claves(self):
+        con_todo = self._poi(email="a@b.es", telefono="900", web="https://x.es").para_supabase()
+        sin_nada = self._poi().para_supabase()
+        assert set(con_todo) == set(sin_nada)
+
+    def test_los_huecos_van_como_null_explicito(self):
+        d = self._poi().para_supabase()
+        assert "email" in d and d["email"] is None
+        assert "telefono" in d and d["telefono"] is None
+
+    def test_extra_nunca_es_null(self):
+        # La columna es NOT NULL con default '{}'; un None romperia el insert.
+        d = self._poi().para_supabase()
+        assert d["extra"] == {}
+
+    def test_no_manda_geom(self):
+        # La rellena el trigger: la API REST no puede construir un geography.
+        assert "geom" not in self._poi().para_supabase()
+
+    def test_no_cuela_la_propiedad_geolocalizado(self):
+        assert "geolocalizado" not in self._poi(lat=41.5, lon=2.1).para_supabase()
+
+
+class TestDefensaDeLote:
+    def test_detecta_claves_distintas(self):
+        import pytest
+
+        from nook.salida import _comprueba_claves_uniformes
+
+        with pytest.raises(RuntimeError, match="mismas claves"):
+            _comprueba_claves_uniformes([{"a": 1, "b": 2}, {"a": 1}], 0)
+
+    def test_lote_uniforme_pasa(self):
+        from nook.salida import _comprueba_claves_uniformes
+
+        _comprueba_claves_uniformes([{"a": 1, "b": None}, {"a": 2, "b": 3}], 0)
+
+    def test_lote_vacio_no_revienta(self):
+        from nook.salida import _comprueba_claves_uniformes
+
+        _comprueba_claves_uniformes([], 0)

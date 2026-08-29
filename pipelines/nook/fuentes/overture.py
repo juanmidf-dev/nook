@@ -166,6 +166,11 @@ def consulta_sql(b: BBox, geometria: str = GEOM_WKB) -> str:
         addresses[1].region                             AS region,
         websites[1]                                     AS web,
         phones[1]                                       AS telefono,
+        -- El correo es parte del entregable de 199 euros: el notario compra
+        -- una lista de puntos de demanda con la que poder contactar, y una
+        -- lista sin forma de contactar vale bastante menos. Overture lo
+        -- publica en `emails` y hasta ahora se estaba tirando.
+        emails[1]                                       AS email,
         ST_Y({geometria})                               AS lat,
         ST_X({geometria})                               AS lon
     FROM read_parquet('{{origen}}', filename=true, hive_partitioning=1)
@@ -221,6 +226,7 @@ def fila_a_poi(fila: dict[str, Any]) -> Poi | None:
         municipio=fila.get("municipio"),
         provincia=fila.get("region"),
         telefono=fila.get("telefono"),
+        email=fila.get("email"),
         web=fila.get("web"),
         lat=float(lat),
         lon=float(lon),

@@ -66,6 +66,27 @@ def resumen(pois: list[Poi]) -> dict:
     }
 
 
+def _comprueba_claves_uniformes(trozo: list[dict], desde: int) -> None:
+    """
+    PostgREST rechaza un lote entero si sus objetos no comparten claves, con
+    un `PGRST102: All object keys must match` que no dice cuál sobra ni cuál
+    falta. Merece la pena detectarlo aquí: el error llega tras la
+    geocodificación, o sea, tres cuartos de hora después de empezar.
+    """
+    if not trozo:
+        return
+    referencia = set(trozo[0])
+    for n, obj in enumerate(trozo[1:], start=1):
+        if set(obj) != referencia:
+            sobran = sorted(set(obj) - referencia)
+            faltan = sorted(referencia - set(obj))
+            raise RuntimeError(
+                f"el registro {desde + n} no tiene las mismas claves que el "
+                f"primero del lote (sobran: {sobran or 'ninguna'}; "
+                f"faltan: {faltan or 'ninguna'}). PostgREST rechazaria el lote."
+            )
+
+
 class Supabase:
     """
     Escritura por PostgREST con upsert.
@@ -104,6 +125,7 @@ class Supabase:
         escritos = 0
         for i in range(0, len(pois), self.lote):
             trozo = [p.para_supabase() for p in pois[i : i + self.lote]]
+            _comprueba_claves_uniformes(trozo, i)
             r = requests.post(
                 f"{self.base}/pois",
                 params={"on_conflict": "fuente,fuente_id"},

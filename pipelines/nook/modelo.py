@@ -48,10 +48,28 @@ class Poi:
         return self.lat is not None and self.lon is not None
 
     def para_supabase(self) -> dict[str, Any]:
+        """
+        El registro completo, con los huecos como `null` explícito.
+
+        No se filtran los campos vacíos, aunque apetezca. PostgREST exige que
+        todos los objetos de un mismo lote tengan **las mismas claves**: si una
+        notaría lleva correo y la siguiente no, quitar la clave a la segunda
+        hace que rechace el lote entero con
+        `PGRST102: All object keys must match`. Pasó en la primera ingesta
+        real, después de 45 minutos de geocodificación.
+
+        Mandar el null explícito además es lo correcto para el upsert: cada
+        ejecución relee el censo completo, así que un campo vacío significa que
+        la fuente ya no lo trae, no que no lo sepamos.
+
+        `geom` no se manda: la rellena el trigger `geom_desde_latlon` a partir
+        de lat/lon, porque la API REST no puede construir un `geography`.
+        """
         d = asdict(self)
-        # PostGIS recibe la geometría desde lat/lon con un trigger o una
-        # expresión en el upsert; aquí se mandan las columnas planas.
-        return {k: v for k, v in d.items() if v is not None or k in ("lat", "lon")}
+        # `extra` es NOT NULL en el esquema, con default '{}'. Un None aquí
+        # rompería la inserción en vez de caer al default.
+        d["extra"] = d.get("extra") or {}
+        return d
 
 
 def normaliza(texto: str) -> str:

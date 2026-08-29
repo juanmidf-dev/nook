@@ -132,31 +132,31 @@ class TestConsultaSQL:
                  {{'primary': 'real_estate_agent', 'alternate': ['agency']}}, 0.91::DOUBLE,
                  [{{'freeform': 'CL SANT JOAN 39', 'postcode': '08202',
                     'locality': 'Sabadell', 'region': 'Barcelona'}}],
-                 ['https://ejemplo.test'], ['937000000'],
+                 ['https://ejemplo.test'], ['937000000'], ['hola@ejemplo.test'],
                  ST_AsWKB(ST_Point(2.1099, 41.5474)),
                  {{'xmin': 2.1099, 'xmax': 2.1099, 'ymin': 41.5474, 'ymax': 41.5474}}),
                 ('ov-2', {{'primary': 'Bufete Exemple'}},
                  {{'primary': 'professional_services', 'alternate': ['lawyer']}}, 0.80::DOUBLE,
                  [{{'freeform': 'CL ADVOCATS 1', 'postcode': '08201',
                     'locality': 'Sabadell', 'region': 'Barcelona'}}],
-                 [NULL], [NULL],
+                 [NULL], [NULL], [NULL],
                  ST_AsWKB(ST_Point(2.1050, 41.5500)),
                  {{'xmin': 2.1050, 'xmax': 2.1050, 'ymin': 41.5500, 'ymax': 41.5500}}),
                 ('ov-3', {{'primary': 'Baja confianza'}},
                  {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.20::DOUBLE,
                  [{{'freeform': 'CL DUDOSA 9', 'postcode': '08201',
                     'locality': 'Sabadell', 'region': 'Barcelona'}}],
-                 [NULL], [NULL],
+                 [NULL], [NULL], [NULL],
                  ST_AsWKB(ST_Point(2.1060, 41.5510)),
                  {{'xmin': 2.1060, 'xmax': 2.1060, 'ymin': 41.5510, 'ymax': 41.5510}}),
                 ('ov-4', {{'primary': 'Fuera de la caja'}},
                  {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.95::DOUBLE,
                  [{{'freeform': 'CL LEJOS 1', 'postcode': '28001',
                     'locality': 'Madrid', 'region': 'Madrid'}}],
-                 [NULL], [NULL],
+                 [NULL], [NULL], [NULL],
                  ST_AsWKB(ST_Point(-3.7038, 40.4168)),
                  {{'xmin': -3.7038, 'xmax': -3.7038, 'ymin': 40.4168, 'ymax': 40.4168}})
-              ) AS t(id, names, categories, confidence, addresses, websites, phones, geometry, bbox)
+              ) AS t(id, names, categories, confidence, addresses, websites, phones, emails, geometry, bbox)
             ) TO '{destino}' (FORMAT PARQUET)
             """
         )
@@ -236,27 +236,27 @@ class TestFiltrosSinSpatial:
                  {{'primary': 'real_estate_agent', 'alternate': ['agency']}}, 0.91::DOUBLE,
                  [{{'freeform': 'CL SANT JOAN 39', 'postcode': '08202',
                     'locality': 'Sabadell', 'region': 'Barcelona'}}],
-                 ['https://ejemplo.test'], ['937000000'], 41.5474, 2.1099,
+                 ['https://ejemplo.test'], ['937000000'], ['hola@ejemplo.test'], 41.5474, 2.1099,
                  {{'xmin': 2.1099, 'xmax': 2.1099, 'ymin': 41.5474, 'ymax': 41.5474}}),
                 ('ov-3', {{'primary': 'Baja confianza'}},
                  {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.20::DOUBLE,
                  [{{'freeform': 'CL DUDOSA 9', 'postcode': '08201',
                     'locality': 'Sabadell', 'region': 'Barcelona'}}],
-                 [NULL], [NULL], 41.5510, 2.1060,
+                 [NULL], [NULL], [NULL], 41.5510, 2.1060,
                  {{'xmin': 2.1060, 'xmax': 2.1060, 'ymin': 41.5510, 'ymax': 41.5510}}),
                 ('ov-4', {{'primary': 'Fuera de la caja'}},
                  {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.95::DOUBLE,
                  [{{'freeform': 'CL LEJOS 1', 'postcode': '28001',
                     'locality': 'Madrid', 'region': 'Madrid'}}],
-                 [NULL], [NULL], 40.4168, -3.7038,
+                 [NULL], [NULL], [NULL], 40.4168, -3.7038,
                  {{'xmin': -3.7038, 'xmax': -3.7038, 'ymin': 40.4168, 'ymax': 40.4168}}),
                 ('ov-5', NULL,
                  {{'primary': 'real_estate_agent', 'alternate': [NULL]}}, 0.99::DOUBLE,
                  [{{'freeform': 'CL SIN NOMBRE 1', 'postcode': '08201',
                     'locality': 'Sabadell', 'region': 'Barcelona'}}],
-                 [NULL], [NULL], 41.5480, 2.1090,
+                 [NULL], [NULL], [NULL], 41.5480, 2.1090,
                  {{'xmin': 2.1090, 'xmax': 2.1090, 'ymin': 41.5480, 'ymax': 41.5480}})
-              ) AS t(id, names, categories, confidence, addresses, websites, phones, lat_p, lon_p, bbox)
+              ) AS t(id, names, categories, confidence, addresses, websites, phones, emails, lat_p, lon_p, bbox)
             ) TO '{destino}' (FORMAT PARQUET)
             """
         )
