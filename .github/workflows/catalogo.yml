@@ -1,0 +1,71 @@
+name: Catálogo de municipios
+
+# Reconstruye el catálogo del INE: el árbol que alimenta los desplegables del
+# mapa y, opcionalmente, la tabla `municipios` de Supabase.
+#
+# Se ejecuta a mano y rara vez. El INE publica la relación cada 1 de enero, así
+# que una vez al año basta; el resto del tiempo, un catálogo que cambia solo
+# haría que un municipio apareciera o desapareciera del desplegable sin que
+# nadie hubiera tocado nada.
+
+on:
+  workflow_dispatch:
+    inputs:
+      supabase:
+        description: Volcar también a la tabla `municipios` de Supabase
+        required: true
+        default: 'no'
+        type: choice
+        options: ['no', 'si']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalogo
+  cancel-in-progress: false
+
+jobs:
+  catalogo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar dependencias
+        working-directory: pipelines
+        run: pip install -r requirements.txt openpyxl
+
+      - name: Construir el catálogo
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          A_SUPABASE: ${{ github.event.inputs.supabase }}
+        run: |
+          if [ "$A_SUPABASE" = "si" ]; then
+            python scripts/catalogo_municipios.py --supabase
+          else
+            python scripts/catalogo_municipios.py
+          fi
+
+      - name: Commitear el catálogo si ha cambiado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/municipios.json
+          if git diff --cached --quiet; then
+            echo "::notice::El catálogo del INE no ha cambiado."
+            exit 0
+          fi
+          git commit -m "Actualizar el catálogo de municipios del INE"
+          for intento in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rechazado, reintento $intento tras rebase"
+            git pull --rebase origin main
+          done
+          exit 1

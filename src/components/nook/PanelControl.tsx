@@ -2,15 +2,14 @@ import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
  import { CATEGORIAS, CATEGORIAS_DEMANDA, ETIQUETAS, type Categoria, type Config } from '@/lib/heat';
 import type { Incidencia, Municipio } from '@/data/sabadell';
-import type { EntradaMunicipio } from '@/data/municipios';
+import SelectorMunicipio from './SelectorMunicipio';
 import Marca from '@/components/nook/Marca';
 import Leyenda from '@/components/nook/Leyenda';
 
 interface Props {
   municipio: Municipio;
-  municipios: EntradaMunicipio[];
-  claveMunicipio: string;
-  onMunicipio: (clave: string) => void;
+  codIne: string;
+  onCodIne: (codIne: string) => void;
   incidencias: Incidencia[];
   cfg: Config;
   onCfg: (c: Config) => void;
@@ -50,9 +49,8 @@ function Campo({
 
 export default function PanelControl({
   municipio,
-  municipios,
-  claveMunicipio,
-  onMunicipio,
+  codIne,
+  onCodIne,
   incidencias,
   cfg,
   onCfg,
@@ -74,27 +72,8 @@ export default function PanelControl({
 
       <div className="lista-scroll flex-1 space-y-6 overflow-y-auto px-5 py-5">
         <div className="space-y-2">
-          <label className="etiqueta-campo" htmlFor="selector-municipio">
-            Zona de análisis
-          </label>
-          <select
-            id="selector-municipio"
-            value={claveMunicipio}
-            onChange={(e) => onMunicipio(e.target.value)}
-            /* Tarjeta clara sobre el azul, como los bloques DEMANDA /
-               COMPETENCIA / OFERTA EN ALQUILER de la propuesta comercial. */
-            className="tarjeta-crema w-full cursor-pointer font-display text-sm font-semibold uppercase tracking-[0.03em] outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-acento"
-          >
-            {municipios.map((m) => (
-              <option key={m.clave} value={m.clave} className="bg-crema text-[hsl(var(--crema-tinta))]">
-                {m.nombre} · {m.provincia}
-              </option>
-            ))}
-          </select>
-          <p className="text-[11px] leading-snug text-tinta-tenue">
-            INE {municipio.codIne}. Las capas de demanda solo cubren Cataluña y Madrid:
-            fuera de ahí el mapa saldrá vacío hasta que se ingiera esa zona.
-          </p>
+          <span className="etiqueta-campo">Zona de análisis</span>
+          <SelectorMunicipio codIne={codIne} onCodIne={onCodIne} />
         </div>
 
         <section className="space-y-4">

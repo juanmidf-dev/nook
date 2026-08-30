@@ -247,6 +247,11 @@ inmobiliarias. Geocodificarlo entero son dos horas largas.
   la taxonomía: `accountant`, `bookkeeper`, `tax_services`, `payroll_services`
   y `business_consulting`. `tax_office` queda fuera a propósito: cuelga de
   `public_service_and_government`, es la Agencia Tributaria.
+- **Recuperar la clave ajena de `cod_ine`.** Ya no hay excusa: la tabla
+  `municipios` se puebla con `scripts/catalogo_municipios.py --supabase`, que
+  carga los 8.132 municipios del INE. Con ella cargada se puede volver a poner
+  la FK con `not valid` y luego `validate constraint`, como está escrito en
+  `schema.sql`. Ver el punto 6.
 - **Registros de la Propiedad y Mercantiles.** El enum `poi_tipo` ya incluye
   `registro` y nada lo puebla.
 - **Población por sección censal.** Ver más abajo por qué la municipal no

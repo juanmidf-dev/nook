@@ -17,17 +17,12 @@ import {
   type Config,
 } from '@/lib/heat';
 import { PROCEDENCIA } from '@/data/sabadell';
-import {
-  MUNICIPIO_POR_DEFECTO,
-  MUNICIPIOS,
-  cargaCorte,
-  type Corte,
-} from '@/data/municipios';
+import { MUNICIPIO_POR_DEFECTO, cargaCorte, type Corte } from '@/data/municipios';
 
 const TOKEN = (import.meta.env.VITE_MAPBOX_TOKEN as string | undefined) ?? '';
 
 export default function Index() {
-  const [clave, setClave] = useState(MUNICIPIO_POR_DEFECTO);
+  const [codIne, setCodIne] = useState(MUNICIPIO_POR_DEFECTO);
   const [corte, setCorte] = useState<Corte | null>(null);
   const [errorCarga, setErrorCarga] = useState<string | null>(null);
   const [cfg, setCfg] = useState<Config>(CONFIG_POR_DEFECTO);
@@ -46,7 +41,7 @@ export default function Index() {
   useEffect(() => {
     let vigente = true;
     setErrorCarga(null);
-    cargaCorte(clave)
+    cargaCorte(codIne)
       .then((c) => {
         // Si el usuario ha cambiado de municipio mientras se cargaba este,
         // pintar ahora el anterior dejaría el mapa contradiciendo al selector.
@@ -58,7 +53,7 @@ export default function Index() {
     return () => {
       vigente = false;
     };
-  }, [clave]);
+  }, [codIne]);
 
   const pois = corte?.pois ?? [];
   const locales = corte?.locales ?? [];
@@ -111,9 +106,19 @@ export default function Index() {
           <Marca />
           <h1 className="text-lg font-semibold text-tinta">No se pudo cargar el municipio</h1>
           <p className="text-sm leading-relaxed text-tinta-suave">
-            Falta el corte de <code className="rounded bg-white/10 px-1">{clave}</code>. Se genera
-            con el workflow «Exportar corte para el mapa».
+            El municipio <code className="rounded bg-white/10 px-1">{codIne}</code> todavía no
+            tiene datos exportados. Se generan con el workflow «Exportar corte para el mapa»,
+            y solo hay ingesta de Cataluña y Madrid.
           </p>
+          {/* Sin esto, quien llegue aquí se queda sin panel y sin forma de
+              elegir otro municipio salvo recargando la página. */}
+          <button
+            type="button"
+            onClick={() => setCodIne(MUNICIPIO_POR_DEFECTO)}
+            className="rounded-md bg-[hsl(var(--acento))] px-3 py-1.5 font-display text-[12px] font-semibold uppercase tracking-[0.05em] text-[hsl(var(--acento-tinta))] transition-opacity hover:opacity-90"
+          >
+            Volver a Sabadell
+          </button>
         </div>
       </div>
     );
@@ -147,9 +152,8 @@ export default function Index() {
       <div className="pointer-events-none absolute inset-0 flex items-start justify-between gap-4 p-4">
         <PanelControl
           municipio={municipio}
-          municipios={MUNICIPIOS}
-          claveMunicipio={clave}
-          onMunicipio={setClave}
+          codIne={codIne}
+          onCodIne={setCodIne}
           incidencias={corte?.incidencias ?? []}
           cfg={cfg}
           onCfg={setCfg}
