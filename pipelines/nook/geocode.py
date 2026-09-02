@@ -95,6 +95,14 @@ class Resultado:
     calidad: Calidad
     fuente: str
     etiqueta: str | None = None
+    # CartoCiudad devuelve el código INE del municipio en `muniCode`, y lo
+    # estábamos tirando. Es la clave con la que cruzar fuentes: cruzar por
+    # nombre pierde los que se escriben distinto —la Guía Notarial dice
+    # "L'Hospitalet de Llobregat" y el Banco de España "Hospitalet De
+    # Llobregat(L')"—, y es además la que le falta a `pois.cod_ine` para
+    # poder recuperar su clave ajena.
+    cod_ine: str | None = None
+    municipio: str | None = None
 
 
 def _calidad(tipo: str | None, estado: object) -> Calidad:
@@ -132,12 +140,18 @@ def interpreta_cartociudad(datos: object) -> Resultado | None:
         if not (27.0 <= lat <= 44.0 and -19.0 <= lon <= 5.0):
             log.warning("descartada coordenada fuera de España: %s, %s", lat, lon)
             continue
+        muni = c.get("muniCode")
         return Resultado(
             lat=lat,
             lon=lon,
             calidad=_calidad(c.get("type"), c.get("state")),
             fuente="cartociudad",
             etiqueta=c.get("address") or c.get("name"),
+            # Cinco dígitos: provincia (2) + municipio (3). Se comprueba la
+            # forma en vez de confiar, porque un código a medias metido en
+            # `cod_ine` sería peor que no tener ninguno.
+            cod_ine=str(muni) if muni and str(muni).isdigit() and len(str(muni)) == 5 else None,
+            municipio=c.get("muni") or None,
         )
     return None
 

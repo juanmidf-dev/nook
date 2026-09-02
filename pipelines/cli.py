@@ -22,7 +22,7 @@ import os
 import pathlib
 import sys
 
-from nook import geocode
+from nook import geocode, geografia
 from nook.fuentes import bancos, notarias, overture
 from nook.modelo import Poi, colapsa_por_id, deduplica
 from nook.salida import Supabase, a_ndjson, resumen
@@ -50,6 +50,13 @@ def geocodifica_pendientes(pois: list[Poi], limite: int | None = None) -> None:
             # el registro aparecería como "no se encontró", que es falso y
             # manda a buscar en el sitio equivocado.
             p.geocode_fuente, p.geocode_calidad = r.fuente, r.calidad
+            # El geocodificador oficial sabe en qué municipio ha caído el
+            # punto. Es mejor dato que el que traiga la fuente, y es la clave
+            # con la que se cruzan las capas.
+            if r.cod_ine and not p.cod_ine:
+                p.cod_ine = r.cod_ine
+            if r.municipio and not p.municipio:
+                p.municipio = r.municipio
             if r.calidad in geocode.CALIDADES_NO_UBICABLES:
                 log.warning(
                     "solo a nivel de %s, se deja sin coordenada: %s (%s)",
@@ -166,6 +173,16 @@ def main(argv: list[str] | None = None) -> int:
     pois, repetidos = colapsa_por_id(pois)
     if repetidos:
         log.info("claves repetidas en origen: %d registros colapsados", repetidos)
+
+    # La provincia que traen las fuentes no vale para agrupar: Overture la
+    # publica como texto libre y en un mismo volcado salen "Tarragona",
+    # "Provincia de Tarragona" y "tarragona". Se deduce del código postal,
+    # que en España identifica la provincia sin excepciones.
+    corregidas, sin_deducir = geografia.normaliza(pois)
+    log.info(
+        "provincias normalizadas: %d corregidas, %d sin código postal utilizable",
+        corregidas, sin_deducir,
+    )
 
     escribe(pois, args.comando, prueba=args.prueba)
     return 0

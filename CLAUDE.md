@@ -240,6 +240,32 @@ como ya se hace con los abogados.
 Son 7.664 registros: el mismo orden que las notarías, no el de las
 inmobiliarias. Geocodificarlo entero son dos horas largas.
 
+### 8. La provincia se deduce del código postal, no se cree
+
+El campo `provincia` que traen las fuentes no vale para agrupar. Overture lo
+publica como texto libre y en un mismo volcado salen «Tarragona», «Provincia
+de Tarragona» y «tarragona»; Cataluña aparece como «Catalonia», «Catalunya»,
+«CT» y «Cataluña»; y hay barrios de Madrid —«Arganzuela - Imperial»— metidos
+en el campo de provincia. El informe de cobertura salía repartido en 61
+«provincias».
+
+En España **los dos primeros dígitos del código postal son el código de
+provincia**, sin excepciones, así que `nook/geografia.py` la deduce en vez de
+creérsela. Lo que no se puede deducir se deja como venga: el dato original
+puede ser correcto y borrarlo sería perder información.
+
+El volcado del Banco de España ya venía limpio —0 correcciones sobre 4.054
+registros—, que es la comprobación de que el normalizador no estropea lo que
+está bien.
+
+Y `cod_ine`: CartoCiudad devuelve el código INE del municipio en `muniCode` y
+se estaba tirando. Ahora se captura. Es la clave con la que cruzar capas,
+porque por nombre se pierden los que se escriben distinto: la Guía Notarial
+dice «L'Hospitalet de Llobregat» y el Banco de España «Hospitalet De
+Llobregat(L')». Un código postal **no** identifica un municipio —uno grande
+tiene muchos y uno pequeño lo comparte con los vecinos—, así que el `cod_ine`
+completo solo lo pone el geocodificador o la propia fuente.
+
 ### Pendientes anotados con su razón
 
 - ~~Gestorías y asesorías como capa de demanda.~~ Hecho el 29/08/2026. Quinto

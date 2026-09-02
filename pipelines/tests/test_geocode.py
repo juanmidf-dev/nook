@@ -345,3 +345,32 @@ class _Spec:
         if self._tipo is None:
             return {"definitions": {}}
         return {"definitions": {"pois": {"properties": {"tipo": self._tipo}}}}
+
+
+class TestCodIneDelGeocodificador:
+    """
+    CartoCiudad devuelve el codigo INE del municipio en `muniCode`, y se
+    estaba tirando. Es la clave con la que cruzar fuentes: cruzar por nombre
+    pierde los que se escriben distinto —la Guia Notarial dice "L'Hospitalet
+    de Llobregat" y el Banco de Espana "Hospitalet De Llobregat(L')"—, y es la
+    que le falta a pois.cod_ine para recuperar su clave ajena.
+    """
+
+    REAL = [{"muni": "Sabadell", "muniCode": "08187", "type": "portal",
+             "lat": 41.5459, "lng": 2.1088, "state": 0, "address": "SOL"}]
+
+    def test_captura_el_codigo(self):
+        r = interpreta_cartociudad(self.REAL)
+        assert r.cod_ine == "08187"
+        assert r.municipio == "Sabadell"
+
+    def test_un_codigo_a_medias_no_se_guarda(self):
+        # Peor que no tener codigo es tener uno que no cruza con nada.
+        for malo in ("817", "0818X", "", None, 8187):
+            r = interpreta_cartociudad([dict(self.REAL[0], muniCode=malo)])
+            assert r.cod_ine is None, malo
+
+    def test_sin_municipio_no_falla(self):
+        r = interpreta_cartociudad([{k: v for k, v in self.REAL[0].items()
+                                     if k not in ("muni", "muniCode")}])
+        assert r is not None and r.cod_ine is None and r.municipio is None
