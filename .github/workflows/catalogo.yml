@@ -69,3 +69,22 @@ jobs:
             git pull --rebase origin main
           done
           exit 1
+
+  cobertura:
+    # Solo lee. Se ejecuta siempre, tambien cuando no se vuelca a Supabase,
+    # porque "¿esta ya cargado todo?" es la pregunta que mas se repite.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - working-directory: pipelines
+        run: pip install -r requirements.txt
+      - name: Informe de cobertura
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python scripts/cobertura.py
