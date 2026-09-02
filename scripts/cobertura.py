@@ -14,9 +14,13 @@ from __future__ import annotations
 
 import collections
 import os
+import pathlib
 import sys
 
 import requests
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "pipelines"))
+from nook.modelo import normaliza  # noqa: E402
 
 PAGINA = 1000
 
@@ -63,9 +67,24 @@ def main() -> None:
         print(f"   {t:14} {n:>7,}  ({sin_coord} sin ubicar)".replace(",", "."))
 
     # Municipios distintos con al menos un punto de cada clase.
-    con_notaria = {p["municipio"] for p in pois if p["tipo"] == "notaria" and p["municipio"]}
-    con_demanda = {p["municipio"] for p in pois if p["tipo"] in DEMANDA and p["municipio"]}
-    print("\n=== municipios nombrados con al menos un punto ===")
+    #
+    # Se comparan los nombres normalizados —sin acentos, sin puntuación y con
+    # las palabras ordenadas— porque cada fuente los escribe a su manera: la
+    # Guía Notarial dice «L'Hospitalet de Llobregat» y el Banco de España
+    # «Hospitalet De Llobregat(L')». Cruzando el literal esos dos no casan, y
+    # el municipio aparece como si le faltara una capa.
+    #
+    # Sigue siendo una aproximación: la cuenta exacta necesita `cod_ine` en
+    # todos los puntos, y los de Overture no lo traen. Deducirlo sería
+    # geocodificación inversa de 13.887 registros.
+    def clave(nombre: str) -> str:
+        return " ".join(sorted(normaliza(nombre).split()))
+
+    con_notaria = {clave(p["municipio"]) for p in pois
+                   if p["tipo"] == "notaria" and p["municipio"]}
+    con_demanda = {clave(p["municipio"]) for p in pois
+                   if p["tipo"] in DEMANDA and p["municipio"]}
+    print("\n=== municipios con al menos un punto (nombres normalizados) ===")
     print(f"   con notarías (competencia): {len(con_notaria):,}".replace(",", "."))
     print(f"   con demanda:                {len(con_demanda):,}".replace(",", "."))
     print(f"   con ambas cosas:            {len(con_notaria & con_demanda):,}".replace(",", "."))
