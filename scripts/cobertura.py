@@ -25,6 +25,17 @@ from nook.modelo import normaliza  # noqa: E402
 PAGINA = 1000
 
 
+def mil(n: int) -> str:
+    """
+    Separador de miles a la española.
+
+    Antes se hacía con un `.replace(",", ".")` sobre la línea entera ya
+    formateada, y eso también tocaba los nombres: «Balears, Illes» salía como
+    «Balears. Illes» y parecía un dato corrupto que no lo era.
+    """
+    return f"{n:,}".replace(",", ".")
+
+
 def pide(base: str, cab: dict, ruta: str, params: dict) -> list[dict]:
     """Pagina hasta el final: PostgREST corta a 1.000 filas y no avisa."""
     filas: list[dict] = []
@@ -55,8 +66,8 @@ def main() -> None:
     pois = pide(base, cab, "pois", {"select": "tipo,provincia,municipio,lat", "activo": "is.true"})
     municipios = pide(base, cab, "municipios", {"select": "cod_ine"})
 
-    print(f"catálogo de municipios en la base de datos: {len(municipios):,}".replace(",", "."))
-    print(f"puntos totales: {len(pois):,}".replace(",", "."))
+    print(f"catálogo de municipios en la base de datos: {mil(len(municipios))}")
+    print(f"puntos totales: {mil(len(pois))}")
 
     DEMANDA = {"banco", "inmobiliaria", "abogados", "gestoria"}
 
@@ -64,7 +75,7 @@ def main() -> None:
     print("\n=== puntos por capa ===")
     for t, n in por_tipo.most_common():
         sin_coord = sum(1 for p in pois if p["tipo"] == t and p["lat"] is None)
-        print(f"   {t:14} {n:>7,}  ({sin_coord} sin ubicar)".replace(",", "."))
+        print(f"   {t:14} {mil(n):>7}  ({sin_coord} sin ubicar)")
 
     # Municipios distintos con al menos un punto de cada clase.
     #
@@ -85,10 +96,10 @@ def main() -> None:
     con_demanda = {clave(p["municipio"]) for p in pois
                    if p["tipo"] in DEMANDA and p["municipio"]}
     print("\n=== municipios con al menos un punto (nombres normalizados) ===")
-    print(f"   con notarías (competencia): {len(con_notaria):,}".replace(",", "."))
-    print(f"   con demanda:                {len(con_demanda):,}".replace(",", "."))
-    print(f"   con ambas cosas:            {len(con_notaria & con_demanda):,}".replace(",", "."))
-    print(f"   solo competencia:           {len(con_notaria - con_demanda):,}".replace(",", "."))
+    print(f"   con notarías (competencia): {mil(len(con_notaria))}")
+    print(f"   con demanda:                {mil(len(con_demanda))}")
+    print(f"   con ambas cosas:            {mil(len(con_notaria & con_demanda))}")
+    print(f"   solo competencia:           {mil(len(con_notaria - con_demanda))}")
 
     # Por provincia: es donde se ve el hueco de verdad.
     provs = collections.defaultdict(lambda: {"notaria": 0, "demanda": 0})
@@ -105,11 +116,11 @@ def main() -> None:
 
     print(f"\n=== provincias CON demanda cargada: {len(con)} ===")
     for prov, c in sorted(con, key=lambda x: -x[1]["demanda"]):
-        print(f"   {prov:22} {c['demanda']:>7,} demanda | {c['notaria']:>4} notarías".replace(",", "."))
+        print(f"   {prov:24} {mil(c['demanda']):>7} demanda | {c['notaria']:>4} notarías")
 
     print(f"\n=== provincias SOLO con notarías: {len(sin)} ===")
     print("   " + ", ".join(p for p, _ in sin))
-    print(f"\n   Suman {sum(c['notaria'] for _, c in sin):,} notarías sin ninguna capa de demanda.".replace(",", "."))
+    print(f"\n   Suman {mil(sum(c['notaria'] for _, c in sin))} notarías sin ninguna capa de demanda.")
 
 
 if __name__ == "__main__":
