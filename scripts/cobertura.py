@@ -87,7 +87,7 @@ def main() -> None:
     #
     # Sigue siendo una aproximación: la cuenta exacta necesita `cod_ine` en
     # todos los puntos, y los de Overture no lo traen. Deducirlo sería
-    # geocodificación inversa de 13.887 registros.
+    # geocodificación inversa de decenas de miles de registros.
     def clave(nombre: str) -> str:
         return " ".join(sorted(normaliza(nombre).split()))
 
@@ -106,9 +106,12 @@ def main() -> None:
     for p in pois:
         if not p.get("provincia"):
             continue
-        clave = "notaria" if p["tipo"] == "notaria" else ("demanda" if p["tipo"] in DEMANDA else None)
-        if clave:
-            provs[p["provincia"]][clave] += 1
+        # Ojo: no llamar `clave` a esto. Hay una función con ese nombre
+        # unas líneas más arriba y la taparía; hoy funciona solo porque su
+        # última llamada queda por encima.
+        capa = "notaria" if p["tipo"] == "notaria" else ("demanda" if p["tipo"] in DEMANDA else None)
+        if capa:
+            provs[p["provincia"]][capa] += 1
 
     con, sin = [], []
     for prov, c in sorted(provs.items()):
