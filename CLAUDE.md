@@ -151,8 +151,10 @@ completo, así que cada uno recibe su propia consulta.
 ```
 src/lib/heat.ts              motor de calor: rejilla H3, kernel gaussiano, scoring
 src/lib/colores.ts           rampa del score y formas por categoría
-src/data/sabadell.json       corte estático de datos reales de Sabadell
-src/data/sabadell.ts         carga y tipado de ese corte
+public/datos/indice.json     qué municipios tienen datos, con su centro y su zoom
+public/datos/p08.json        los puntos de una provincia; uno por provincia
+src/data/municipios.ts       carga del índice, de la provincia y del catálogo
+src/data/municipios.json     los 8.132 municipios del INE, para los desplegables
 src/components/nook/         mapa (Mapbox GL) y paneles
 src/pages/Index.tsx          composición y estado
 scripts/convertir_raw.py     Excel -> JSON, reproducible
@@ -193,10 +195,10 @@ restricción lo usa cualquiera que abra el inspector.
 
 | Pieza | Estado |
 |---|---|
-| Frontend | Funciona, pero sigue leyendo `src/data/sabadell.json`, no Supabase |
+| Frontend | Lee `public/datos/`, un fichero por provincia, generado desde Supabase. Cualquier municipio de España es seleccionable si tiene datos |
 | Motor de calor en TypeScript | Hecho y en uso |
 | Motor de calor en Python | **No se ejecuta**: `h3`, `numpy`, `pyproj` y `scipy` no están en `requirements.txt`, nadie lo importa y no tiene tests |
-| Supabase | **Desplegada y verificada.** Trigger de `geom` comprobado: 0 filas con lat/lon y sin geometría, desvío 0 m |
+| Supabase | **Inalcanzable desde el 12/09/2026**: el host del proyecto no resuelve (NXDOMAIN). Ver abajo |
 | Extractor Guía Notarial | **En producción.** 2.641 notarías escritas, 2.458 ubicadas |
 | Extractor Banco de España | **En producción** para Cataluña y Madrid: 4.024 oficinas, 93,5 % geocodificadas. Faltan 15 comunidades |
 | Extractor Overture Maps | Categorías corregidas contra la taxonomía real; **sin ejecutar nunca contra S3** |
@@ -266,6 +268,69 @@ Llobregat(L')». Un código postal **no** identifica un municipio —uno grande
 tiene muchos y uno pequeño lo comparte con los vecinos—, así que el `cod_ine`
 completo solo lo pone el geocodificador o la propia fuente.
 
+### 9. El mapa lee ficheros por provincia, y el centro de cada municipio se calcula
+
+Hasta el 12/09/2026 el frontend leía tres cortes —Sabadell, Barcelona y
+Madrid— exportados a mano. El resultado era que en Supabase había **54.335
+puntos y el mapa enseñaba 8.000**, y el desplegable ofrecía los 8.132
+municipios del INE con 8.129 deshabilitados. No era un fallo de la ingesta:
+el exportador llevaba un diccionario de tres entradas, y añadir un municipio
+exigía teclear su centro y su zoom.
+
+Ahora `scripts/exportar_espana.py` vuelca **un fichero por provincia** a
+`public/datos/`, más un `indice.json` que dice qué municipios tienen datos.
+
+**Por provincia y no por municipio** porque el corte de un municipio tiene que
+salirse de su término —una notaría al otro lado del límite es competencia
+real—, así que se toma por caja alrededor del centro. Con mil municipios esas
+cajas se solapan tanto en el área metropolitana que el mismo punto acabaría
+copiado en decenas de ficheros. Por provincia cada punto aparece una vez, y
+moverse entre municipios de la misma provincia no cuesta ninguna descarga.
+
+**El centro sale de la mediana de los puntos del municipio**, no de una lista
+escrita a mano. Mediana y no media: una sola coordenada mal geocodificada
+desplazaría la media y el mapa abriría mirando al sitio equivocado. El radio
+sale del percentil 90 de la dispersión, acotado entre 2,5 y 12 km, y de ahí el
+zoom. Contrastado contra los tres valores que estaban puestos a mano: salen
+5.067 m donde había 5.000, 6.913 donde había 7.000 y 8.419 donde había 8.000.
+
+Un municipio sin ningún punto **no tiene centro**, y queda declarado sin datos
+en vez de aparecer con uno inventado. Es la misma regla del punto 3.
+
+**El cruce por nombre va por tres niveles** —nombre exacto, sin los artículos
+de los extremos, y palabras ordenadas— y renuncia a asignar cuando hay empate.
+El nivel de palabras ordenadas no vale en solitario, que es como estaba en
+`scripts/cobertura.py`: ordenando las palabras, «Mora de Rubielos» y «Rubielos
+de Mora» —dos municipios distintos de Teruel— son el mismo sitio, igual que
+«Negrilla de Palencia» y «Palencia de Negrilla» en Salamanca.
+
+**Lo que esto expone.** Los ficheros de `public/datos/` los sirve el sitio tal
+cual, así que cualquiera que abra el mapa puede descargárselos: antes eran tres
+municipios, ahora es el censo nacional, que es justo el activo del entregable
+de 199 €. Que estuvieran dentro del bundle no protegía nada —bastaba el
+inspector—, pero la escala sí cambia. Antes de publicar esto de cara al
+público hay que poner el censo detrás de algo: servir solo la provincia que el
+cliente ha comprado, o dar los puntos ya agregados a hexágono y reservar el
+listado con nombre y teléfono para quien paga.
+
+### 10. Supabase dejó de resolver el 12/09/2026
+
+`<ref>.supabase.co` devuelve **NXDOMAIN**, comprobado desde el equipo local,
+desde un runner de Actions y desde el resolutor público de Google. No es un
+problema de red ni de credenciales: el nombre no existe.
+
+El ping de `mantener-supabase.yml` respondió **HTTP 200 el 10/09/2026 a las
+05:31 UTC**, así que el proyecto se perdió entre esa fecha y el 12. Supabase
+retira el DNS de los proyectos pausados y de los borrados, y desde fuera los
+dos casos se ven igual. Hay que mirarlo en el panel de Supabase: si está
+pausado, se reanuda y los datos siguen ahí; si está borrado, hay que volver a
+aplicar `infra/schema.sql` y relanzar las ingestas.
+
+Mientras tanto, `public/datos/` lleva los 8.000 puntos que ya estaban
+exportados, para que el mapa siga funcionando. En cuanto la base de datos
+vuelva, basta lanzar el workflow «Exportar datos para el mapa»: el código ya
+está puesto y no hay que tocar nada.
+
 ### Pendientes anotados con su razón
 
 - ~~Gestorías y asesorías como capa de demanda.~~ Hecho el 29/08/2026. Quinto
@@ -291,7 +356,8 @@ completo solo lo pone el geocodificador o la propia fuente.
 3. Crear el proyecto de Supabase, aplicar `infra/schema.sql`, y añadir los
    secretos `SUPABASE_URL` y `SUPABASE_SERVICE_KEY`.
 4. Ingesta en modo prueba, revisar el artefacto, y solo entonces en modo real.
-5. Sustituir `src/data/sabadell.ts` por la consulta a Supabase.
+5. ~~Sustituir `src/data/sabadell.ts` por la consulta a Supabase.~~ Hecho el
+   12/09/2026, por exportación a `public/datos/` en vez de consulta directa.
 
 ### El endpoint de la Guía Notarial (confirmado el 28/08/2026)
 

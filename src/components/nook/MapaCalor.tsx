@@ -14,7 +14,7 @@ import {
   paradasScore,
   type Forma,
 } from '@/lib/colores';
-import type { Municipio } from '@/data/sabadell';
+import type { Municipio } from '@/data/municipios';
 
 interface Props {
   token: string;

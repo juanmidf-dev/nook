@@ -1,7 +1,7 @@
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
  import { CATEGORIAS, CATEGORIAS_DEMANDA, ETIQUETAS, type Categoria, type Config } from '@/lib/heat';
-import type { Incidencia, Municipio } from '@/data/sabadell';
+import type { Incidencia, Municipio } from '@/data/municipios';
 import SelectorMunicipio from './SelectorMunicipio';
 import Marca from '@/components/nook/Marca';
 import Leyenda from '@/components/nook/Leyenda';

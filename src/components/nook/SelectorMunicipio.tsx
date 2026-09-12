@@ -2,9 +2,10 @@ import { useEffect, useMemo, useState } from 'react';
 
 import {
   cargaCatalogo,
-  tieneCorte,
+  cargaIndice,
   ubica,
   type Catalogo,
+  type Indice,
 } from '@/data/municipios';
 
 /**
@@ -15,8 +16,9 @@ import {
  * escribiendo se tropieza con los nombres bilingües —Alicante/Alacant,
  * Araba/Álava— y con los que empiezan por artículo.
  *
- * Los municipios sin corte exportado se ofrecen igualmente, marcados. Enseñar
- * solo los tres que tienen dato daría a entender que no existen los demás.
+ * Los municipios sin datos se ofrecen igualmente, marcados y sin poder
+ * elegirse. Enseñar solo los que tienen dato daría a entender que los demás no
+ * existen, y la cobertura real es la información que hay que dar, no esconder.
  */
 export default function SelectorMunicipio({
   codIne,
@@ -26,14 +28,16 @@ export default function SelectorMunicipio({
   onCodIne: (codIne: string) => void;
 }) {
   const [cat, setCat] = useState<Catalogo | null>(null);
+  const [idx, setIdx] = useState<Indice | null>(null);
   const [ccaa, setCcaa] = useState<string | null>(null);
   const [provincia, setProvincia] = useState<string | null>(null);
 
   useEffect(() => {
     let vigente = true;
-    cargaCatalogo().then((c) => {
+    Promise.all([cargaCatalogo(), cargaIndice()]).then(([c, i]) => {
       if (!vigente) return;
       setCat(c);
+      setIdx(i);
       // Los desplegables arrancan situados sobre el municipio activo, no en
       // blanco: si no, al abrirlos parece que no hay nada seleccionado.
       const donde = ubica(c, codIne);
@@ -58,12 +62,44 @@ export default function SelectorMunicipio({
     [provincias, provincia],
   );
 
+  /**
+   * Qué se le puede decir al usuario de cada municipio antes de que lo elija.
+   *
+   * Distinguir «sin datos» de «solo competencia» importa: un municipio con
+   * notarías y sin capa de demanda **abre igual**, pero el mapa sale plano, y
+   * sin avisar parecería que allí no hay ninguna oportunidad. Que sea un hueco
+   * nuestro de cobertura y no un hallazgo del modelo tiene que verse antes de
+   * mirar el mapa, no después.
+   */
+  const etiqueta = useMemo(() => {
+    return (cod: string, nombre: string): { texto: string; elegible: boolean } => {
+      const f = idx?.municipios[cod];
+      if (!f) return { texto: `${nombre} — sin datos`, elegible: false };
+      if (!f.demanda) return { texto: `${nombre} — sin capa de demanda`, elegible: true };
+      if (!f.competencia) return { texto: `${nombre} — sin notarías`, elegible: true };
+      return { texto: nombre, elegible: true };
+    };
+  }, [idx]);
+
+  const cobertura = useMemo(() => {
+    if (!idx) return null;
+    let conDatos = 0;
+    let completos = 0;
+    for (const [cod] of municipios) {
+      const f = idx.municipios[cod];
+      if (!f) continue;
+      conDatos++;
+      if (f.demanda && f.competencia) completos++;
+    }
+    return { conDatos, completos, total: municipios.length };
+  }, [idx, municipios]);
+
   const clase =
     'w-full cursor-pointer rounded-md border border-white/15 bg-white/[0.06] px-2.5 py-1.5 ' +
     'text-[12.5px] text-tinta outline-none transition-colors hover:bg-white/[0.1] ' +
     'focus-visible:ring-2 focus-visible:ring-acento disabled:cursor-not-allowed disabled:opacity-40';
 
-  if (!cat) {
+  if (!cat || !idx) {
     return <div className="text-[11px] text-tinta-tenue">Cargando municipios…</div>;
   }
 
@@ -97,6 +133,7 @@ export default function SelectorMunicipio({
         {provincias.map((p) => (
           <option key={p.cod} value={p.cod} className="bg-panel-alto text-tinta">
             {p.nombre}
+            {idx.provincias[p.cod] ? ` · ${idx.provincias[p.cod].puntos} puntos` : ' · sin datos'}
           </option>
         ))}
       </select>
@@ -113,26 +150,25 @@ export default function SelectorMunicipio({
         {!municipios.some(([cod]) => cod === codIne) && (
           <option value={codIne}>Municipio…</option>
         )}
-        {municipios.map(([cod, nombre]) => (
-          /* Los municipios sin corte se listan pero no se pueden elegir. Se
-             listan para que se vea que existen; no se eligen porque la
-             pantalla de error sustituía al panel entero y dejaba al usuario
-             sin forma de volver a seleccionar sin recargar. */
-          <option key={cod} value={cod} disabled={!tieneCorte(cod)}>
-            {tieneCorte(cod) ? nombre : `${nombre} — sin datos`}
-          </option>
-        ))}
+        {municipios.map(([cod, nombre]) => {
+          const { texto, elegible } = etiqueta(cod, nombre);
+          return (
+            <option key={cod} value={cod} disabled={!elegible}>
+              {texto}
+            </option>
+          );
+        })}
       </select>
 
-      <p className="text-[11px] leading-snug text-tinta-tenue">
-        {municipios.length > 0 && (
-          <>
-            {municipios.filter(([c]) => tieneCorte(c)).length} de {municipios.length} municipios
-            con datos cargados en esta provincia.{' '}
-          </>
-        )}
-        Las capas de demanda solo cubren Cataluña y Madrid.
-      </p>
+      {cobertura && cobertura.total > 0 && (
+        <p className="text-[11px] leading-snug text-tinta-tenue">
+          {cobertura.conDatos} de {cobertura.total} municipios con datos en esta provincia,{' '}
+          {cobertura.completos} con las dos capas.
+          {cobertura.completos < cobertura.conDatos && (
+            <> En el resto falta la capa de demanda, que aún no cubre toda España.</>
+          )}
+        </p>
+      )}
     </div>
   );
 }

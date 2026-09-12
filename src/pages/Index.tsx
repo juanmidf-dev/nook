@@ -16,8 +16,7 @@ import {
   type Celda,
   type Config,
 } from '@/lib/heat';
-import { PROCEDENCIA } from '@/data/sabadell';
-import { MUNICIPIO_POR_DEFECTO, cargaCorte, type Corte } from '@/data/municipios';
+import { MUNICIPIO_POR_DEFECTO, PROCEDENCIA, cargaCorte, type Corte } from '@/data/municipios';
 
 const TOKEN = (import.meta.env.VITE_MAPBOX_TOKEN as string | undefined) ?? '';
 
@@ -63,7 +62,7 @@ export default function Index() {
   // los puntos: así una coordenada mal geocodificada no puede estirar la
   // rejilla ni alterar la normalización del score.
   const celdasIds = useMemo(
-    () => (municipio ? celdasDeBBox(bboxDeCentro(municipio.centro, 6000), cfg.resolucion) : []),
+    () => (municipio ? celdasDeBBox(bboxDeCentro(municipio.centro, municipio.radio), cfg.resolucion) : []),
     [municipio, cfg.resolucion],
   );
 
