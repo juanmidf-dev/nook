@@ -30,3 +30,7 @@ dist-ssr
 # Configuracion local de Claude Code. launch.json lleva la ruta absoluta de
 # node en esta maquina, asi que no vale para nadie mas.
 .claude/
+
+# Bytecode de Python
+__pycache__/
+*.pyc

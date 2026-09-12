@@ -1,38 +1,38 @@
-name: Exportar corte para el mapa
+name: Exportar datos para el mapa
 
-# Genera `src/data/<municipio>.json` desde Supabase y lo commitea.
+# Genera `public/datos/*.json` desde Supabase y los commitea: un fichero por
+# provincia con todos sus puntos, más un índice de qué municipios tienen dato.
 #
 # El navegador no consulta la base de datos: la clave publicable viaja en el
 # bundle de JavaScript, así que dar lectura al rol anónimo sobre `pois`
 # permitiría descargarse el censo entero de una petición. Aquí lee el runner
-# con la clave secreta, que vive en los secretos del repositorio, y deja un
-# fichero con lo justo para pintar un municipio.
+# con la clave secreta, que vive en los secretos del repositorio.
+#
+# Antes esto exportaba tres municipios elegidos a mano. El resultado era que la
+# base de datos tenía 54.335 puntos y el mapa enseñaba 8.000.
 
 on:
   workflow_dispatch:
-    inputs:
-      municipio:
-        description: Municipio a exportar
-        required: true
-        default: sabadell
-        type: choice
-        options: [sabadell, barcelona, madrid]
+  # Después de cada ingesta real, para que el mapa no se quede con los datos
+  # del mes pasado sin que nadie se dé cuenta.
+  workflow_run:
+    workflows: ['Ingesta de datos']
+    types: [completed]
 
 permissions:
   contents: write
 
 concurrency:
-  # Un unico grupo para todo el workflow, no uno por municipio: dos
-  # exportaciones simultaneas comitean sobre la misma rama y la segunda pierde
-  # el push. Paso al lanzar Barcelona y Madrid a la vez. Y no se cancela la que
-  # esta corriendo, porque ya ha hecho el trabajo.
+  # Un único grupo: dos exportaciones simultáneas commitean sobre la misma
+  # rama y la segunda pierde el push. Y no se cancela la que está corriendo,
+  # porque ya ha hecho el trabajo.
   group: exportar
   cancel-in-progress: false
 
 jobs:
   exportar:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -49,39 +49,39 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-          MUNICIPIO: ${{ github.event.inputs.municipio }}
-        run: python scripts/exportar_municipio.py "$MUNICIPIO"
+        run: python scripts/exportar_espana.py
 
-      - name: Comprobar que el corte no viene vacío
-        env:
-          MUNICIPIO: ${{ github.event.inputs.municipio }}
+      - name: Comprobar que la exportación no viene vacía
         run: |
           # Misma regla que en la ingesta: cero registros no significa "no hay
           # datos", significa que algo dejó de encajar. Mejor fallar que
-          # commitear un mapa en blanco.
+          # commitear un mapa en blanco, que no da ningún error visible.
           python - <<'PY'
-          import json, os, pathlib, sys
-          f = pathlib.Path("src/data") / (os.environ["MUNICIPIO"] + ".json")
-          d = json.loads(f.read_text(encoding="utf-8"))
-          n = len(d["pois"])
-          print(f"{f}: {n} puntos")
-          if n == 0:
-              sys.exit("el corte ha salido vacío; no se commitea")
+          import json, pathlib, sys
+          d = pathlib.Path("public/datos")
+          indice = json.loads((d / "indice.json").read_text(encoding="utf-8"))
+          municipios = len(indice["municipios"])
+          provincias = len(indice["provincias"])
+          puntos = sum(p["puntos"] for p in indice["provincias"].values())
+          print(f"{puntos} puntos, {provincias} provincias, {municipios} municipios con datos")
+          # Los umbrales son holgados a propósito: no comprueban que el dato
+          # sea bueno, solo que no se ha desplomado. Hoy son ~54.000 puntos en
+          # 52 provincias; la mitad de eso sería una regresión, no una ingesta.
+          if puntos < 20000 or provincias < 30 or municipios < 400:
+              sys.exit("la exportación ha salido muy por debajo de lo esperado; no se commitea")
           PY
 
-      - name: Commitear el corte
-        env:
-          MUNICIPIO: ${{ github.event.inputs.municipio }}
+      - name: Commitear los datos
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "src/data/$MUNICIPIO.json"
+          git add -A public/datos
           if git diff --cached --quiet; then
-            echo "::notice::El corte no ha cambiado desde la última exportación."
+            echo "::notice::Los datos no han cambiado desde la última exportación."
             exit 0
           fi
-          git commit -m "Actualizar el corte de $MUNICIPIO desde Supabase"
-          # Cinturon y tirantes: aunque la concurrencia serializa, entre el
+          git commit -m "Actualizar los datos del mapa desde Supabase"
+          # Cinturón y tirantes: aunque la concurrencia serializa, entre el
           # checkout y el push puede haber entrado otro commit.
           for intento in 1 2 3; do
             if git push; then exit 0; fi
